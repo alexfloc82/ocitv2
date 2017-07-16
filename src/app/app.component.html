@@ -1,29 +1,48 @@
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a routerLink="contact" class="nav-link"  routerLinkActive="active">Home</a>
+  <a class="navbar-brand">GIPA</a>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" *ngIf="authService.user | async">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="Home" class="nav-link" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a routerLink="contact" class="nav-link"  routerLinkActive="active">Proposals</a>
+        <a routerLink="Proposal" class="nav-link" routerLinkActive="active">Proposals</a>
       </li>
       <li class="nav-item">
-        <a routerLink="contact" class="nav-link"  routerLinkActive="active">Timesheets</a>
+        <a routerLink="Timesheet" class="nav-link" routerLinkActive="active">Timesheets</a>
       </li>
       <li class="nav-item">
-        <a routerLink="contact" class="nav-link"  routerLinkActive="active">Time off</a>
+        <a routerLink="Timeoff" class="nav-link" routerLinkActive="active">Time Off</a>
       </li>
       <li class="nav-item">
-        <a routerLink="contact" class="nav-link"  routerLinkActive="active">Travels</a>
+        <a routerLink="Travel" class="nav-link" routerLinkActive="active">Travels</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="User" class="nav-link" routerLinkActive="active">Users</a>
       </li>
     </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <div class="mr-sm-2">{{ (authService.user | async)?.email }}</div>
+      <button class="btn btn-outline-warning my-2 my-sm-0" (click)="logout()" *ngIf="authService.user | async">Logout</button>
+    </div>
   </div>
 </nav>
-<div class="container-fluid text-center">
+<div class="container-fluid pt-1" >
+  <div class="container" *ngIf="message.text">
+    <div class="alert" role="alert" 
+      [class.alert-warning]="message.type=='warning'" 
+      [class.alert-danger]="message.type=='error'" 
+      [class.alert-success]="message.type=='success'"
+      [class.alert-info]="message.type=='info'">
+      <button type="button" class="close" aria-label="Close" (click)="clearMessage()">
+    <span aria-hidden="true">&times;</span>
+  </button> {{message.text}}
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </div>
-
-

@@ -1,0 +1,13 @@
+<div class="container p-3">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+    <div *ngFor="let question of questions" class="form-row">
+      <df-question [question]="question" [form]="form"></df-question>
+    </div>
+
+    <div class="form-row">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-outline-success my-2 my-sm-0">Save</button>
+      <button  class="btn btn-outline-danger my-2 my-sm-0" (click)="goBack()">Go Back</button>
+    </div>
+  </form>
+</div>
