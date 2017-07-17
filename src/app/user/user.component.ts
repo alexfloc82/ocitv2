@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AuthService } from '../core/auth/auth.service';
@@ -13,7 +13,10 @@ export class UserComponent implements OnInit {
   users: FirebaseListObservable<any>;
   public email: string;
 
-  constructor(db: AngularFireDatabase, private router: Router) {
+  constructor(
+    db: AngularFireDatabase, 
+    private router: Router,
+    private route: ActivatedRoute,) {
     this.users = db.list('/users');
   }
 
@@ -22,7 +25,7 @@ export class UserComponent implements OnInit {
   }
 
   gotoDetail(id: string): void {
-    this.router.navigate(['/User', id]);
+    this.router.navigate([id], { relativeTo: this.route });
   }
 
 }

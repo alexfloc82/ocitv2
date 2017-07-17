@@ -12,7 +12,7 @@ import { UserSigninQuestionService } from './user-signin-question.service';
 
 @Component({
     selector: 'app-user',
-    templateUrl: './user-detail.component.html',
+    templateUrl: './user-signin.component.html',
     styleUrls: ['./user-detail.component.css'],
     providers: [UserSigninQuestionService]
 })
