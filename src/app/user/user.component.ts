@@ -10,6 +10,7 @@ import { AuthService } from '../core/auth/auth.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  loader=false;
   users: any[];
   filteredUsers: any[];
   public email: string;
@@ -18,11 +19,15 @@ export class UserComponent implements OnInit {
     db: AngularFireDatabase, 
     private router: Router,
     private route: ActivatedRoute,) {
-    db.list('/users').subscribe(a => {this.users = a; this.filteredUsers = a});
+    this.loader=true;
+    db.list('/users').subscribe(a => {
+      this.users = a; 
+      this.filteredUsers = a; 
+      this.loader=false;});
   }
 
   ngOnInit() {
-    this.email = "alexandre.floquet@gmail.com";
+    
   }
 
   gotoDetail(id: string): void {
@@ -36,5 +41,13 @@ export class UserComponent implements OnInit {
         user.email.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
         user.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
   }
+
+  private showLoader(): void {
+        console.log('Show loader');
+    }
+
+  private hideLoader(): void {
+        console.log('Hide loader');
+    }
 
 }
