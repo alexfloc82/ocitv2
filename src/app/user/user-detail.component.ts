@@ -39,8 +39,12 @@ export class UserDetailComponent implements OnInit {
         }));
     }
 
+    goBack(): void {
+        this.location.back();
+    }
+    
     onSubmit() {
-        this.user.update(this.form.value).then(a => 
+        this.user.update(this.form.value).then(a =>
             this.location.back()
         );
     }

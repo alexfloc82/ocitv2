@@ -4,9 +4,9 @@
     <div *ngFor="let question of questions" class="form-row">
       <df-question [question]="question" [form]="form"></df-question>
     </div>
-
-    <div class="form-row">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-outline-success my-2 my-sm-0">Save</button>
-    </div>
   </form>
+  <div class="form-row">
+    <button [disabled]="!form.valid" class="btn btn-outline-success my-2 my-sm-0" (click)="onSubmit()">Save</button>
+    <button  class="btn btn-outline-danger my-2 my-sm-0" (click)="goBack()">Go Back</button>
+  </div>
 </div>
