@@ -10,14 +10,15 @@ import { AuthService } from '../core/auth/auth.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  users: FirebaseListObservable<any>;
+  users: any[];
+  filteredUsers: any[];
   public email: string;
 
   constructor(
     db: AngularFireDatabase, 
     private router: Router,
     private route: ActivatedRoute,) {
-    this.users = db.list('/users');
+    db.list('/users').subscribe(a => {this.users = a; this.filteredUsers = a});
   }
 
   ngOnInit() {
@@ -26,6 +27,14 @@ export class UserComponent implements OnInit {
 
   gotoDetail(id: string): void {
     this.router.navigate([id], { relativeTo: this.route });
+  }
+
+  onFilter(value:string){
+    this.filteredUsers = this.users.filter(user => 
+        user.adsuser.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+        user.name.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+        user.email.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+        user.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
   }
 
 }

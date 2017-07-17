@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row p-3">
     <div class="col-4">
-      <input type="text" placeholder="filter...">
+      <input type="text" placeholder="filter..." class="form-control" (change)="onFilter($event)">
     </div>
   </div>
   <table class="table">
@@ -14,7 +14,7 @@
       <th></th>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users | async">
+      <tr *ngFor="let user of filteredUsers">
         <td>{{user.adsuser}}</td>
         <td>{{user.name}}</td>
         <td>{{user.lastname}}</td>
