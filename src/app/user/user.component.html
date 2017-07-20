@@ -14,16 +14,14 @@
       <th>Last Name</th>
       <th>email</th>
       <th>Role</th>
-      <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let user of filteredUsers">
-        <td>{{user.adsuser}}</td>
+        <td><button class="btn-link" (click)="gotoDetail(user.$key)">{{user.adsuser}}</button></td>
         <td>{{user.name}}</td>
         <td>{{user.lastname}}</td>
         <td>{{user.email}}</td>
         <td>{{user.role}}</td>
-        <td><button class="btn btn-primary" (click)="gotoDetail(user.$key)"><span class="fa fa-edit"></span></button></td>
       </tr>
     </tbody>
   </table>

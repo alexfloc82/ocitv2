@@ -24,16 +24,9 @@ export class UserDetailQuestionService {
       }),
 
       new TextboxQuestion({
-        key: 'email',
-        label: 'Email',
-        type: 'email',
-        order: 3
-      }),
-
-      new TextboxQuestion({
         key: 'adsuser',
         label: 'ADS User',
-        order: 4
+        order: 3
       }),
 
       new DropdownQuestion({
@@ -45,7 +38,7 @@ export class UserDetailQuestionService {
           {key: 'E-Team',  value: 'E-Team'},
           {key: 'Standard',   value: 'Standard'}
         ],
-        order: 5
+        order: 4
       }),
 
     ];
