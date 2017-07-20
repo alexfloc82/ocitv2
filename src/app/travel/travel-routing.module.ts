@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {TravelComponent} from './travel.component';
 
 const routes: Routes = [
-  { path: '',    component: TravelComponent }
+  { path: '',    component: TravelComponent },
+  { path: 'Travel/:id',    component: TravelComponent },
 ];
 
 @NgModule({
