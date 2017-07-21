@@ -12,7 +12,6 @@ import { AuthService } from '../core/auth/auth.service';
 export class TravelComponent implements OnInit {
 
   loader = false;
-  
   travels: any[];
   filteredTravels: any[];
   public email: string;
