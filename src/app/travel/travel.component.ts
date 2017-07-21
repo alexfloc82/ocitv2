@@ -11,48 +11,54 @@ import { AuthService } from '../core/auth/auth.service';
 })
 export class TravelComponent implements OnInit {
 
-  loader=false;
+  loader = false;
   travels: any[];
   filteredTravels: any[];
   public email: string;
 
   constructor(
-    db: AngularFireDatabase, 
+    private db: AngularFireDatabase,
     private router: Router,
-    private route: ActivatedRoute,) {
-    this.loader=true;
-    db.list('/travels').subscribe(a => {
-      this.travels = a; 
-      this.travels.forEach(travel =>  
-          db.object('/users/'+ travel.user).subscribe(a => { travel.userObj = a;}) 
-        )
-      this.filteredTravels = this.travels; 
-      this.loader=false;});
+    private route: ActivatedRoute, ) {
+    this.loader = true;
+    this.getTravels();
   }
 
   ngOnInit() {
-    
+
   }
 
   gotoDetail(id: string): void {
     this.router.navigate([id], { relativeTo: this.route });
   }
 
-  onFilter(value:string){
-    this.filteredTravels = this.travels.filter(travel => 
-        travel.expenses.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
-        travel.finish.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
-        travel.proposal.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
-        travel.start.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
+  onFilter(value: string) {
+    this.filteredTravels = this.travels.filter(travel =>
+      travel.expenses.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.finish.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.proposal.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.start.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
   }
 
   private showLoader(): void {
-        console.log('Show loader');
-    }
+    console.log('Show loader');
+  }
 
   private hideLoader(): void {
-        console.log('Hide loader');
-    }
+    console.log('Hide loader');
+  }
 
+  private getTravels(){
+        this.db.list('/travels').subscribe(a => {
+      this.travels = a;
+      this.travels.forEach(travel => {
+        this.db.object('/users/' + travel.user).subscribe(a => { travel.userObj = a; });
+        this.db.object('/proposals/' + travel.proposal).subscribe(a => { travel.proposalObj = a; });
+      }
+      );
+      this.filteredTravels = this.travels;
+      this.loader = false;
+    });
+  }
 
 }
