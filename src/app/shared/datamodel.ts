@@ -10,12 +10,16 @@ export class Proposal
 	travels: number;
 	workload: number;
 	closed: boolean;
+
+	constructor(){}
 }
 
 export class Estimate
 {
 	user: string;
 	hours:number;
+
+	constructor(){}
 }
 
 export class Timesheet 
@@ -28,6 +32,8 @@ export class Timesheet
 	month : string;
 	q1 : number;
 	q2 : number;
+
+	constructor(){}
 }
 
 export class Travel 
@@ -38,6 +44,8 @@ export class Travel
 	taxi : number;
 	commute : number;
 	propuesta : string;
+
+	constructor(){}
 }
 
 export class Holidays
@@ -46,13 +54,21 @@ export class Holidays
 	user : string;
 	from : Date;
 	to : Date;
+
+	constructor(){}
 }
 
 export class User
 {
-	user : string;
+
+	uid : string;
+	adsuser: string;
 	name : string;
 	email : string;
+	lastname: string;
+	role: string;
+	
+	constructor(){}
 }
 
 export class Area 
@@ -60,4 +76,6 @@ export class Area
 	area: string;
 	responsible : string;
 	projectLead : string;
+
+	constructor(){}
 }

@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AuthService } from '../core/auth/auth.service';
+import { User, Proposal } from '../shared/datamodel';
+
 
 @Component({
   selector: 'app-travel',
@@ -11,16 +13,14 @@ import { AuthService } from '../core/auth/auth.service';
 })
 export class TravelComponent implements OnInit {
 
-  loader = false;
+  loader = { "user": true, "travel": true };
   travels: any[];
   filteredTravels: any[];
-  public email: string;
 
   constructor(
     private db: AngularFireDatabase,
     private router: Router,
     private route: ActivatedRoute, ) {
-    this.loader = true;
     this.getTravels();
   }
 
@@ -34,9 +34,11 @@ export class TravelComponent implements OnInit {
 
   onFilter(value: string) {
     this.filteredTravels = this.travels.filter(travel =>
-      travel.expenses.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.userObj.adsuser.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.userObj.name.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.userObj.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
       travel.finish.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
-      travel.proposal.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+      travel.proposalObj.id.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
       travel.start.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
   }
 
@@ -48,16 +50,18 @@ export class TravelComponent implements OnInit {
     console.log('Hide loader');
   }
 
-  private getTravels(){
-        this.db.list('/travels').subscribe(a => {
+  private getTravels() {
+    this.db.list('/travels').subscribe(a => {
       this.travels = a;
       this.travels.forEach(travel => {
-        this.db.object('/users/' + travel.user).subscribe(a => { travel.userObj = a; });
-        this.db.object('/proposals/' + travel.proposal).subscribe(a => { travel.proposalObj = a; });
+        travel.userObj = new User();
+        travel.proposalObj = new Proposal();
+        this.db.object('/users/' + travel.user).subscribe(a => { travel.userObj = a; this.loader.user = false; });
+        this.db.object('/proposals/' + travel.proposal).subscribe(a => { travel.proposalObj = a; this.loader.travel = false; });
       }
       );
       this.filteredTravels = this.travels;
-      this.loader = false;
+
     });
   }
 
