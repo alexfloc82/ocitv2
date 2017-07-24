@@ -9,8 +9,8 @@
     <button class="btn btn-primary" (click)="login()" [disabled]="!email || !password">Login</button>
   </div>
   <div class="form-group">
-    <span (click)="resetPassword()">Forgot Password?</span>
-    <span (click)="signIn()">Sign in</span>
+    <button class="btn-link" (click)="resetPassword()">Forgot Password?</button>
+    <button class="btn-link" (click)="signIn()">Sign up</button>
   </div>
 </div>
 
@@ -44,7 +44,7 @@
   <div class="row p-1">
     <div class="col-sm-3">
       <div class="card">
-        <span (click)="gotoMenu('User')" class="btn <btn-danger></btn-danger>">
+        <span (click)="gotoMenu('User')" class="btn btn-danger">
           <h1>Users</h1><span class="fa fa-user fa-5x" aria-hidden="true"></span></span>
       </div>
     </div>

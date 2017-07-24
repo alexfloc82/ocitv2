@@ -1,0 +1,41 @@
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container p-3" *ngIf="!loader">
+  <form (ngSubmit)="onSubmit()">
+
+    <label for="proposal">Proposal</label>
+    <div class="form-group">
+
+      <select [(ngModel)]="form.proposal" class="form-control" name="proposal">
+        <option *ngFor="let proposal of proposals" [value]="proposal.$key">{{proposal.id}}</option>
+      </select>
+    </div>
+    <label for="proposal">Start</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.start" type="text" class="form-control" name="start">
+    </div>
+
+    <label for="proposal">Finish</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.finish" type="text" class="form-control" name="finish">
+    </div>
+
+    <label for="proposal">User</label>
+    <div class="form-group">
+      <select [(ngModel)]="form.user" class="form-control" name="user">
+        <option *ngFor="let user of users" [value]="user.$key">{{user.adsuser}} - {{user.name}} {{user.lastname}}</option>
+      </select>
+    </div>
+
+    <label for="proposal">Expenses</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.expenses" type="text" class="form-control" name="expenses">
+    </div>
+
+  </form>
+  <div class="form-row">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="onSubmit()">Save</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0" (click)="goBack()">Go Back</button>
+  </div>
+</div>

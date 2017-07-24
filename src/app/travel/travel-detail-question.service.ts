@@ -3,7 +3,7 @@ import { Injectable }       from '@angular/core';
 import { QuestionBase, TextboxQuestion, DropdownQuestion }     from '../core/question/question-base';
 
 @Injectable()
-export class UserDetailQuestionService {
+export class TravelDetailQuestionService {
 
   // Todo: get from a remote source of question metadata∫
   // Todo: make asynchronous
