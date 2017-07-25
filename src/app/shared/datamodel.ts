@@ -43,7 +43,7 @@ export class Travel
 	transport : number;
 	taxi : number;
 	commute : number;
-	propuesta : string;
+	proposal : string;
 
 	constructor(){}
 }
