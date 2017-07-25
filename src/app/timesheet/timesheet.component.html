@@ -1,6 +1,9 @@
-<div class="container" id="home-timesheets">
+<div class="container text-center pt-5" *ngIf="loader.user && loader.timesheet">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container" id="home-timesheets" *ngIf="!(loader.user && loader.timesheet)">
       <div class="row">
-        <div class="col-lg-12"><h1>2017</h1></div>
+        <div class="col-lg-12"><h1>ACTIVE TIMESHEETS</h1></div>
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
           <div class="thumbnail">
               <div class="caption">
@@ -19,26 +22,26 @@
                            <th>Q2</th> 
                         </thead> 
                         <tbody> 
-                          <tr>
+   <!--                       <tr>
                             <td>ACN-SP-MSF-PDM030</td>
                             <td align=center>47</td>
                             <td align=center>90</td>
                           </tr>
                           <tr>
                              <td>SI-AMVISION</td> <!-- CLASE ESPECIAL PARA EPAM -->
-                             <td align=center>0</td>
+                 <!--            <td align=center>0</td>
                              <td align=center>5</td>
                           </tr>
                           <tr>
                              <td>AUSENCIAS, FESTIVOS, CURSOS...</td>
                              <td align=center>40</td>
                              <td align=center>0</td>
-
+-->
                              <!-- Filtrar por mes, proposal y quincena para el usuario activo -->
-                      <!--<tr *ngFor="let tsheets of timesheets | async">   
-                             <td>{{tsheets.propuesta}}</td> 
+                          <tr *ngFor='let tsheets of filteredTimesheets'> 
+                             <td>{{tsheets.proposalObj.id}}</td>
                              <td>{{tsheets.q1}}</td> 
-                             <td>{{tsheets.q2}}</td> -->
+                             <td>{{tsheets.q2}}</td> 
                              <!--<td><button class="btn btn-primary" (click)="gotoDetail(user.$key)"><span class="fa fa-edit"></span></button></td> -->
                           </tr> 
                         </tbody> 
@@ -63,6 +66,7 @@
                     <p>4111xxxxxxxx3265</p>
                 </div>
                 <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">Update</button>
+                <span class="fa fa-exclamation-triangle text-danger pull-right icon-style  aria-hidden='true'"></span>
             </div>
           </div>
         </div>
@@ -83,7 +87,7 @@
             </div>
           </div>
         </div>
-      <div class="col-lg-12"><h1>BLOCKED</h1></div>
+      <div class="col-lg-12"><h1>PAST TIMESHEETS</h1></div>
       <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
           <div class="thumbnail">
               <div class="caption">
@@ -136,6 +140,6 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-12"><a href="#">View Deleted Cards</a></div>
+       <!-- <div class="col-lg-12"><a href="#">View Deleted Cards</a></div>-->
       </div><!-- End row -->
     </div><!-- End container -->
