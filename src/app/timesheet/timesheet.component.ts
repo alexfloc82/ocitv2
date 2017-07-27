@@ -4,9 +4,27 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AuthService } from '../core/auth/auth.service';
 
-import { Timesheet } from '../shared/datamodel';
+import { Timesheet, User, Proposal } from '../shared/datamodel';
 
-import { User, Proposal } from '../shared/datamodel';
+export class MesComponent {
+  id: string;
+  name: string;
+}
+
+const MESES: MesComponent[] = [
+    {id: '01', name: 'JANUARY'},
+    {id: '02', name: 'FEBRUARY'},
+    {id: '03', name: 'MARCH'},
+    {id: '04', name: 'APRIL'},
+    {id: '05', name: 'MAY'},
+    {id: '06', name: 'JUNE'},
+    {id: '07', name: 'JULY'},
+    {id: '08', name: 'AUGUST'},
+    {id: '09', name: 'SEPTEMBER'},
+    {id: '10', name: 'OCTOBER'},
+    {id: '11', name: 'NOVEMBER'},
+    {id: '12', name: 'DECEMBER'}
+  ];
 
 @Component({
   selector: 'app-timesheet',
@@ -21,6 +39,7 @@ export class TimesheetComponent implements OnInit {
   filteredTimesheets: any[];
 
   constructor(
+    public authService: AuthService,
     private db: AngularFireDatabase,
     private router: Router,
     private route: ActivatedRoute, ) {
@@ -48,12 +67,14 @@ export class TimesheetComponent implements OnInit {
          timesheet.proposalObj = new Proposal();
          this.db.object('/users/' + timesheet.user).subscribe(a => { timesheet.userObj = a; this.loader.user = false; });
          this.db.object('/proposals/' + timesheet.proposal).subscribe(a => { timesheet.proposalObj = a; this.loader.timesheet = false; });
-        /*this.loader.user = false;
-        this.loader.timesheet = false;*/
         }
        );
        this.filteredTimesheets = this.timesheets;
       }
      );
+   }
+
+   private getFecha(meses: number) {
+     // f: Date();
    }
 }
