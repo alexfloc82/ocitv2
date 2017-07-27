@@ -66,6 +66,7 @@ export class User
 	name : string;
 	email : string;
 	lastname: string;
+	area: string;
 	role: string;
 	
 	constructor(){}

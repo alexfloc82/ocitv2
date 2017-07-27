@@ -1,3 +1,5 @@
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 export class QuestionBase<T>{
   value: T;
   key: string;
@@ -7,13 +9,13 @@ export class QuestionBase<T>{
   controlType: string;
 
   constructor(options: {
-      value?: T,
-      key?: string,
-      label?: string,
-      required?: boolean,
-      order?: number,
-      controlType?: string
-    } = {}) {
+    value?: T,
+    key?: string,
+    label?: string,
+    required?: boolean,
+    order?: number,
+    controlType?: string
+  } = {}) {
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';
@@ -21,15 +23,21 @@ export class QuestionBase<T>{
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
   }
+
+
 }
 
 export class DropdownQuestion extends QuestionBase<string> {
   controlType = 'dropdown';
-  options: {key: string, value: string}[] = [];
+  options: { key: string, value: string }[] = [];
 
   constructor(options: {} = {}) {
     super(options);
     this.options = options['options'] || [];
+  }
+
+  getAreas(db:AngularFireDatabase){
+    db.list('/areas').subscribe(areas => areas.forEach(area => this.options.push({ key: area.$key, value: area.id })));
   }
 }
 
