@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 
 import { UtilsService } from '../core/utils/utils.service';
+import { MessageService } from '../core/message/message.service';
 
 import { User, Proposal, Travel } from '../shared/datamodel';
 
@@ -33,7 +34,8 @@ export class TravelDetailComponent implements OnInit {
         private db: AngularFireDatabase,
         private route: ActivatedRoute,
         private location: Location,
-        private utils: UtilsService) {
+        private utils: UtilsService,
+        public messageService: MessageService) {
         
         this.loader = true;
         this.db.list('/proposals').subscribe(b => this.proposals = b);
@@ -76,13 +78,23 @@ export class TravelDetailComponent implements OnInit {
         this.form.start = this.utils.convertNgbDateToISO(this.form.startDate);
         //Update object in database
         if (this.travel) {
-            this.travel.update(this.form).then(a => this.location.back());
+            this.travel.update(this.form).then(a => this.location.back()).catch(
+                err => this.messageService.sendMessage(err.message, 'error')
+            );
         }
         //Create new object
         else {
-            this.db.list('/travels').push(this.form).then(a => this.location.back());
+            this.db.list('/travels').push(this.form).then(a => this.location.back()).catch(
+                err => this.messageService.sendMessage(err.message, 'error')
+            );;
         }
 
+    }
+
+    delete(){
+        this.travel.remove().then(a => this.location.back()).catch(
+                err => this.messageService.sendMessage(err.message, 'error')
+            );;
     }
 
     //Proposal typeahead
