@@ -4,29 +4,36 @@
 <div class="container p-3" *ngIf="!loader">
   <form (ngSubmit)="onSubmit()">
 
-    <label for="proposal">Proposal</label>
+    <label>Proposal</label>
 
     <div class="form-group">
-      <input type="text" name="selectedProposal" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="selectedProposal"
-        [inputFormatter]="pformatter" [resultFormatter]="pformatter" (selectItem)="selectProposal($event)">
-    </div>
-    <label for="proposal">Start</label>
-    <div class="form-group">
-      <input placeholder="dd/mm/yyyy" [(ngModel)]="form.start" class="form-control" name="start">
+      <input type="text" name="selectedProposal" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="selectedProposal" [inputFormatter]="pformatter"
+        [resultFormatter]="pformatter" (selectItem)="selectProposal($event)">
     </div>
 
-    <label for="proposal">Finish</label>
-    <div class="form-group">
-      <input placeholder="dd/mm/yyyy" [(ngModel)]="form.finish" class="form-control" name="finish">
-    </div>
-
-    <label for="proposal">User</label>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Start</label>
         <div class="form-group">
-      <input type="text" name="selectedUser" class="form-control" [ngbTypeahead]="usearch" [(ngModel)]="selectedUser"
-        [inputFormatter]="uformatter" [resultFormatter]="uformatter" (selectItem)="selectUser($event)">
+          <ngb-datepicker #ds [(ngModel)]="form.startDate" [startDate]="{year:form.startDate.year, month:form.startDate.month}" name="startDate"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>Finish</label>
+        <div class="form-group">
+          <ngb-datepicker #df [(ngModel)]="form.finishDate" [startDate]="{year:form.finishDate.year, month:form.finishDate.month}"
+            name="finishdate"></ngb-datepicker>
+        </div>
+      </div>
     </div>
 
-    <label for="proposal">Expenses</label>
+    <label>User</label>
+    <div class="form-group">
+      <input type="text" name="selectedUser" class="form-control" [ngbTypeahead]="usearch" [(ngModel)]="selectedUser" [inputFormatter]="uformatter"
+        [resultFormatter]="uformatter" (selectItem)="selectUser($event)">
+    </div>
+
+    <label>Expenses (in €)</label>
     <div class="form-group">
       <input [(ngModel)]="form.expenses" type="text" class="form-control" name="expenses">
     </div>

@@ -8,6 +8,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from './auth/auth.service';
 import { QuestionControlService }    from './question/question-control.service';
 import {MessageService} from './message/message.service';
+import { UtilsService } from './utils/utils.service';
 
 import { DynamicFormQuestionComponent } from '../core/question/dynamic-form-question.component';
 
@@ -18,6 +19,6 @@ import { DynamicFormQuestionComponent } from '../core/question/dynamic-form-ques
   imports: [
    NgbModule.forRoot(), HttpModule, FormsModule, CommonModule, ReactiveFormsModule
   ],
-  providers:[AuthService, AngularFireDatabase, QuestionControlService, MessageService]
+  providers:[AuthService, AngularFireDatabase, QuestionControlService, MessageService, UtilsService]
 })
 export class CoreModule { }

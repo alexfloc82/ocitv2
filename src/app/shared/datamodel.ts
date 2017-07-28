@@ -1,82 +1,90 @@
-export class Proposal
-{
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+export class Proposal {
 	area: Area[];
 	estimates: Estimate[];
 	end: Date;
 	id: string;
-	country:string;
+	country: string;
 	pms: string[];
 	start: Date;
 	travels: number;
 	workload: number;
 	closed: boolean;
 
-	constructor(){}
+	constructor() { }
 }
 
-export class Estimate
-{
+export class Estimate {
 	user: string;
-	hours:number;
+	hours: number;
 
-	constructor(){}
+	constructor() { }
 }
 
-export class Timesheet 
-{
+export class Timesheet {
 	id: string;
-	user : string;
-	propuesta : string;
-	pm : string;
-	year : string;
-	month : string;
-	q1 : number;
-	q2 : number;
+	user: string;
+	propuesta: string;
+	pm: string;
+	year: string;
+	month: string;
+	q1: number;
+	q2: number;
 
-	constructor(){}
+	constructor() { }
 }
 
-export class Travel 
-{
-	id : string;
-	user : string;
-	transport : number;
-	taxi : number;
-	commute : number;
-	proposal : string;
+export class Travel {
+	id: string;
+	user: string;
+	start: string;
+	finish: string;
+	startDate: NgbDateStruct;
+	finishDate: NgbDateStruct;
+	expenses: number;
+	proposal: string;
 
-	constructor(){}
+	constructor(
+		date?: string,
+		ngbDate?: NgbDateStruct,
+
+	) {
+		this.proposal = '';
+		this.user= '';
+		this.start = date;
+		this.finish = date;
+		this.startDate = ngbDate;
+		this.finishDate = ngbDate;
+	}
 }
 
-export class Holidays
-{
-	id : string;
-	user : string;
-	from : Date;
-	to : Date;
+export class Holidays {
+	id: string;
+	user: string;
+	from: Date;
+	to: Date;
 
-	constructor(){}
+	constructor() { }
 }
 
-export class User
-{
+export class User {
 
-	uid : string;
+	uid: string;
 	adsuser: string;
-	name : string;
-	email : string;
+	name: string;
+	email: string;
 	lastname: string;
 	area: string;
 	role: string;
-	
-	constructor(){}
+
+	constructor() { }
 }
 
-export class Area 
-{
+export class Area {
 	area: string;
-	responsible : string;
-	projectLead : string;
+	responsible: string;
+	projectLead: string;
 
-	constructor(){}
+	constructor() { }
 }

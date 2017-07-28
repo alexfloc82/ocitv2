@@ -16,25 +16,25 @@
 
 <div class="container p-3" *ngIf="(authService.user | async)">
   <div class="row p-1">
-    <div class="col-sm-3">
+    <div class="col-lg-3">
       <div class="card">
         <span (click)="gotoMenu('Proposal')" class="btn btn-info">
           <h1>Proposals</h1><span class="fa fa-file-text-o fa-5x fa-fw" aria-hidden="true"></span></span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-lg-3">
       <div class="card">
         <span (click)="gotoMenu('Timesheet')" class="btn btn-primary">
           <h1>Timesheets</h1><span class="fa fa-clock-o fa-5x" aria-hidden="true"></span></span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-lg-3">
       <div class="card">
         <span (click)="gotoMenu('Timeoff')" class="btn btn-success">
           <h1>Time Off</h1><span class="fa fa-sun-o fa-5x" aria-hidden="true"></span></span>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-lg-3">
       <div class="card">
         <span (click)="gotoMenu('Travel')" class="btn btn-warning">
           <h1>Travels</h1><span class="fa fa-plane fa-5x" aria-hidden="true"></span></span>
@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="row p-1">
-    <div class="col-sm-3">
+    <div class="col-lg-3">
       <div class="card">
         <span (click)="gotoMenu('User')" class="btn btn-danger">
           <h1>Users</h1><span class="fa fa-user fa-5x" aria-hidden="true"></span></span>

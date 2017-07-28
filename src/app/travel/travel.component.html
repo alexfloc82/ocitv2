@@ -4,7 +4,10 @@
 <div class="container" *ngIf="!(loader.user && loader.travel)">
   <div class="row p-3">
     <div class="col-4">
-      <input type="text" placeholder="filter..." class="form-control" (change)="onFilter($event)">
+      <input type="text" placeholder="filter..." class="form-control" (change)="onFilter($event)"> 
+    </div>
+    <div class="col-8">
+    <span class="btn btn-success float-sm-right" (click)="createNew()"><span class="fa fa-plus" aria-hidden="true"></span> New</span>
     </div>
   </div>
   <table class="table">
@@ -18,8 +21,8 @@
     <tbody>
       <tr *ngFor="let travel of filteredTravels">
         <td><button class="btn-link" (click)="gotoDetail(travel.$key)">{{travel.userObj.adsuser}} - {{travel.userObj.name}} {{travel.userObj.lastname}}</button></td>
-        <td>{{travel.start}}</td>
-        <td>{{travel.finish}}</td>
+        <td>{{travel.start | date:'dd/MM/yyyy'}}</td>
+        <td>{{travel.finish | date:'dd/MM/yyyy'}}</td>
         <td>{{travel.proposalObj.id}}</td>
         <td>{{travel.expenses | currency:'EUR':true:'1.0-0'}}</td>
       </tr>

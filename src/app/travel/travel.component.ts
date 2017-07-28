@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AuthService } from '../core/auth/auth.service';
-import { User, Proposal } from '../shared/datamodel';
+import { User, Proposal, Travel } from '../shared/datamodel';
+import { UtilsService } from '../core/utils/utils.service';
 
 
 @Component({
@@ -17,11 +17,12 @@ export class TravelComponent implements OnInit {
   loader = { "user": true, "travel": true };
   travels: any[];
   filteredTravels: any[];
-
+  
   constructor(
     private db: AngularFireDatabase,
     private router: Router,
-    private route: ActivatedRoute, ) {
+    private route: ActivatedRoute,
+    private utils: UtilsService ) {
     this.getTravels();
   }
 
@@ -33,6 +34,10 @@ export class TravelComponent implements OnInit {
     this.router.navigate([id], { relativeTo: this.route });
   }
 
+  createNew(){
+    this.router.navigate(['-'], { relativeTo: this.route });
+  }
+
   onFilter(value: string) {
     this.filteredTravels = this.travels.filter(travel =>
       travel.userObj.adsuser.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
@@ -41,14 +46,6 @@ export class TravelComponent implements OnInit {
       travel.finish.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
       travel.proposalObj.id.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
       travel.start.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
-  }
-
-  private showLoader(): void {
-    console.log('Show loader');
-  }
-
-  private hideLoader(): void {
-    console.log('Hide loader');
   }
 
   private getTravels() {
