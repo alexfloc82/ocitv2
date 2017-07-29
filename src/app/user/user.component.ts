@@ -13,7 +13,6 @@ export class UserComponent implements OnInit {
   loader=false;
   users: any[];
   filteredUsers: any[];
-  public email: string;
 
   constructor(
     db: AngularFireDatabase, 
@@ -41,13 +40,5 @@ export class UserComponent implements OnInit {
         user.email.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
         user.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
   }
-
-  private showLoader(): void {
-        console.log('Show loader');
-    }
-
-  private hideLoader(): void {
-        console.log('Hide loader');
-    }
 
 }

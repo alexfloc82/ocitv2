@@ -1,0 +1,77 @@
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container p-3" *ngIf="!loader">
+  <div class="form-row mb-3">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true" ></span> Save</button>
+    <button class="btn btn-outline-warning my-2 my-sm-0" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Undo</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0 float-sm-right" (click)="toggleClose(true)" *ngIf="proposal && !form.closed">Close</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0 float-sm-right" (click)="toggleClose(false)" *ngIf="proposal && form.closed">Re-Open</button>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>ID Propuesta</label>
+        <div class="form-group">
+          <input [(ngModel)]="form.id" type="text" class="form-control" name="idPropuesta" [readonly]="proposal? true: false">
+        </div>
+
+        <label>Title</label>
+        <div class="form-group">
+          <input [(ngModel)]="form.title" type="text" class="form-control" name="title">
+        </div>
+
+        <label>Responsible</label>
+        <div class="form-group">
+          <input type="text" name="selectedUser" class="form-control" [ngbTypeahead]="usearch" [(ngModel)]="selectedUser" [inputFormatter]="uformatter"
+            [resultFormatter]="uformatter" (selectItem)="selectUser($event)">
+        </div>
+
+        <label>Comments</label>
+        <div class="form-group">
+          <textarea [(ngModel)]="form.comments" rows="3" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>From</label>
+        <div class="form-group">
+          <ngb-datepicker #ds [(ngModel)]="form.startDate" [startDate]="{year:form.startDate.year, month:form.startDate.month}" name="startDate"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>To</label>
+        <div class="form-group">
+          <ngb-datepicker #df [(ngModel)]="form.endDate" [startDate]="{year:form.endDate.year, month:form.endDate.month}" name="finishdate"></ngb-datepicker>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="text-info">Estimates</h2>
+    <label>Travel Expenses (in €)</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.travels" type="text" class="form-control" name="expenses">
+    </div>
+
+    <label>Work hours</label>
+    <span class="btn btn-outline-success my-2 my-sm-0 float-sm-right" (click)="addEstimates()">Add</span>
+    <div class="mt-3">
+      <table class="table">
+        <thead>
+          <th>User</th>
+          <th>Hours</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let estimate of form.estimates;let i = index;">
+            <td><input type="text" class="form-control" [ngbTypeahead]="usearch" [(ngModel)]="selectedResources[i]" [inputFormatter]="uformatter"
+                [resultFormatter]="uformatter" (selectItem)="selectResource($event, i)"></td>
+            <td><input [(ngModel)]="estimate.hours" type="text" class="form-control"></td>
+            <td><button class="btn btn-outline-danger" (click)="deleteResource(i)"><span class="fa fa-trash"></span></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

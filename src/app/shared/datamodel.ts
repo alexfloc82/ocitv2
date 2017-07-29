@@ -3,16 +3,30 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 export class Proposal {
 	area: Area[];
 	estimates: Estimate[];
-	end: Date;
+	end: string;
+	endDate: NgbDateStruct;
 	id: string;
 	country: string;
 	pms: string[];
-	start: Date;
+	responsible: string;
+	start: string;
+	startDate: NgbDateStruct;
 	travels: number;
 	workload: number;
 	closed: boolean;
+	title: string;
+	comments: string;
 
-	constructor() { }
+	constructor(
+		date?: string,
+		ngbDate?: NgbDateStruct,
+	) { 
+		this.start = date;
+		this.end = date;
+		this.startDate = ngbDate;
+		this.endDate = ngbDate;
+		this.estimates=[];
+	}
 }
 
 export class Estimate {
