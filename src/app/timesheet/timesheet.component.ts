@@ -5,50 +5,48 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AuthService } from '../core/auth/auth.service';
 
 import { Timesheet, User, Proposal } from '../shared/datamodel';
-
-export class MesComponent {
-  id: string;
-  name: string;
-}
-
-const MESES: MesComponent[] = [
-    {id: '01', name: 'JANUARY'},
-    {id: '02', name: 'FEBRUARY'},
-    {id: '03', name: 'MARCH'},
-    {id: '04', name: 'APRIL'},
-    {id: '05', name: 'MAY'},
-    {id: '06', name: 'JUNE'},
-    {id: '07', name: 'JULY'},
-    {id: '08', name: 'AUGUST'},
-    {id: '09', name: 'SEPTEMBER'},
-    {id: '10', name: 'OCTOBER'},
-    {id: '11', name: 'NOVEMBER'},
-    {id: '12', name: 'DECEMBER'}
-  ];
+import { TimesheetMeses, TimesheetMesComponent } from './timesheet-date.service';
 
 @Component({
   selector: 'app-timesheet',
+  /*template: `<div>
+    <p>Today is {{((today | date: 'M')-1)}}</p>
+    <p>Or if you prefer, {{today | date:'fullDate'}}</p>
+    <p>The time is {{today | date:'jmZ'}}</p>
+  </div>`,*/
+  /*template: `
+  <h2>Meses</h2>
+    <ul>
+      <li *ngFor="let mes of meses">
+        <span>{{mes.id}}</span> {{mes.name}}
+      </li>
+    </ul>
+    `,*/
   templateUrl: './timesheet.component.html',
-  styleUrls: ['./timesheet.component.css']
+  styleUrls: ['./timesheet.component.css'],
+  providers: [TimesheetMeses]
 })
 
 export class TimesheetComponent implements OnInit {
-
+  meses: TimesheetMesComponent[]
+  today: number = Date.now();
   loader = { 'user': true, 'timesheet': true };
   timesheets: any[];
   filteredTimesheets: any[];
+  fecha: any[];
 
   constructor(
+    private timesheetDateService: TimesheetMeses,
     public authService: AuthService,
     private db: AngularFireDatabase,
     private router: Router,
     private route: ActivatedRoute, ) {
-    // this.loader.timesheet = true;
 
     this.getTimesheets();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getMeses();
   }
 
   private showLoader(): void {
@@ -74,7 +72,7 @@ export class TimesheetComponent implements OnInit {
      );
    }
 
-   private getFecha(meses: number) {
-     // f: Date();
+   public getMeses(): void {
+     this.timesheetDateService.getMeses().then(meses => this.meses = meses);
    }
 }
