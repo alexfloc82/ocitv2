@@ -7,7 +7,7 @@ export class Proposal {
 	endDate: NgbDateStruct;
 	id: string;
 	country: string;
-	pms: string[];
+	pms: any[];
 	responsible: string;
 	start: string;
 	startDate: NgbDateStruct;

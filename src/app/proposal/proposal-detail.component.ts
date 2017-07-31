@@ -33,7 +33,7 @@ export class ProposalDetailComponent implements OnInit {
     private db: AngularFireDatabase,
     private route: ActivatedRoute,
     private location: Location,
-    private utils: UtilsService,
+    public utils: UtilsService,
     public messageService: MessageService) {
 
     this.loader = true;
@@ -57,13 +57,13 @@ export class ProposalDetailComponent implements OnInit {
             a => {
               this.form = a;
               this.db.object('/users/' + a.responsible).subscribe(b => this.selectedUser = b);
-              if(this.form.estimates){
-              this.selectedResources = new Array(this.form.estimates.length);
-              this.form.estimates.forEach((a, index) => {
-                this.db.object('/users/' + a.user).subscribe(c =>
-                { this.selectedResources[index] = c })
-              }
-              );
+              if (this.form.estimates) {
+                this.selectedResources = new Array(this.form.estimates.length);
+                this.form.estimates.forEach((a, index) => {
+                  this.db.object('/users/' + a.user).subscribe(c =>
+                  { this.selectedResources[index] = c })
+                }
+                );
               }
               this.loader = false;
             }
@@ -123,6 +123,17 @@ export class ProposalDetailComponent implements OnInit {
 
   deleteResource(index: number) {
     this.form.estimates.splice(index, 1);
+  }
+
+  addRelease() {
+    if (!this.form.pms) {
+      this.form.pms = [];
+    }
+    this.form.pms.push({value:''});
+  }
+
+  deleteRelease(index: number) {
+    this.form.pms.splice(index, 1);
   }
 
 }
