@@ -34,6 +34,7 @@ export class TimesheetComponent implements OnInit {
   timesheets: any[];
   filteredTimesheets: any[];
   fecha: any[];
+  items: any[];
 
   constructor(
     private timesheetDateService: TimesheetMeses,
@@ -57,6 +58,16 @@ export class TimesheetComponent implements OnInit {
     console.log('Hide loader');
   }
 
+  createRange(numero) {
+    this.items = [];
+    let i = 0;
+
+    for (i = 1; i <= numero; i++) {
+       this.items.push(i);
+    }
+    return this.items;
+  }
+
   private getTimesheets() {
      this.db.list('/timesheets').subscribe(a => {
        this.timesheets = a;
@@ -70,6 +81,23 @@ export class TimesheetComponent implements OnInit {
        this.filteredTimesheets = this.timesheets;
       }
      );
+   }
+
+   getMes (num) {
+      let mes: number;
+
+      mes = this.today + num;
+
+      return mes;
+   }
+
+   suma (num1: number, num2: number) {
+
+    let result: number;
+
+    result = Number(num1) + Number(num2);
+
+    return result;
    }
 
    public getMeses(): void {
