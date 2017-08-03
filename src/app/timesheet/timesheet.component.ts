@@ -23,7 +23,7 @@ import { Timesheet, User, Proposal } from '../shared/datamodel';
     `,*/
   templateUrl: './timesheet.component.html',
   styleUrls: ['./timesheet.component.css'],
-  providers: [TimesheetMeses]
+  providers: []
 })
 
 export class TimesheetComponent implements OnInit {
