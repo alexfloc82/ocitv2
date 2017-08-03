@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AuthService } from '../core/auth/auth.service';
@@ -10,19 +10,35 @@ import { AuthService } from '../core/auth/auth.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  users: FirebaseListObservable<any>;
-  public email: string;
+  loader=false;
+  users: any[];
+  filteredUsers: any[];
 
-  constructor(db: AngularFireDatabase, private router: Router) {
-    this.users = db.list('/users');
+  constructor(
+    db: AngularFireDatabase, 
+    private router: Router,
+    private route: ActivatedRoute,) {
+    this.loader=true;
+    db.list('/users').subscribe(a => {
+      this.users = a; 
+      this.filteredUsers = a; 
+      this.loader=false;});
   }
 
   ngOnInit() {
-    this.email = "alexandre.floquet@gmail.com";
+    
   }
 
   gotoDetail(id: string): void {
-    this.router.navigate(['/User', id]);
+    this.router.navigate([id], { relativeTo: this.route });
+  }
+
+  onFilter(value:string){
+    this.filteredUsers = this.users.filter(user => 
+        user.adsuser.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+        user.name.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+        user.email.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
+        user.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
   }
 
 }

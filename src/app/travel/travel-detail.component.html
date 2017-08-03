@@ -1,0 +1,50 @@
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container p-3" *ngIf="!loader">
+  <div class="form-row mb-3">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true"></span> Save</button>
+    <button class="btn btn-outline-warning my-2 my-sm-0" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Undo</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0 float-sm-right" (click)="delete()" *ngIf="travel"><span class="fa fa-trash" aria-hidden="true"></span> Delete</button>
+  </div>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <label>User</label>
+        <div class="form-group">
+          <input type="text" name="selectedUser" class="form-control" [ngbTypeahead]="usearch" [(ngModel)]="selectedUser" [inputFormatter]="uformatter"
+            [resultFormatter]="uformatter" (selectItem)="selectUser($event)">
+        </div>
+
+        <label>Proposal</label>
+        <div class="form-group">
+          <input type="text" name="selectedProposal" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="selectedProposal" [inputFormatter]="pformatter"
+            [resultFormatter]="pformatter" (selectItem)="selectProposal($event)" required>
+        </div>
+
+        <label>Expenses (in €)</label>
+        <div class="form-group">
+          <input [(ngModel)]="form.expenses" type="text" class="form-control" name="expenses">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>From</label>
+        <div class="form-group">
+          <ngb-datepicker #ds [(ngModel)]="form.startDate" [startDate]="{year:form.startDate.year, month:form.startDate.month}" name="startDate"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label>To</label>
+        <div class="form-group">
+          <ngb-datepicker #df [(ngModel)]="form.finishDate" [startDate]="{year:form.finishDate.year, month:form.finishDate.month}"
+            name="finishdate"></ngb-datepicker>
+        </div>
+      </div>
+    </div>
+
+
+
+  </form>
+</div>
