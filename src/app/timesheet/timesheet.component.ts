@@ -5,7 +5,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AuthService } from '../core/auth/auth.service';
 
 import { Timesheet, User, Proposal } from '../shared/datamodel';
-import { TimesheetMeses, TimesheetMesComponent } from './timesheet-date.service';
 
 @Component({
   selector: 'app-timesheet',
@@ -28,7 +27,7 @@ import { TimesheetMeses, TimesheetMesComponent } from './timesheet-date.service'
 })
 
 export class TimesheetComponent implements OnInit {
-  meses: TimesheetMesComponent[]
+  //meses: TimesheetMesComponent[]
   today: number = Date.now();
   loader = { 'user': true, 'timesheet': true };
   timesheets: any[];
@@ -37,7 +36,7 @@ export class TimesheetComponent implements OnInit {
   items: any[];
 
   constructor(
-    private timesheetDateService: TimesheetMeses,
+   // private timesheetDateService: TimesheetMeses,
     public authService: AuthService,
     private db: AngularFireDatabase,
     private router: Router,
@@ -47,7 +46,7 @@ export class TimesheetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMeses();
+  //  this.getMeses();
   }
 
   private showLoader(): void {
@@ -83,14 +82,6 @@ export class TimesheetComponent implements OnInit {
      );
    }
 
-   getMes (num) {
-      let mes: number;
-
-      mes = this.today + num;
-
-      return mes;
-   }
-
    suma (num1: number, num2: number) {
 
     let result: number;
@@ -98,9 +89,5 @@ export class TimesheetComponent implements OnInit {
     result = Number(num1) + Number(num2);
 
     return result;
-   }
-
-   public getMeses(): void {
-     this.timesheetDateService.getMeses().then(meses => this.meses = meses);
    }
 }
