@@ -1,7 +1,7 @@
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export class Proposal {
-	area: Area[];
+	area: Area;
 	estimates: Estimate[];
 	end: string;
 	endDate: NgbDateStruct;
