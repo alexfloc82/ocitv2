@@ -18,13 +18,13 @@
   <div class="row p-1" >
     <div class="col-lg-3 mt-3" *ngIf="(authService.userProfile|async)?.role == 'Admin'">
       <div class="card">
-        <span (click)="gotoMenu('Proposal')" class="btn btn-info">
+        <span (click)="gotoMenu('Proposal')" class="btn btn-primary">
           <h1>Tareas</h1><span class="fa fa-file-text-o fa-5x fa-fw" aria-hidden="true"></span></span>
       </div>
     </div>
     <div class="col-lg-3 mt-3" *ngIf="(authService.userProfile|async)?.role == 'Admin'">
       <div class="card">
-        <span (click)="gotoMenu('User')" class="btn btn-danger">
+        <span (click)="gotoMenu('User')" class="btn btn-secondary">
           <h1>Users</h1><span class="fa fa-user fa-5x" aria-hidden="true"></span></span>
       </div>
     </div>
