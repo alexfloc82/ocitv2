@@ -34,18 +34,11 @@ export class UserSigninQuestionService {
       }),
 
       new TextboxQuestion({
-        key: 'adsuser',
-        label: 'ADS User',
-        required: true,
-        order: 4
-      }),
-
-      new TextboxQuestion({
         key: 'password',
         label: 'Pasword',
         type:'password',
         required: true,
-        order: 5
+        order: 4
       }),
 
       new TextboxQuestion({

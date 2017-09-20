@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../core/auth/auth.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-import { User, Proposal, Travel } from '../shared/datamodel';
+import { User, Proposal } from '../shared/datamodel';
 import { UtilsService } from '../core/utils/utils.service';
 
 @Component({
@@ -27,6 +27,7 @@ export class ProposalComponent implements OnInit {
       this.proposals = a;
       this.closedProposals = this.proposals.filter(proposal => proposal.closed);
       this.inprogressProposals = this.proposals.filter(proposal => !proposal.closed);
+      this.inprogressProposals.push({});
       this.loader=false;});
     }
 

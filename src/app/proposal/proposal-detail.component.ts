@@ -10,8 +10,9 @@ import { FormGroup } from '@angular/forms';
 
 import { UtilsService } from '../core/utils/utils.service';
 import { MessageService } from '../core/message/message.service';
+import { AuthService } from '../core/auth/auth.service';
 
-import { User, Proposal, Travel, Timesheet } from '../shared/datamodel';
+import { User, Proposal } from '../shared/datamodel';
 
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 
@@ -25,6 +26,7 @@ export class ProposalDetailComponent implements OnInit {
   loader = false; //to control loading
   proposal: FirebaseObjectObservable<any>; //To keep reference to database Object
   users: User[]; // list of elegible users
+  areas: { key: string, value: string }[] = [];
   selectedUser: User; // Curently selected user
   selectedResources: User[];
   form: Proposal; //form data
@@ -34,10 +36,12 @@ export class ProposalDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     public utils: UtilsService,
+    public authService: AuthService,
     public messageService: MessageService) {
 
     this.loader = true;
     this.db.list('/users').subscribe(a => this.users = a);
+    this.db.list('/areas').subscribe(areas => areas.forEach(area =>  this.areas.push({ key: area.$key, value: area.id })));
 
   }
 
@@ -48,6 +52,12 @@ export class ProposalDetailComponent implements OnInit {
         if (param.get('id') == '-') {
           let now = new Date().toISOString();
           this.form = new Proposal(now, this.utils.convertISOToNgbDate(now));
+          this.authService.userProfile.subscribe(user =>
+            {
+              this.form.responsible = user.$key;
+              this.db.object('/users/'+ user.$key).subscribe(user => this.selectedUser = user);
+            }
+          );
           this.loader = false;
         }
         // Editing proposal
@@ -57,14 +67,6 @@ export class ProposalDetailComponent implements OnInit {
             a => {
               this.form = a;
               this.db.object('/users/' + a.responsible).subscribe(b => this.selectedUser = b);
-              if (this.form.estimates) {
-                this.selectedResources = new Array(this.form.estimates.length);
-                this.form.estimates.forEach((a, index) => {
-                  this.db.object('/users/' + a.user).subscribe(c =>
-                  { this.selectedResources[index] = c })
-                }
-                );
-              }
               this.loader = false;
             }
           )
@@ -101,28 +103,24 @@ export class ProposalDetailComponent implements OnInit {
   }
 
   addEstimates() {
-    if (!this.form.estimates) {
-      this.form.estimates = [];
-    }
-    this.form.estimates.push({ user: '', hours: 0 })
   }
   //Uer typeahead
   usearch = (text$: Observable<string>) =>
     map.call(debounceTime.call(text$, 200),
-      term => term === '' ? [] : this.users.filter(user => (user.adsuser + ' - ' + user.name + ' ' + user.lastname).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+      term => term === '' ? [] : this.users.filter(user => (user.name + ' ' + user.lastname).toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
-  uformatter = (user: User) => user.adsuser + ' - ' + user.name + ' ' + user.lastname;
+  uformatter = (user: User) => user.name + ' ' + user.lastname;
 
   selectUser(selectedItem: any) {
     this.form.responsible = selectedItem.item.$key;
   }
 
   selectResource(selectedItem: any, index: number) {
-    this.form.estimates[index].user = selectedItem.item.$key;
+    
   }
 
   deleteResource(index: number) {
-    this.form.estimates.splice(index, 1);
+    
   }
 
   addRelease() {

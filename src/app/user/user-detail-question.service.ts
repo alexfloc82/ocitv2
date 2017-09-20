@@ -12,15 +12,6 @@ export class UserDetailQuestionService {
 
   getQuestions() {
 
-    let areaq = new DropdownQuestion({
-      key: 'area',
-      label: 'Area',
-      options: [],
-      order: 5
-    })
-
-    areaq.getAreas(this.db);
-
     let questions: QuestionBase<any>[] = [
 
       new TextboxQuestion({
@@ -35,12 +26,6 @@ export class UserDetailQuestionService {
         order: 2
       }),
 
-      new TextboxQuestion({
-        key: 'adsuser',
-        label: 'ADS User',
-        order: 3
-      }),
-
       new DropdownQuestion({
         key: 'role',
         label: 'Role',
@@ -50,10 +35,8 @@ export class UserDetailQuestionService {
           { key: 'E-Team', value: 'E-Team' },
           { key: 'Standard', value: 'Standard' }
         ],
-        order: 4
-      }),
-
-      areaq,
+        order: 3
+      })
 
     ];
 

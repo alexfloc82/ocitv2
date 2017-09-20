@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDvvL3Rfn81De5T7mkDiVBi_nnJCRVvNwk",
-    authDomain: "gipar-dev.firebaseapp.com",
-    databaseURL: "https://gipar-dev.firebaseio.com",
-    projectId: "gipar-dev",
-    storageBucket: "gipar-dev.appspot.com",
-    messagingSenderId: "167161467012"
+    apiKey: "AIzaSyALka-K-dxDyAfPpJPcmIh0ezX0lQYVrwQ",
+    authDomain: "ocitv-dev.firebaseapp.com",
+    databaseURL: "https://ocitv-dev.firebaseio.com",
+    projectId: "ocitv-dev",
+    storageBucket: "ocitv-dev.appspot.com",
+    messagingSenderId: "709455507086"
   }
 };
