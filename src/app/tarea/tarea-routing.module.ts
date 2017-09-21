@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import {TareaComponent} from './tarea.component';
+
+const routes: Routes = [
+  { path: '',    component: TareaComponent },
+ // { path: ':id',    component: ProposalDetailComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
