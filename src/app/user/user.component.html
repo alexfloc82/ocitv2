@@ -17,7 +17,7 @@
       <tr *ngFor="let user of filteredUsers">
         <td><button class="btn-link" (click)="gotoDetail(user.$key)">{{user.name}} {{user.lastname}}</button></td>
         <td>{{user.email}}</td>
-        <td>{{user.role}}</td>
+        <td>{{user.role | role}}</td>
       </tr>
     </tbody>
   </table>
