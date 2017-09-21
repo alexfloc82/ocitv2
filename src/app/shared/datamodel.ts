@@ -33,6 +33,8 @@ export class User {
 	email: string;
 	lastname: string;
 	role: string;
+	password: string;
+	confirm: string;
 
 	constructor() { }
 }

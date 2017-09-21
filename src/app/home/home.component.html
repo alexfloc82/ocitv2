@@ -3,20 +3,20 @@
     <input class="form-control" type="text" [(ngModel)]="email" placeholder="email">
   </div>
   <div class="form-group">
-    <input class="form-control" type="password" [(ngModel)]="password" placeholder="password">
+    <input class="form-control" type="password" [(ngModel)]="password" placeholder="Contraseña">
   </div>
   <div class="form-group">
-    <button class="btn btn-primary" (click)="login()" [disabled]="!email || !password">Login</button>
+    <button class="btn btn-primary" (click)="login()" [disabled]="!email || !password">Entrar</button>
   </div>
   <div class="form-group">
-    <button class="btn-link" (click)="resetPassword()">Forgot Password?</button>
-    <button class="btn-link" (click)="signIn()">Sign up</button>
+    <button class="btn-link" (click)="resetPassword()">¿Contraseña olvidada?</button>
+    <button class="btn-link" (click)="signIn()">Crear cuenta</button>
   </div>
 </div>
 
 <div class="container p-3" *ngIf="(authService.user | async)">
   <div class="row p-1" >
-    <div class="col-lg-3 mt-3" *ngIf="(authService.userProfile|async)?.role == 'Admin'">
+    <div class="col-lg-3 mt-3" >
       <div class="card">
         <span (click)="gotoMenu('Proposal')" class="btn btn-primary">
           <h1>Tareas</h1><span class="fa fa-file-text-o fa-5x fa-fw" aria-hidden="true"></span></span>

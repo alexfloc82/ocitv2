@@ -35,7 +35,6 @@ export class UserComponent implements OnInit {
 
   onFilter(value:string){
     this.filteredUsers = this.users.filter(user => 
-        user.adsuser.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
         user.name.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
         user.email.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
         user.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)

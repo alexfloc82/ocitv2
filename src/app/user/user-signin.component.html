@@ -1,0 +1,33 @@
+<div class="container p-3">
+  <div class="form-row mb-3">
+    <button class="btn btn-outline-success mx-2" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true"></span> Registrarse</button>
+    <button class="btn btn-outline-warning mx-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Cancelar</button>
+  </div>
+  <div>
+    <label>Nombre</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.name" type="text" class="form-control" [readonly]="proposal? true: false">
+    </div>
+
+    <label>Apellido</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.lastname" type="text" class="form-control">
+    </div>
+
+    <label>Email</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.email" type="email" class="form-control">
+    </div>
+
+    <label>Contraseña</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.password" type="password" class="form-control">
+    </div>
+
+    <label>Confirmar Contraseña</label>
+    <div class="form-group">
+      <input [(ngModel)]="form.confirm" type="password" class="form-control">
+    </div>
+
+  </div>
+</div>

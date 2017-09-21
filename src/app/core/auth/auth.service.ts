@@ -26,12 +26,12 @@ export class AuthService {
     this.users = db.list('/users');
   }
 
-  signup(email: string, password: string, name: string, lastname: string, adsuser: string) {
+  signup(email: string, password: string, name: string, lastname: string) {
     this.firebaseAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
-        var user = { email: email, uid: value.uid, name: name, lastname: lastname, adsuser: adsuser, role: 'Standard' };
+        var user = { email: email, uid: value.uid, name: name, lastname: lastname, role: 'Standard' };
         this.users.push(user).then(a => this.router.navigate(['/Home']))
       })
       .catch(err => this.messageService.sendMessage(err.message, 'error'))
@@ -41,7 +41,7 @@ export class AuthService {
     this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password)
-      .then()
+      .then(a => this.getProfile())
       .catch(err =>
         this.messageService.sendMessage(err.message, 'error')
       );
@@ -50,7 +50,8 @@ export class AuthService {
   logout() {
     this.firebaseAuth
       .auth
-      .signOut();
+      .signOut()
+      .then(a => this.router.navigate(['/Home']));
   }
 
   getProfile(){

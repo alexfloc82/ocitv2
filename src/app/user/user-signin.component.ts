@@ -1,36 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 
-import { QuestionBase } from '../core/question/question-base';
-import { QuestionControlService } from '../core/question/question-control.service';
+import { UtilsService } from '../core/utils/utils.service';
+import { MessageService } from '../core/message/message.service';
 import { AuthService } from '../core/auth/auth.service';
-import {MessageService} from '../core/message/message.service';
 
-import { UserSigninQuestionService } from './user-signin-question.service';
+import { User } from '../shared/datamodel';
+
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 
 
 @Component({
     selector: 'app-user',
-    templateUrl: './user-detail.component.html',
+    templateUrl: './user-signin.component.html',
     styleUrls: ['./user-detail.component.css'],
-    providers: [UserSigninQuestionService]
+    providers: []
 })
 export class UserSigninComponent implements OnInit {
     questions: any[];
-    form: FormGroup;
+    form: User; //form data
 
     constructor(
-        private qcs: QuestionControlService,
-        service: UserSigninQuestionService,
+        private db: AngularFireDatabase,
+        private route: ActivatedRoute,
         private auth: AuthService,
         private location: Location,
-        private messageService: MessageService) {
-        this.questions = service.getQuestions();
+        public utils: UtilsService,
+        public authService: AuthService,
+        public messageService: MessageService) {
     }
 
     ngOnInit() {
-        this.form = this.qcs.toFormGroup(this.questions);
+       this.form = new User;
     }
 
     goBack(): void {
@@ -39,13 +42,12 @@ export class UserSigninComponent implements OnInit {
 
     onSubmit() {
 
-        if (this.form.value['password'] == this.form.value['confirm']) {
+        if (this.form.password == this.form.confirm) {
             this.auth.signup(
-                this.form.value['email'],
-                this.form.value['password'],
-                this.form.value['name'],
-                this.form.value['lastname'],
-                this.form.value['adsuser']);
+                this.form.email,
+                this.form.password,
+                this.form.name,
+                this.form.lastname);
         }
         else {
             this.messageService.sendMessage("Password doesn't match", 'error')
