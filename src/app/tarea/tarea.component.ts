@@ -25,6 +25,8 @@ export class TareaComponent implements OnInit {
     private db: AngularFireDatabase, 
     private router: Router,
     private route: ActivatedRoute) { 
+      this.cadenas = this.db.list('/values/cadena');
+      this.combos = this.db.object('/values');
       this.query = {cadena:"", id_tarea:""};
       db.list('/tareas').subscribe(a => {
         this.tareas = a;
@@ -33,8 +35,7 @@ export class TareaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cadenas = this.db.list('/values/cadena');
-    this.combos = this.db.object('/values');
+
   }
 
   gotoDetail(id: string): void {

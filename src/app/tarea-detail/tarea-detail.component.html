@@ -1,3 +1,49 @@
-<p>
-  tarea details works!  
-</p>
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container-fluid p-3" *ngIf="!loader">
+    <button class="btn btn-outline-success m-2" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
+    <button class="btn btn-outline-warning m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Cancelar</button>
+    
+    <div class="row content">
+        <!-- Formulario-->
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>ID Tarea:</label>
+            <input class="form-control" [(ngModel)]="form.id_tarea">
+          </div>
+          <div class="form-group">
+              <label>Semestre:</label>
+              <select class="form-control" [(ngModel)]="form.semestre">
+                <option></option>
+                <option *ngFor="let option of (semestres | async)" value="{{option.$key}}">{{option.$value}}</option>
+              </select>
+            </div>
+          <div class="form-group">
+            <label>Cadena:</label>
+            <select class="form-control" [(ngModel)]="form.cadena">
+              <option></option>
+              <option *ngFor="let option of (cadenas | async)" value="{{option.$key}}">{{option.$value}}</option>
+            </select>
+          </div>
+        </div>
+        <!-- Tabla de fichas -->
+        <div class="col-sm-8 p-3">
+            <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Ficha</button>
+          <table class="table">
+            <thead>
+              <th>Title</th>
+              <th>Inicio</th>
+              <th>Fin</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tarea of displayTareas">
+                <td><button class="btn-link" (click)="gotoDetail(tarea.$key)">{{tarea.id_tarea}}</button></td>
+                <td>{{(combos|async)?.semestre[tarea.semestre]}}</td>
+                <td>{{(combos|async)?.cadena[tarea.cadena]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>
