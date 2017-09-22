@@ -21,7 +21,7 @@
     </div>
     <!-- Tabla de tareas -->
     <div class="col-sm-9 p-3">
-        <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Tarea</button>
+        <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')" [disabled]="(authService.userProfile|async)?.role < 40"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Tarea</button>
       <table class="table">
         <thead>
           <th>#</th>

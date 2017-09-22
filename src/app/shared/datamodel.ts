@@ -49,20 +49,27 @@ export class Tarea {
 	cadena: string;
 	create_date: NgbDateStruct;
 	create_user: string;
-	date: NgbDateStruct;
+	date: string;
+	dateNgb: NgbDateStruct;
 	edicion: string;
 	eh: number;
 	em: number;
 	es: number;
 	fichas: Ficha[];
+	id_tarea:string;
 	revisor: string;
 	revisado:boolean;	
 	semestre: string;
 	update_date: NgbDateStruct;
 	update_user: string;
 
-	constructor() {
+	constructor(
+		date?: string,
+		ngbDate?: NgbDateStruct,
+	) {
 		this.fichas = [];
+		this.date = date;
+		this.dateNgb = ngbDate;
 	}
 }
 
@@ -98,6 +105,7 @@ export class Ficha {
 	retorica: string[];
 	rotulos: string[];
 	title: string;
+	terminado: boolean;
 	valedit: string;
 	
 	constructor() {
@@ -106,6 +114,7 @@ export class Ficha {
 		this.lugares = [];
 		this.localidades = [];
 		this.quienes = [];
+		this.terminado = false;
 	}
 }
 

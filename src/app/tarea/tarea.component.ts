@@ -28,10 +28,12 @@ export class TareaComponent implements OnInit {
       this.cadenas = this.db.list('/values/cadena');
       this.combos = this.db.object('/values');
       this.query = {cadena:"", id_tarea:""};
-      db.list('/tareas').subscribe(a => {
-        this.tareas = a;
-        this.displayTareas = a;
-        this.loader=false;});
+      this.db.list('/tareas',
+      {query:{orderByChild:'date'}}).subscribe(a => {
+      this.tareas = a.reverse();
+      this.displayTareas = a;
+      this.loader=false;});
+      
   }
 
   ngOnInit() {
