@@ -42,6 +42,7 @@ export class User {
 export class Tarea {
 
 	analista: string;
+	analizado: boolean;
 	bh: number;
 	bm: number;
 	bs: number;
@@ -55,6 +56,7 @@ export class Tarea {
 	es: number;
 	fichas: Ficha[];
 	revisor: string;
+	revisado:boolean;	
 	semestre: string;
 	update_date: NgbDateStruct;
 	update_user: string;

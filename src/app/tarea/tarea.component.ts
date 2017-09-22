@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../core/auth/auth.service';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { User, Tarea } from '../shared/datamodel';
 import { UtilsService } from '../core/utils/utils.service';
@@ -16,32 +16,35 @@ export class TareaComponent implements OnInit {
   loader=true;
   tareas: any[];
   displayTareas:any[];
-  combos:FirebaseListObservable<any[]>;
+  cadenas:FirebaseListObservable<any[]>;
+  combos:FirebaseObjectObservable<any>;
+  query: any;
 
   constructor(
     public authService: AuthService, 
     private db: AngularFireDatabase, 
     private router: Router,
     private route: ActivatedRoute) { 
-      db.list('/proposals').subscribe(a => {
+      this.query = {cadena:"", id_tarea:""};
+      db.list('/tareas').subscribe(a => {
         this.tareas = a;
         this.displayTareas = a;
         this.loader=false;});
   }
 
   ngOnInit() {
-    this.combos = this.db.list('/values/cadena');
+    this.cadenas = this.db.list('/values/cadena');
+    this.combos = this.db.object('/values');
   }
 
   gotoDetail(id: string): void {
     this.router.navigate([id], { relativeTo: this.route });
   }
 
-  onFilterSort(value:string){
-    this.displayTareas = this.tareas.filter(user => 
-        user.name.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
-        user.email.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1 ||
-        user.lastname.toLowerCase().indexOf(value['target'].value.toLowerCase()) > -1)
+  onFilterSort(){
+    this.displayTareas = this.tareas.filter(tarea => 
+      (tarea.cadena == this.query.cadena || this.query.cadena == "") &&
+      (tarea.id_tarea.toLowerCase().indexOf(this.query.id_tarea.toLowerCase()) > -1 || this.query.id_tarea == ""))
   }
 
 }

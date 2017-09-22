@@ -5,22 +5,42 @@
   <div class="row content">
     <!-- Search control-->
     <div class="col-sm-3">
+      <h2 class="text-info">Tareas</h2>
       <div class="form-group" style="text-align:left;">
         <label>ID Tarea:</label>
-        <input class="form-control" ng-model="control.query.id_tarea">
+        <input class="form-control" [(ngModel)]="query.id_tarea">
       </div>
       <div class="form-group" style="text-align:left;">
         <label>Cadena:</label>
-        <select class="form-control" ng-model="control.query.cadena">
+        <select class="form-control" [(ngModel)]="query.cadena">
           <option></option>
-          <option *ngFor="let option of (combos | async)" value="{{option.$key}}">{{option.$value}}</option>
+          <option *ngFor="let option of (cadenas | async)" value="{{option.$key}}">{{option.$value}}</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-outline-info" (click)="buscar">Buscar</button>
+      <button class="btn btn-outline-info" (click)="onFilterSort()">Buscar</button>
     </div>
-    <div class="col-sm-9">
-      {{(combos | async | json)}}
-
+    <div class="col-sm-9 p-3">
+        <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Tarea</button>
+      <table class="table">
+        <thead>
+          <th>#</th>
+          <th>Semestre</th>
+          <th>Cadena</th>
+          <th>Fecha</th>
+          <th style="text-align:center;">Analizado</th>
+          <th style="text-align:center;">Revisado</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tarea of displayTareas">
+            <td><button class="btn-link" (click)="gotoDetail(tarea.$key)">{{tarea.id_tarea}}</button></td>
+            <td>{{(combos|async)?.semestre[tarea.semestre]}}</td>
+            <td>{{(combos|async)?.cadena[tarea.cadena]}}</td>
+            <td>{{tarea.date | date:'dd/MM/yyyy'}}</td>
+            <td style="text-align:center;"><input type="checkbox" [checked]="tarea.analizado"  disabled/></td>
+            <td style="text-align:center;"><input type="checkbox" [checked]="tarea.revisado"  disabled/></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
