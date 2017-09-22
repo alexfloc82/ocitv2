@@ -74,8 +74,8 @@ export class TareaDetailComponent implements OnInit {
           this.tarea.subscribe(
             a => {
               this.form = a;
-              this.db.object('/users/' + a.analista).subscribe(b => this.selectedAnalista = b);
-              this.db.object('/users/' + a.revisor).subscribe(b => this.selectedRevisor = b);
+              if(a.analista){this.db.object('/users/' + a.analista).subscribe(b => this.selectedAnalista = b);}
+              if(a.revisor){this.db.object('/users/' + a.revisor).subscribe(b => this.selectedRevisor = b);}
               this.loader = false;
             }
           )
@@ -86,10 +86,6 @@ export class TareaDetailComponent implements OnInit {
 
   gotoDetail(id: string): void {
     this.router.navigate([id], { relativeTo: this.route });
-  }
-
-  onFilterSort() {
-
   }
 
   //Comprueba que todas las fichas han sido terminadas
@@ -142,7 +138,7 @@ export class TareaDetailComponent implements OnInit {
   delete() {
     this.tarea.remove().then(a => this.router.navigate(['Tarea'])).catch(
       err => this.messageService.sendMessage(err.message, 'error')
-    );;
+    );
   }
 
 

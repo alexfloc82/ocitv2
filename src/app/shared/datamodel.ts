@@ -70,6 +70,12 @@ export class Tarea {
 		this.fichas = [];
 		this.date = date;
 		this.dateNgb = ngbDate;
+		this.bh = 0;
+		this.bm = 0;
+		this.bs = 0;
+		this.eh = 0;
+		this.em = 0;
+		this.es = 0;
 	}
 }
 
@@ -88,7 +94,7 @@ export class Ficha {
 	ehour: number;
 	emin: number;
 	equilibrio: string;
-	esec: string;
+	esec: number;
 	espConjunto:boolean;
 	fDirecta: number;
 	fGenerica: number;
@@ -106,6 +112,7 @@ export class Ficha {
 	rotulos: string[];
 	title: string;
 	terminado: boolean;
+	valorAmbito: number;
 	valedit: string;
 	
 	constructor() {
@@ -114,7 +121,17 @@ export class Ficha {
 		this.lugares = [];
 		this.localidades = [];
 		this.quienes = [];
+		this.retorica = [];
+		this.rotulos = [];
+		this.origen = [];
 		this.terminado = false;
+
+		this.bhour = 0;
+		this.bmin = 0;
+		this.bsec = 0;
+		this.ehour = 0;
+		this.emin = 0;
+		this.esec = 0;
 	}
 }
 

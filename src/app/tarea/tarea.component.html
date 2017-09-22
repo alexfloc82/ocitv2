@@ -4,8 +4,7 @@
 <div class="container-fluid p-3" *ngIf="!loader">
   <div class="row content">
     <!-- Search control-->
-    <div class="col-sm-3">
-      <h2 class="text-info">Tareas</h2>
+    <div class="col-sm-3 border rounded p-2 m-2">
       <div class="form-group">
         <label>ID Tarea:</label>
         <input class="form-control" [(ngModel)]="query.id_tarea">
@@ -17,10 +16,27 @@
           <option *ngFor="let option of (cadenas | async)" value="{{option.$key}}">{{option.$value}}</option>
         </select>
       </div>
+      <div class="form-group">
+          <label>Año:</label>
+          <select class="form-control" [(ngModel)]="query.year">
+            <option></option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            
+          </select>
+        </div>
+        <div class="form-group">
+            <label>Semestre:</label>
+            <select class="form-control" [(ngModel)]="query.semestre">
+              <option></option>
+              <option *ngFor="let option of (semestre | async)" value="{{option.$key}}">{{option.$value}}</option>
+            </select>
+          </div>
       <button class="btn btn-outline-info" (click)="onFilterSort()">Buscar</button>
     </div>
     <!-- Tabla de tareas -->
-    <div class="col-sm-9 p-3">
+    <div class="col-sm-8 border rounded p-2 m-2">
         <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')" [disabled]="(authService.userProfile|async)?.role < 40"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Tarea</button>
       <table class="table">
         <thead>
@@ -32,13 +48,13 @@
           <th style="text-align:center;">Revisado</th>
         </thead>
         <tbody>
-          <tr *ngFor="let tarea of displayTareas">
-            <td><button class="btn-link" (click)="gotoDetail(tarea.$key)">{{tarea.id_tarea}}</button></td>
-            <td>{{(combos|async)?.semestre[tarea.semestre]}}</td>
-            <td>{{(combos|async)?.cadena[tarea.cadena]}}</td>
-            <td>{{tarea.date | date:'dd/MM/yyyy'}}</td>
-            <td style="text-align:center;"><input type="checkbox" [checked]="tarea.analizado"  disabled/></td>
-            <td style="text-align:center;"><input type="checkbox" [checked]="tarea.revisado"  disabled/></td>
+          <tr *ngFor="let tarea of displayTareas, let i=index" >
+            <td *ngIf="i<200"><button class="btn-link" (click)="gotoDetail(tarea.$key)">{{tarea.id_tarea}}</button></td>
+            <td *ngIf="i<200">{{(combos|async)?.semestre[tarea.semestre]}}</td>
+            <td *ngIf="i<200">{{(combos|async)?.cadena[tarea.cadena]}}</td>
+            <td *ngIf="i<200">{{tarea.date | date:'dd/MM/yyyy'}}</td>
+            <td *ngIf="i<200" style="text-align:center;"><input type="checkbox" [checked]="tarea.analizado"  disabled/></td>
+            <td *ngIf="i<200"style="text-align:center;"><input type="checkbox" [checked]="tarea.revisado"  disabled/></td>
           </tr>
         </tbody>
       </table>
