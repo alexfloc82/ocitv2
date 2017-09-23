@@ -48,6 +48,10 @@ export class TareaFichaComponent implements OnInit {
   rotulos: FirebaseListObservable<any[]>;
   valedit: FirebaseListObservable<any[]>;
 
+  //Etiquetas
+  personas: string[];
+  temas: string[];
+
   constructor(
     public authService: AuthService,
     private db: AngularFireDatabase,
@@ -74,9 +78,27 @@ export class TareaFichaComponent implements OnInit {
     this.retorica = this.db.list('/values/retorica');
     this.rotulos = this.db.list('/values/rotulos');
     this.valedit = this.db.list('/values/valedit');
+
   }
 
   ngOnInit() {
+    this.db.list('/fichas').subscribe(fichas => {
+      this.personas = [];
+      this.temas = [];
+      fichas.forEach(ficha => {
+        if (ficha.quienes)
+          ficha.quienes.forEach(element => this.personas.push(element.persona));
+
+        if (ficha.dquienes)
+          ficha.dquienes.forEach(element => this.personas.push(element.persona));
+
+        if (ficha.dques)
+          ficha.dques.forEach(element => this.temas.push(element.etiqueta));
+      })
+      this.personas = this.personas.filter((value, index, self) => self.indexOf(value.toLowerCase()) === index).sort();
+      this.temas.filter((value, index, self) => self.indexOf(value) === index).sort();
+    });
+
     this.route.paramMap.forEach(
       param => {
         this.tarea = this.db.object('/tareas/' + param.get('id'));
@@ -164,26 +186,36 @@ export class TareaFichaComponent implements OnInit {
     }
   }
 
-  deleteElem(elem:string, item:number){
+  deleteElem(elem: string, item: number) {
     switch (elem) {
       case 'lugar':
-        this.form.lugares.splice(item,1);
+        this.form.lugares.splice(item, 1);
         break;
       case 'localidad':
-        this.form.localidades.splice(item,1);
+        this.form.localidades.splice(item, 1);
         break;
       case 'quien':
-        this.form.quienes.splice(item,1);
+        this.form.quienes.splice(item, 1);
         break;
       case 'dquien':
-        this.form.dquienes.splice(item,1);
+        this.form.dquienes.splice(item, 1);
         break;
       case 'dque':
-        this.form.dques.splice(item,1);
+        this.form.dques.splice(item, 1);
         break;
       default:
         break;
     }
   }
+
+  //Personas typeahead
+  psearch = (text$: Observable<string>) =>
+    map.call(debounceTime.call(text$, 200),
+      term => term === '' ? [] : this.personas.filter(persona => persona.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+
+  //Temas typeahead
+  tsearch = (text$: Observable<string>) =>
+    map.call(debounceTime.call(text$, 200),
+      term => term === '' ? [] : this.temas.filter(tema => tema.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
 }

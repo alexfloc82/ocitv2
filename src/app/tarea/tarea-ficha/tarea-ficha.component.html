@@ -207,7 +207,7 @@
                   </select>
               </td>
               <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
-              <td><input type="text" class="form-control etiquetas" [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
+              <td><input type="text" class="form-control etiquetas" [ngbTypeahead]="psearch"  [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
               <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
             </tr>
@@ -235,7 +235,7 @@
                                     </select>
               </td>
               <td><select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
-              <td><input type="text" class="form-control" [(ngModel)]="dquien.persona" [disabled]="form.terminado"></td>
+              <td><input type="text" class="form-control" [ngbTypeahead]="psearch"  [(ngModel)]="dquien.persona" [disabled]="form.terminado"></td>
               <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('dquien',i)"
                   *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
@@ -275,7 +275,7 @@
               <td>
                 <select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
               </td>
-              <td><input type="text" class="form-control etiquetas" [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
+              <td><input type="text" class="form-control" [ngbTypeahead]="tsearch"  [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
               <td>
                 <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
                                             <span class="fa fa-trash"></span>

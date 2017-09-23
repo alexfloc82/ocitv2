@@ -31,7 +31,7 @@ export class AuthService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
-        var user = { email: email, uid: value.uid, name: name, lastname: lastname, role: 'Standard' };
+        var user = { email: email, uid: value.uid, name: name, lastname: lastname, role: '30' };
         this.users.push(user).then(a => this.router.navigate(['/Home']))
       })
       .catch(err => this.messageService.sendMessage(err.message, 'error'))
@@ -54,7 +54,7 @@ export class AuthService {
       .then(a => this.router.navigate(['/Home']));
   }
 
-  getProfile(){
+  getProfile() {
     this.user.subscribe(userAuth => {
       this.db.list('/users', {
         query: {
@@ -66,6 +66,51 @@ export class AuthService {
         this.userProfile = new Observable(observer => observer.next(userProfile[0]));
       });
     });
+  }
+
+  sendResetPassword(email: string) {
+    this.firebaseAuth.auth.sendPasswordResetEmail(email)
+      .then(a => this.messageService.sendMessage('Un email a sido enviado a ' + email + ' para resetear su contraseña.', 'info'))
+      .catch(err =>
+        this.messageService.sendMessage(err.message, 'error')
+      );
+  }
+
+  resetPass(newPass: string, code?: string) {
+
+    if (code) {
+      this.firebaseAuth.auth.confirmPasswordReset(code, newPass)
+        .then(a => {
+          this.messageService.sendMessage('Su contraseña ha sido reseteada correctamente', 'info');
+          this.router.navigate(['/Home']);
+        })
+        .catch(err =>
+          this.messageService.sendMessage(err.message, 'error')
+        );
+
+    }
+    else {
+      this.firebaseAuth.auth.currentUser.updatePassword(newPass)
+        .then(a => {
+          this.messageService.sendMessage('Su contraseña ha sido actualizada', 'info');
+          this.router.navigate(['/Home']);
+        })
+        .catch(err =>
+          this.messageService.sendMessage(err.message, 'error')
+        );
+    }
+
+  }
+
+  getEmail(code: string) {
+    this.firebaseAuth.auth.verifyPasswordResetCode(code)
+      .then(a => {
+        this.messageService.sendMessage('Su contraseña ha sido actualizada', 'info');
+      })
+      .catch(err => {
+        this.messageService.sendMessage(err.message, 'error');
+      }
+      );
   }
 
 }
