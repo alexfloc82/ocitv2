@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  /*dev
+  //dev
   firebase: {
     apiKey: "AIzaSyALka-K-dxDyAfPpJPcmIh0ezX0lQYVrwQ",
     authDomain: "ocitv-dev.firebaseapp.com",
@@ -13,14 +13,14 @@ export const environment = {
     projectId: "ocitv-dev",
     storageBucket: "ocitv-dev.appspot.com",
     messagingSenderId: "709455507086"
-  },*/
+  },
   //prod
-  firebase: {
+  /*firebase: {
     apiKey: "AIzaSyAMoVCjNT323p6BJS11o6qiqbJOwH9IXck",
     authDomain: "ocitv-complutense.firebaseapp.com",
     databaseURL: "https://ocitv-complutense.firebaseio.com",
     projectId: "ocitv-complutense",
     storageBucket: "",
     messagingSenderId: "319794440492"
-  }
+  }*/
 };
