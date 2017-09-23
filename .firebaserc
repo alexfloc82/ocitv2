@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "ocitv-dev"
+    "default": "ocitv-dev",
+    "prod"; "ocitv-complutense"
   }
 }
