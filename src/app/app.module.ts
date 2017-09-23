@@ -9,7 +9,6 @@ import {AppRouteModule} from './app.route.module';
 import {CoreModule} from './core/core.module';
 import {HomeModule} from './home/home.module';
 
-import { ProposalModule } from './proposal/proposal.module';
 import { TareaModule } from './tarea/tarea.module';
 import { DesplegableModule } from './desplegable/desplegable.module';
 import { SharedModule } from './shared/shared.module';
@@ -27,7 +26,7 @@ import {GrowlModule} from 'primeng/primeng';
     AppComponent
   ],
   imports: [
-    BrowserModule, AppRouteModule, CoreModule, ProposalModule, SharedModule, GrowlModule,
+    BrowserModule, AppRouteModule, CoreModule, SharedModule, GrowlModule,
     UserModule, HomeModule, TareaModule, DesplegableModule,BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
