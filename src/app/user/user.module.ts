@@ -8,6 +8,8 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import {UserDetailComponent} from './user-detail.component';
 import {UserSigninComponent} from './user-signin.component';
+import { UserResetComponent } from './user-reset/user-reset.component';
+import { UserForgotComponent } from './user-forgot/user-forgot.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import {UserSigninComponent} from './user-signin.component';
     UserRoutingModule, SharedModule,
     ReactiveFormsModule, FormsModule
   ],
-  declarations: [UserComponent, UserDetailComponent,  UserSigninComponent ]
+  declarations: [UserComponent, UserDetailComponent,  UserSigninComponent, UserResetComponent, UserForgotComponent ]
 })
 export class UserModule { }

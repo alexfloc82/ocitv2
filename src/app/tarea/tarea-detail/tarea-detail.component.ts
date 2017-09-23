@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { AuthService } from '../core/auth/auth.service';
-import { MessageService } from '../core/message/message.service';
-import { UtilsService } from '../core/utils/utils.service';
+import { AuthService } from '../../core/auth/auth.service';
+import { MessageService } from '../../core/message/message.service';
+import { UtilsService } from '../../core/utils/utils.service';
 
-import { User, Tarea, Ficha } from '../shared/datamodel';
+import { User, Tarea, Ficha } from '../../shared/datamodel';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
