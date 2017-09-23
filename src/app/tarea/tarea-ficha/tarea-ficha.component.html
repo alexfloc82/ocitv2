@@ -5,7 +5,7 @@
   <div class="row content">
     <div class="col-3">
       <div class="list-group sticky-top" id="list-tab" role="tablist">
-        <button class="btn btn-success m-2" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
+        <button class="btn btn-success m-2" (click)="onSubmit()" [disabled]="!form.title" ><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
         <button class="btn btn-secondary m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Regresar</button>
         <button class="btn btn-danger m-2 float-right" (click)="delete()" *ngIf="!form.terminado && form.$key"><span class="fa fa-trash" aria-hidden="true"></span> Eliminar</button>
         <button class="list-group-item list-group-item-action" href="#gen">General</button>

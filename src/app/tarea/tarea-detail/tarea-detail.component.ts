@@ -68,7 +68,10 @@ export class TareaDetailComponent implements OnInit {
         else {
           this.tarea = this.db.object('/tareas/' + param.get('id'));
 
-          this.db.list('/tareas/' + param.get('id') + '/fichas')
+          this.db.list('/fichas',{query:{
+            orderByChild:'tarea_id',
+            equalTo:param.get('id')
+          }})
             .subscribe(fichas => this.fichas = fichas.sort(this.compareFichas));
 
           this.tarea.subscribe(

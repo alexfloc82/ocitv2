@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from './core/auth/auth.service';
 import { MessageService } from './core/message/message.service';
 import { Router } from '@angular/router';
+import {Message} from 'primeng/primeng';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnDestroy {
   message={text:'', type:'success'};
   subscription: Subscription;
+  msgs: Message[] = [];
 
   constructor(
     public authService: AuthService, 

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -18,14 +19,16 @@ import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 
+import {GrowlModule} from 'primeng/primeng';
+
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, AppRouteModule, CoreModule, ProposalModule, SharedModule, 
-    UserModule, HomeModule, TareaModule, DesplegableModule,
+    BrowserModule, AppRouteModule, CoreModule, ProposalModule, SharedModule, GrowlModule,
+    UserModule, HomeModule, TareaModule, DesplegableModule,BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
   ],

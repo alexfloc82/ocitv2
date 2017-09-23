@@ -27,19 +27,6 @@
   </div>
 </nav>
 <div class="container-fluid pt-1" >
-  <div class="row sticky-top" style="z-index: 1200" *ngIf="message.text">
-    <div class="col-9"></div>
-    <div class="col-3">
-        <div class="alert alert-dismissible fade show" role="alert" 
-        [class.alert-warning]="message.type=='warning'" 
-        [class.alert-danger]="message.type=='error'" 
-        [class.alert-success]="message.type=='success'"
-        [class.alert-info]="message.type=='info'">
-        <button type="button" class="close" aria-label="Close" (click)="clearMessage()">
-      <span aria-hidden="true">&times;</span>
-    </button> {{message.text}}
-      </div>
-    </div>
-  </div>
+  <p-growl [(value)]="msgs"></p-growl>
   <router-outlet></router-outlet>
 </div>

@@ -81,6 +81,7 @@ export class Tarea {
 
 export class Ficha {
 
+	tarea_id:string;
 	ambito: string;
 	bhour: number;
 	bmin: number;
@@ -115,7 +116,10 @@ export class Ficha {
 	valorAmbito: number;
 	valedit: string;
 	
-	constructor() {
+	constructor(
+		tarea?: string,
+	) {
+		this.tarea_id = tarea;
 		this.dquienes = [];
 		this.dques = [];
 		this.lugares = [];

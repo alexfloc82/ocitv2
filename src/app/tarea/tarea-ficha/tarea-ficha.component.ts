@@ -79,16 +79,15 @@ export class TareaFichaComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.forEach(
       param => {
-        // new tarea
+        this.tarea = this.db.object('/tareas/' + param.get('id'));
+        // new ficha
         if (param.get('idficha') == '-') {
-          this.form = new Ficha();
-          this.tarea = this.db.object('/tareas/' + param.get('id'));
+          this.form = new Ficha(param.get('id'));
           this.loader = false;
         }
-        // Editing tarea
+        // Editing ficha
         else {
-          this.ficha = this.db.object('/tareas/' + param.get('id') + '/fichas/' + param.get('idficha'));
-          this.tarea = this.db.object('/tareas/' + param.get('id'));
+          this.ficha = this.db.object('/fichas/' + param.get('idficha'));
           this.ficha.subscribe(
             a => {
               this.form = a;
@@ -132,7 +131,7 @@ export class TareaFichaComponent implements OnInit {
     }
     //Create new object
     else {
-      this.db.list('/tareas/' + this.tarea.$ref.key + '/fichas').push(this.form)
+      this.db.list('/fichas').push(this.form)
         .then(a => {
           this.messageService.sendMessage('La ficha ha sido guardada', 'success');
           this.router.navigate(['Tarea', this.tarea.$ref.key, a.key]);
