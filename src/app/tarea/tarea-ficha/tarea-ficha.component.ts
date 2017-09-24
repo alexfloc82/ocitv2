@@ -65,7 +65,7 @@ export class TareaFichaComponent implements OnInit {
     this.format = this.db.list('/values/format');
     this.genero = this.db.list('/values/genero');
     this.zona = this.db.list('/values/zona');
-    this.pais = this.db.list('/values/pais');
+    this.pais = this.db.list('/values/pais',{query:{orderByValue:true}});
     this.ambito = this.db.list('/values/ambito');
     this.comunidad = this.db.list('/values/comunidad');
     this.categoria = this.db.list('/values/categoria');

@@ -97,7 +97,8 @@ export class Ficha {
 	equilibrio: string;
 	esec: number;
 	espConjunto:boolean;
-	fDirecta: number;
+	fConfidencial: number;
+	fDir: number;
 	fGenerica: number;
 	format: string;
 	fuente: string;
@@ -136,6 +137,11 @@ export class Ficha {
 		this.ehour = 0;
 		this.emin = 0;
 		this.esec = 0;
+		this.fConfidencial = 0;
+		this.fDir = 0;
+		this.fGenerica = 0;
+		this.declhombre = 0;
+		this.declmujeres = 0;
 	}
 }
 
