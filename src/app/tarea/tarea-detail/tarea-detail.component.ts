@@ -26,6 +26,7 @@ export class TareaDetailComponent implements OnInit {
   form: Tarea; //form data
   fichas: Ficha[];
   displayFichas: any[];
+  startDate ={year:null, month:null};
 
 
   //desplegables
@@ -62,6 +63,7 @@ export class TareaDetailComponent implements OnInit {
         if (param.get('id') == '-') {
           let now = new Date().toISOString();
           this.form = new Tarea(now, this.utils.convertISOToNgbDate(now));
+          this.startDate={year: new Date().getFullYear(), month: new Date().getMonth() + 1}
           this.loader = false;
         }
         // Editing tarea
@@ -77,6 +79,7 @@ export class TareaDetailComponent implements OnInit {
           this.tarea.subscribe(
             a => {
               this.form = a;
+              this.startDate={year: this.form.dateNgb.year, month: this.form.dateNgb.month}
               if(a.analista){this.db.object('/users/' + a.analista).subscribe(b => this.selectedAnalista = b);}
               if(a.revisor){this.db.object('/users/' + a.revisor).subscribe(b => this.selectedRevisor = b);}
               this.loader = false;

@@ -91,7 +91,7 @@
     <div class="col-sm-2 mt-2 pt-2">
       <div class="form-group form-inline">
         <div>
-          <ngb-datepicker [(ngModel)]="form.dateNgb" [startDate]="{year:form.dateNgb.year, month:form.dateNgb.month}" (click)="form.date = utils.convertNgbDateToISO(form.dateNgb)"></ngb-datepicker>
+          <ngb-datepicker [(ngModel)]="form.dateNgb" [startDate]="startDate" (click)="form.date = utils.convertNgbDateToISO(form.dateNgb)"></ngb-datepicker>
         </div>
       </div>
     </div>
