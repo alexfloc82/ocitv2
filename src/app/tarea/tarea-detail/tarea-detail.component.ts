@@ -142,6 +142,15 @@ export class TareaDetailComponent implements OnInit {
   }
 
   delete() {
+
+    this.db.list('/fichas', {query:{orderByChild:'tarea_id', equalTo:this.tarea.$ref.key}}).subscribe(fichas =>{
+      fichas.forEach(ficha =>{
+        this.db.object('/fichas/' + ficha.$key).remove().catch(
+          err => this.messageService.sendMessage(err.message, 'error')
+        );;
+      })
+    })
+
     this.tarea.remove().then(a => this.router.navigate(['Tarea'])).catch(
       err => this.messageService.sendMessage(err.message, 'error')
     );

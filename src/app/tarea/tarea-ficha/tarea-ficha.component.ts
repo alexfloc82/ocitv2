@@ -65,7 +65,7 @@ export class TareaFichaComponent implements OnInit {
     this.format = this.db.list('/values/format');
     this.genero = this.db.list('/values/genero');
     this.zona = this.db.list('/values/zona');
-    this.pais = this.db.list('/values/pais',{query:{orderByValue:true}});
+    this.pais = this.db.list('/values/pais', { query: { orderByValue: true } });
     this.ambito = this.db.list('/values/ambito');
     this.comunidad = this.db.list('/values/comunidad');
     this.categoria = this.db.list('/values/categoria');
@@ -86,17 +86,32 @@ export class TareaFichaComponent implements OnInit {
       this.personas = [];
       this.temas = [];
       fichas.forEach(ficha => {
-        if (ficha.quienes)
-          ficha.quienes.forEach(element => this.personas.push(element.persona));
+        if (ficha.quienes) {
+          ficha.quienes.forEach(element => {
+            if (this.personas.indexOf(element.persona)<0){
+              this.personas.push(element.persona)
+            }
+          })
+        }
 
-        if (ficha.dquienes)
-          ficha.dquienes.forEach(element => this.personas.push(element.persona));
+        if (ficha.dquienes) { 
+          ficha.dquienes.forEach(element => {
+            if (this.personas.indexOf(element.persona)<0){
+              this.personas.push(element.persona)
+            }
+          })
+        }
 
-        if (ficha.dques)
-          ficha.dques.forEach(element => this.temas.push(element.etiqueta));
+        if (ficha.dques) { 
+          ficha.dques.forEach(element => {
+            if (this.temas.indexOf(element.etiqueta)<0){
+              this.temas.push(element.etiqueta)
+            }
+          })
+        }
       })
-      this.personas = this.personas.filter((value, index, self) => self.indexOf(value.toLowerCase()) === index).sort();
-      this.temas.filter((value, index, self) => self.indexOf(value) === index).sort();
+      this.personas.sort();
+      this.temas.sort();
     });
 
     this.route.paramMap.forEach(
