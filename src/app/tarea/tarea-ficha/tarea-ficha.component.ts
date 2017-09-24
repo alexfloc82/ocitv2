@@ -88,7 +88,7 @@ export class TareaFichaComponent implements OnInit {
       fichas.forEach(ficha => {
         if (ficha.quienes) {
           ficha.quienes.forEach(element => {
-            if (this.personas.indexOf(element.persona)<0){
+            if (element.persona && this.personas.indexOf(element.persona)<0){
               this.personas.push(element.persona)
             }
           })
@@ -96,7 +96,7 @@ export class TareaFichaComponent implements OnInit {
 
         if (ficha.dquienes) { 
           ficha.dquienes.forEach(element => {
-            if (this.personas.indexOf(element.persona)<0){
+            if (element.persona && this.personas.indexOf(element.persona)<0){
               this.personas.push(element.persona)
             }
           })
@@ -104,7 +104,7 @@ export class TareaFichaComponent implements OnInit {
 
         if (ficha.dques) { 
           ficha.dques.forEach(element => {
-            if (this.temas.indexOf(element.etiqueta)<0){
+            if (element.etiqueta && this.temas.indexOf(element.etiqueta)<0){
               this.temas.push(element.etiqueta)
             }
           })
