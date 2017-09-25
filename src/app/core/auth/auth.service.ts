@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 import { MessageService } from '../message/message.service';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
   userProfile: Observable<any>;
   user: Observable<firebase.User>;
-  users: FirebaseListObservable<any>;
+  users: FirebaseObjectObservable<any>;
 
   constructor(
     private firebaseAuth: AngularFireAuth,
@@ -23,7 +23,7 @@ export class AuthService {
     this.user = firebaseAuth.authState;
     this.userProfile = new Observable(observer => observer.next(''))
     this.getProfile();
-    this.users = db.list('/users');
+    this.users = db.object('/users');
   }
 
   signup(email: string, password: string, name: string, lastname: string) {
@@ -31,8 +31,10 @@ export class AuthService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
-        var user = { email: email, uid: value.uid, name: name, lastname: lastname, role: '30' };
-        this.users.push(user).then(a => this.router.navigate(['/Home']))
+        let newUser={}
+        let user = { email: email, uid: value.uid, name: name, lastname: lastname, role: '30' };
+        newUser[value.uid]=user;
+        this.users.update(newUser).then(a => this.router.navigate(['/Home']))
       })
       .catch(err => this.messageService.sendMessage(err.message, 'error'))
   }
