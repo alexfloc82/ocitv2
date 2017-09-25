@@ -31,7 +31,7 @@ export class AuthService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
-        let newUser={}
+        let newUser={};
         let user = { email: email, uid: value.uid, name: name, lastname: lastname, role: '30' };
         newUser[value.uid]=user;
         this.users.update(newUser).then(a => this.router.navigate(['/Home']))
