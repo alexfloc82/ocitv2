@@ -42,6 +42,12 @@ export class UserSigninComponent implements OnInit {
 
     onSubmit() {
 
+        if(!this.form.email.endsWith('ucm.es'))
+        {
+            this.messageService.sendMessage("Se requiere una cuenta de correo de la complutense 'ucm.es' para registrarse", 'error')
+            return false;
+        }
+
         if (this.form.password == this.form.confirm) {
             this.auth.signup(
                 this.form.email,
@@ -50,7 +56,7 @@ export class UserSigninComponent implements OnInit {
                 this.form.lastname);
         }
         else {
-            this.messageService.sendMessage("Password doesn't match", 'error')
+            this.messageService.sendMessage("la contraseña introducida no coincide con la de confirmación", 'error')
         }
 
     }
