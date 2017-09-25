@@ -88,23 +88,23 @@ export class TareaFichaComponent implements OnInit {
       fichas.forEach(ficha => {
         if (ficha.quienes) {
           ficha.quienes.forEach(element => {
-            if (element.persona && this.personas.indexOf(element.persona)<0){
+            if (element.persona && this.personas.indexOf(element.persona) < 0) {
               this.personas.push(element.persona)
             }
           })
         }
 
-        if (ficha.dquienes) { 
+        if (ficha.dquienes) {
           ficha.dquienes.forEach(element => {
-            if (element.persona && this.personas.indexOf(element.persona)<0){
+            if (element.persona && this.personas.indexOf(element.persona) < 0) {
               this.personas.push(element.persona)
             }
           })
         }
 
-        if (ficha.dques) { 
+        if (ficha.dques) {
           ficha.dques.forEach(element => {
-            if (element.etiqueta && this.temas.indexOf(element.etiqueta)<0){
+            if (element.etiqueta && this.temas.indexOf(element.etiqueta) < 0) {
               this.temas.push(element.etiqueta)
             }
           })
@@ -221,6 +221,12 @@ export class TareaFichaComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  goTo(location: string): void {
+    window.location.hash = "";
+    window.location.hash = location;
+    window.scrollBy(0,2);
   }
 
   //Personas typeahead

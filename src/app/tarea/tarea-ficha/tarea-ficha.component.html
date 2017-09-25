@@ -8,14 +8,14 @@
         <button class="btn btn-success m-2" (click)="onSubmit()" [disabled]="!form.title" ><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
         <button class="btn btn-secondary m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Regresar</button>
         <button class="btn btn-danger m-2 float-right" (click)="delete()" *ngIf="!form.terminado && form.$key"><span class="fa fa-trash" aria-hidden="true"></span> Eliminar</button>
-        <button class="list-group-item list-group-item-action" href="#gen">General</button>
-        <button class="list-group-item list-group-item-action" href="#loc">Localización</button>
-        <button class="list-group-item list-group-item-action" href="#fuen">Fuentes</button>
-        <button class="list-group-item list-group-item-action" href="#quien">Quien habla</button>
-        <button class="list-group-item list-group-item-action" href="#dequien">De quien habla</button>
-        <button class="list-group-item list-group-item-action" href="#deque">De que se habla</button>
-        <button class="list-group-item list-group-item-action" href="#trat">Tratamiento</button>
-        <button class="list-group-item list-group-item-action" href="#obs">Observaciones</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('gen')" href="#gen">General</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('loc')" href="#loc">Localización</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('fuen')" href="#fuen">Fuentes</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('quien')" href="#quien">Quien habla</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('dequien')" href="#dequien">De quien habla</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('deque')" href="#deque">De que se habla</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('trat')" href="#trat">Tratamiento</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('obs')" href="#obs">Observaciones</button>
       </div>
     </div>
     <div class="col-9">
