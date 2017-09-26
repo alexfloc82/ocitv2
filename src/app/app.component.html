@@ -14,6 +14,9 @@
         <a routerLink="Tarea" class="nav-link" routerLinkActive="active">Tareas</a>
       </li>
       <li class="nav-item">
+        <a routerLink="Dashboard" class="nav-link" routerLinkActive="active">Análisis</a>
+      </li>
+      <li class="nav-item">
           <a routerLink="Desplegable" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Etiquetas</a>
         </li>
       <li class="nav-item">

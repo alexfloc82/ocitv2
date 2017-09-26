@@ -1,3 +1,15 @@
-<p>
-  dashboard works!
-</p>
+<div class="container text-center pt-5" *ngIf="loader">
+    <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+  </div>
+  <div class="container-fluid p-3" *ngIf="!loader">
+    <div class="row">
+      <div class="col-3">
+        <div class="list-group" id="list-tab" role="tablist">
+          <button class="list-group-item list-group-item-action" routerLink="General" >Dashboard 1</button>
+          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 2</button>
+        </div>
+      </div>
+      <div class="col-9">
+       <router-outlet></router-outlet>
+    </div>
+  </div>

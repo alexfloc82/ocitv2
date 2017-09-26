@@ -25,6 +25,8 @@ export class TareaFichaComponent implements OnInit {
   ficha: FirebaseObjectObservable<any>;
   form: Ficha; //form data
   tarea: FirebaseObjectObservable<any>;
+  analista: string;
+  revisor:string;
 
   //desplegables
   combos: FirebaseObjectObservable<any>;
@@ -117,6 +119,10 @@ export class TareaFichaComponent implements OnInit {
     this.route.paramMap.forEach(
       param => {
         this.tarea = this.db.object('/tareas/' + param.get('id'));
+        this.tarea.subscribe(tarea =>{
+          this.analista = tarea.analista;
+          this.revisor = tarea.revisor;
+        })
         // new ficha
         if (param.get('idficha') == '-') {
           this.form = new Ficha(param.get('id'));

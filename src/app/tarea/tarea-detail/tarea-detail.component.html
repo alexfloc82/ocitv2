@@ -24,7 +24,7 @@
         <label class="col-3">Analista: </label>
         <input type="text" name="selectedAnalista" class="form-control" [ngbTypeahead]="usearch" [(ngModel)]="selectedAnalista" [inputFormatter]="uformatter"
           [resultFormatter]="uformatter" (selectItem)="selectAnalista($event)" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
-        <label><input class="mx-2" type="checkbox" [(ngModel)]="form.analizado" (click)="checkTerminado()" [disabled]="form.revisado"> Analizado</label>
+        <label><input class="mx-2" type="checkbox" [(ngModel)]="form.analizado" (click)="checkTerminado()" [disabled]="form.revisado || (authService.user|async)?.uid != form.analista"> Analizado</label>
       </div>
       <div class="form-group form-inline">
         <label class="col-3">Revisor: </label>
@@ -99,7 +99,7 @@
   <div class="row content" *ngIf="form.$key">
     <!-- Tabla de fichas -->
     <div class="col-sm-11 p-3">
-      <button class="btn btn-outline-success m-2" *ngIf="!form.analizado" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Pieza</button>
+      <button class="btn btn-outline-success m-2" *ngIf="!form.analizado && ((authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == form.analista)" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Pieza</button>
       <table class="table">
         <thead>
           <th>Titulo</th>
