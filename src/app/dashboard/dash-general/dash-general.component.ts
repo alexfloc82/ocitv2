@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DashboardService} from '../dashboard.service';
+
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-dash-general',
@@ -6,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dash-general.component.css']
 })
 export class DashGeneralComponent implements OnInit {
+  tareas: any[];
 
-  constructor() { }
+  constructor(
+    private dashService : DashboardService,
+  ) { 
+    this.dashService.dataTarea.subscribe(tareas => this.tareas  = tareas)
+
+  }
 
   ngOnInit() {
   }
