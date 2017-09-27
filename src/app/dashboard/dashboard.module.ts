@@ -6,10 +6,11 @@ import { DashboardComponent } from './dashboard.component';
 import { DashGeneralComponent } from './dash-general/dash-general.component';
 import { DashLocationComponent } from './dash-location/dash-location.component';
 import {DashboardService} from './dashboard.service';
+import {ChartModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,ChartModule,
     DashboardRoutingModule
   ],
   declarations: [DashboardComponent, DashGeneralComponent, DashLocationComponent],

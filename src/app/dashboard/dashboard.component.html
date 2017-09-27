@@ -3,13 +3,17 @@
   </div>
   <div class="container-fluid p-3" *ngIf="!loader">
     <div class="row">
-      <div class="col-3">
+      <div class="col-md-2">
         <div class="list-group" id="list-tab" role="tablist">
           <button class="list-group-item list-group-item-action" routerLink="General" >Dashboard 1</button>
           <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 2</button>
+          <button class="list-group-item list-group-item-action" routerLink="General" >Dashboard 3</button>
+          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 4</button>
+          <button class="list-group-item list-group-item-action" routerLink="General" >Dashboard 5</button>
+          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 6</button>
         </div>
       </div>
-      <div class="col-9">
+      <div class="col-md-10">
        <router-outlet></router-outlet>
     </div>
   </div>
