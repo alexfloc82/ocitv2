@@ -8,6 +8,7 @@ import {DashboardService} from './dashboard.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  selectedItem:string;
 
   constructor(
     private dashService : DashboardService,
@@ -15,6 +16,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dashService.emitNormTarea();
+    this.selectedItem = 'General';
   }
 
+  selectItem(selectedItem: any) {
+    this.selectedItem = selectedItem;
+  }
 }

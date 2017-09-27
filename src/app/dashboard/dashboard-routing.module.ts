@@ -6,8 +6,9 @@ import {DashGeneralComponent} from './dash-general/dash-general.component';
 import {DashLocationComponent} from './dash-location/dash-location.component';
 
 const routes: Routes = [
-  { path: '',    component: DashboardComponent, 
+  { path: '',    component: DashboardComponent,
   children: [
+    {path: '',    component: DashGeneralComponent},
     {path: 'General',    component: DashGeneralComponent},
     {path: 'Location',    component: DashLocationComponent},
   ] }

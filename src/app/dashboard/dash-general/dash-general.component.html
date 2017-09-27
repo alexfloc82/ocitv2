@@ -1,5 +1,36 @@
 <div class="row">
-  <div class="col-6">
-    <p-chart [type]="totalPiezaChart.type" [data]="totalPiezaChart.data" [options]="totalPiezaChart.options"></p-chart>
-  </div>
+    <div class="col-xl-6 p-2">
+        <div class="border rounded">
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <p-chart [type]="totalTareaChart.type" [data]="totalTareaChart.data" [options]="totalTareaChart.options"></p-chart>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <p-chart [type]="duracionTareaChart.type" [data]="duracionTareaChart.data" [options]="duracionTareaChart.options"></p-chart>
+                </div>
+                <div class="col-xl-6">
+                    <p-chart [type]="duracionMedTareaChart.type" [data]="duracionMedTareaChart.data" [options]="duracionMedTareaChart.options"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 p-2">
+        <div class="border rounded">
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <p-chart [type]="totalPiezaChart.type" [data]="totalPiezaChart.data" [options]="totalPiezaChart.options"></p-chart>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <p-chart [type]="duracionPiezaChart.type" [data]="duracionPiezaChart.data" [options]="duracionPiezaChart.options"></p-chart>
+                </div>
+                <div class="col-xl-6">
+                    <p-chart [type]="duracionMedPiezaChart.type" [data]="duracionMedPiezaChart.data" [options]="duracionMedPiezaChart.options"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

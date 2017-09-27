@@ -9,6 +9,7 @@ import { Subject } from 'rxjs/Subject';
 export class DashboardService {
   query: any;
   dataTarea: Subject<any>;
+  dataFicha: Subject<any>;
   tareas: Tarea[];
 
   //
@@ -17,8 +18,9 @@ export class DashboardService {
   constructor(
     private db: AngularFireDatabase) {
         this.db.object('/values').subscribe(combos => this.combos = combos);
-        this.db.list('/tareas').subscribe(tareas => this.tareas = tareas);
+        this.db.object('/tareas').subscribe(tareas => this.tareas = tareas);
         this.dataTarea = new Subject();
+        this.dataFicha = new Subject();
         
 
   }
@@ -35,8 +37,20 @@ export class DashboardService {
         })
         this.dataTarea.next(fileteredTarea);
     });
-    
+  }
 
+  emitNormFicha(){
+    this.db.list('/fichas')
+    .subscribe(fichas => {
+        fichas.forEach((ficha, index, fichas)=>{
+          ficha['tarea'] = this.tareas[ficha.tarea_id];
+        });
+        let fileteredFicha = fichas.filter(a=>true);//prepara el filtro con la query
+        fileteredFicha.forEach((ficha, index, fichas)=>{
+          ficha['duracion'] = (ficha.ehour-ficha.bhour)*3600 + (ficha.emin - ficha.bmin)*60 + (ficha.esec-ficha.bsec);
+        })
+        this.dataFicha.next(fileteredFicha);
+    });
   }
 
  
