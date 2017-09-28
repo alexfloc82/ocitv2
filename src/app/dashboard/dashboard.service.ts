@@ -48,6 +48,53 @@ export class DashboardService {
         });
         let fileteredFicha = fichas.filter(a=>(this.query.semestre =="" || this.query.semestre == a.tarea.semestre));//prepara el filtro con la query
         fileteredFicha.forEach((ficha, index, fichas)=>{
+          ficha['genero-l'] = this.combos.genero[ficha.genero];
+          ficha['format-l'] = this.combos.format[ficha.format];
+          ficha['ambito-l'] = this.combos.ambito[ficha.ambito];
+          ficha['relcad-l'] = this.combos.relcad[ficha.relcad];
+          ficha['valedit-l'] = this.combos.valedit[ficha.valedit];
+          ficha['informador-l'] = this.combos.informador[ficha.informador];
+          ficha['zona-l'] = this.combos.zona[ficha.zona];
+          ficha['catTem-l'] = this.combos.catTem[ficha.catTem];
+          if(ficha.lugares){
+            ficha.lugares.forEach(lugar =>{
+              if(lugar.pais){lugar['pais-l']=this.combos.pais[lugar.pais];}
+              if(lugar.comunidad){lugar['comunidad-l']=this.combos.comunidad[lugar.comunidad];}
+            })
+          }
+          if(ficha.dques){
+            ficha.dques.forEach(dque =>{
+              if(dque.categoria){dque['categoria-l']=this.combos.dqcategoria[dque.categoria];}
+            })
+          }
+          if(ficha.quienes){
+            ficha.quienes.forEach(quien =>{
+              if(quien.categoria){quien['categoria-l']=this.combos.categoria[quien.categoria];}
+            })
+          }
+          if(ficha.dquienes){
+            ficha.dquienes.forEach(dquien =>{
+              if(dquien.categoria){dquien['categoria-l']=this.combos.categoria[dquien.categoria];}
+            })
+          }
+          if(ficha.origen){
+            ficha['origen-l']=[];
+            ficha.origen.forEach(valor =>{
+              ficha['origen-l'].push({key:valor, value:this.combos.origen[valor]});
+            })
+          }
+          if(ficha.rotulos){
+            ficha['rotulos-l']=[];
+            ficha.rotulos.forEach(valor =>{
+              ficha['rotulos-l'].push({key:valor, value:this.combos.rotulos[valor]})
+            })
+          }
+          if(ficha.retorica){
+            ficha['retorica-l']=[];
+            ficha.retorica.forEach(valor =>{
+              ficha['retorica-l'].push({key:valor, value:this.combos.retorica[valor]})
+            })
+          }
           ficha['duracion'] = (ficha.ehour-ficha.bhour)*3600 + (ficha.emin - ficha.bmin)*60 + (ficha.esec-ficha.bsec);
         })
         this.dataFicha.next(fileteredFicha);
