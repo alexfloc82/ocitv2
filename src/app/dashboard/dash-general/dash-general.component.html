@@ -1,17 +1,20 @@
-<div class="row">
+<p-tabView>
+        <p-tabPanel header="Panel">
+            <div class="row mb-2">
     <div class="col-xl-6 p-2">
-        <div class="border rounded">
+        <div class="border rounded p-2">
+            <h3 class="text-info">Informativos</h3>
             <div class="row mb-3">
                 <div class="col-xl-12">
                     <p-chart [type]="totalTareaChart.type" [data]="totalTareaChart.data" [options]="totalTareaChart.options"></p-chart>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <p-chart [type]="duracionTareaChart.type" [data]="duracionTareaChart.data" [options]="duracionTareaChart.options"></p-chart>
                 </div>
-              </div>
-              <div class="row">
+            </div>
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <p-chart [type]="duracionMedTareaChart.type" [data]="duracionMedTareaChart.data" [options]="duracionMedTareaChart.options"></p-chart>
                 </div>
@@ -19,18 +22,19 @@
         </div>
     </div>
     <div class="col-xl-6 p-2">
-        <div class="border rounded">
+        <div class="border rounded p-2">
+            <h3 class="text-info">Piezas</h3>
             <div class="row mb-3">
                 <div class="col-xl-12">
                     <p-chart [type]="totalPiezaChart.type" [data]="totalPiezaChart.data" [options]="totalPiezaChart.options"></p-chart>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <p-chart [type]="duracionPiezaChart.type" [data]="duracionPiezaChart.data" [options]="duracionPiezaChart.options"></p-chart>
                 </div>
-              </div>
-              <div class="row">
+            </div>
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <p-chart [type]="duracionMedPiezaChart.type" [data]="duracionMedPiezaChart.data" [options]="duracionMedPiezaChart.options"></p-chart>
                 </div>
@@ -38,3 +42,38 @@
         </div>
     </div>
 </div>
+</p-tabPanel>
+    <p-tabPanel header="Datos - Informativos">
+        <p-dataTable #dt [value]="informativos" exportFilename="informativos" resizableColumns="true">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()" style="float:left"></button>
+                </div>
+            </p-header>
+            <p-column field="$key" header="Clave"></p-column>
+            <p-column field="id_tarea" header="Id"></p-column>
+            <p-column field="cadena-l" header="Cadena"></p-column>
+            <p-column field="duracion" header="Duracion"></p-column>
+            <p-column field="date" header="Fecha"></p-column>
+            <p-column field="semestre-l" header="Semestre"></p-column>
+            <p-column field="edicion-l" header="Edicion"></p-column>
+        </p-dataTable>
+    </p-tabPanel>
+    <p-tabPanel header="Datos - Piezas">
+            <p-dataTable #dt1 [value]="piezas" exportFilename="piezas" resizableColumns="true">
+                    <p-header>
+                        <div class="ui-helper-clearfix">
+                            <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
+                        </div>
+                    </p-header>
+                    <p-column field="$key" header="Clave Pieza"></p-column>
+                    <p-column field="tarea_id" header="Clave Tarea"></p-column>
+                    <p-column field="title" header="Titulo"></p-column>
+                    <p-column field="duracion" header="Duracion"></p-column>
+                    <p-column field="genero-l" header="Genero"></p-column>
+                    <p-column field="format-l" header="Formato"></p-column>
+                    <p-column field="observaciones" header="Observaciones"></p-column>
+                    <p-column field="terminado" header="Teminado"></p-column>
+                </p-dataTable>
+    </p-tabPanel>
+</p-tabView>

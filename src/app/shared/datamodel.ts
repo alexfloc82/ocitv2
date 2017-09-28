@@ -154,3 +154,15 @@ export class Item {
 	valor:number;
 	constructor() {}
 }
+
+export class Data{
+	datasets: any[];
+
+	constructor(backgroundColors: any[], data:any[]){
+		this.datasets = [];
+		this.datasets.push({
+			data:data,
+			backgroundColor:backgroundColors,
+			hoverBackgroundColor: backgroundColors});
+	}
+}

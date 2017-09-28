@@ -5,3 +5,7 @@ button:hover {
 button:disabled:hover {
     cursor: not-allowed;
 }
+
+.ui-widget-header {
+    border: none;
+}

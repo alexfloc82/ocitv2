@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
+import {Data} from '../../shared/datamodel';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
@@ -18,6 +19,8 @@ export class DashGeneralComponent implements OnInit {
   totalPiezaChart: any;
   duracionPiezaChart: any;
   duracionMedPiezaChart: any;
+  informativos: any[];
+  piezas: any[];
   backgroundColors = ["#FF6384", "#4BC0C0", "#36A2EB", "#FFCE56", '#9CCC65', 'purple'];
 
   cadenas: any;
@@ -39,7 +42,7 @@ export class DashGeneralComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Numero total de informativos por cadena'
+          text: 'Total'
         }
       }
     }
@@ -56,9 +59,9 @@ export class DashGeneralComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Duracion total de informativos por cadena (en segundos)'
+          text: 'Duración (en segundos)'
         },
-        legend:{display:false}
+        legend: { display: false }
       }
     }
     this.duracionMedTareaChart = {
@@ -74,9 +77,9 @@ export class DashGeneralComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Duracion media de informativos por cadena (en segundos)'
+          text: 'Duración media (en segundos)'
         },
-        legend:{display:false}
+        legend: { display: false }
       }
     }
 
@@ -93,7 +96,7 @@ export class DashGeneralComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Numero total de piezas por cadena'
+          text: 'Total'
         }
       }
     }
@@ -110,9 +113,9 @@ export class DashGeneralComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Duracion total de piezas por cadena (en segundos)'
+          text: 'Duración (en segundos)'
         },
-        legend:{display:false}
+        legend: { display: false }
       }
     }
     this.duracionMedPiezaChart = {
@@ -128,18 +131,20 @@ export class DashGeneralComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: 'Duracion media de piezas por cadena (en segundos)'
+          text: 'Duración media (en segundos)'
         },
-        legend:{display:false}
+        legend: { display: false }
       }
     }
 
     this.dashService.dataTarea.subscribe(tareas => {
       this.formatTareas(tareas);
+      this.informativos = tareas;
     });
 
     this.dashService.dataFicha.subscribe(piezas => {
       this.formatPiezas(piezas);
+      this.piezas = piezas;
     });
   }
 
@@ -155,24 +160,27 @@ export class DashGeneralComponent implements OnInit {
     let data = [];
     let duracionData = [];
     let medData = [];
-    this.cadenas.forEach((element, index) => {
-      labels.push(element);
-      let NumTarea = tareas.filter(tarea => tarea.cadena == index).length;
-      let duracion = tareas.filter(tarea => tarea.cadena == index).reduce((prev,newval,index,tareas) => {
-        return prev + tareas[index].duracion;
-      },0)
-      duracionData.push(duracion);
-      data.push(NumTarea);
-      if(NumTarea>0){
-        medData.push(duracion/NumTarea);
-      }
-      else{
-        medData.push(0);
-      }
-    });
-    this.totalTareaChart.data.datasets[0].data = data;
-    this.duracionTareaChart.data.datasets[0].data = duracionData;
-    this.duracionMedTareaChart.data.datasets[0].data = medData;
+    if (this.cadenas) {
+      this.cadenas.forEach((element, index) => {
+        labels.push(element);
+        let NumTarea = tareas.filter(tarea => tarea.cadena == index).length;
+        let duracion = tareas.filter(tarea => tarea.cadena == index).reduce((prev, newval, index, tareas) => {
+          return prev + tareas[index].duracion;
+        }, 0)
+        duracionData.push(duracion);
+        data.push(NumTarea);
+        if (NumTarea > 0) {
+          medData.push(duracion / NumTarea);
+        }
+        else {
+          medData.push(0);
+        }
+      });
+
+    }
+    this.totalTareaChart.data = new Data(this.backgroundColors, data);
+    this.duracionTareaChart.data = new Data(this.backgroundColors, duracionData);
+    this.duracionMedTareaChart.data = new Data(this.backgroundColors, medData);
     this.totalTareaChart.data.labels = labels;
     this.duracionTareaChart.data.labels = labels;
     this.duracionMedTareaChart.data.labels = labels;
@@ -183,24 +191,26 @@ export class DashGeneralComponent implements OnInit {
     let data = [];
     let duracionData = [];
     let medData = [];
-    this.cadenas.forEach((element, index) => {
-      labels.push(element);
-      let NumTarea = piezas.filter(pieza => pieza.tarea.cadena == index).length;
-      let duracion = piezas.filter(pieza => pieza.tarea.cadena == index).reduce((prev,newval,index,piezas) => {
-        return prev + piezas[index].duracion;
-      },0)
-      duracionData.push(duracion);
-      data.push(NumTarea);
-      if(NumTarea>0){
-        medData.push(duracion/NumTarea);
-      }
-      else{
-        medData.push(0);
-      }
-    });
-    this.totalPiezaChart.data.datasets[0].data = data;
-    this.duracionPiezaChart.data.datasets[0].data = duracionData;
-    this.duracionMedPiezaChart.data.datasets[0].data = medData;
+    if (this.cadenas) {
+      this.cadenas.forEach((element, index) => {
+        labels.push(element);
+        let NumTarea = piezas.filter(pieza => pieza.tarea.cadena == index).length;
+        let duracion = piezas.filter(pieza => pieza.tarea.cadena == index).reduce((prev, newval, index, piezas) => {
+          return prev + piezas[index].duracion;
+        }, 0)
+        duracionData.push(duracion);
+        data.push(NumTarea);
+        if (NumTarea > 0) {
+          medData.push(duracion / NumTarea);
+        }
+        else {
+          medData.push(0);
+        }
+      });
+    }
+    this.totalPiezaChart.data= new Data(this.backgroundColors, data);
+    this.duracionPiezaChart.data = new Data(this.backgroundColors, duracionData);
+    this.duracionMedPiezaChart.data = new Data(this.backgroundColors, medData);
     this.totalPiezaChart.data.labels = labels;
     this.duracionPiezaChart.data.labels = labels;
     this.duracionMedPiezaChart.data.labels = labels;
