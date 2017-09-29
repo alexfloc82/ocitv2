@@ -13,17 +13,19 @@ import { UIChart } from 'primeng/primeng';
   styleUrls: ['./dash-general.component.css']
 })
 export class DashGeneralComponent implements OnInit {
+  loader = false;
+
   totalTareaChartData:any[];
   totalPiezaChartData: any[];
   informativos: any[];
   piezas: any[];
-  backgroundColors = ["#FF6384", "#4BC0C0", "#36A2EB", "#FFCE56", '#9CCC65', 'purple'];
 
   cadenas: any;
 
   constructor(
     private dashService: DashboardService, private db: AngularFireDatabase
   ) {
+    this.loader = true;
     this.totalTareaChartData = [];
     this.totalPiezaChartData = [];
     this.db.object('/values').subscribe(combos => this.cadenas = combos.cadena);
@@ -63,8 +65,8 @@ export class DashGeneralComponent implements OnInit {
         }
         this.totalTareaChartData.push({cadena:element, total:NumTarea, dur:duracion, med: medData});
       });
-
     }
+    this.loader = false;
   }
 
   formatPiezas(piezas: any[]) {
@@ -88,6 +90,7 @@ export class DashGeneralComponent implements OnInit {
         this.totalPiezaChartData.push({cadena:element, total:NumTarea, dur:duracion, med: medData});
       });
     }
+    this.loader = false;
   }
 
 }

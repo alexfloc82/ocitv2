@@ -1,4 +1,7 @@
-<p-tabView>
+<div class="container text-center pt-5" *ngIf="loader">
+        <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+      </div>
+<p-tabView *ngIf="!loader">
     <p-tabPanel header="Panel">
         <div class="row mb-2">
             <div class="col-xl-6 p-2">
