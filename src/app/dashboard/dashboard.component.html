@@ -1,32 +1,34 @@
 <div class="container text-center pt-5" *ngIf="loader">
-    <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
-  </div>
-  <div class="container-fluid p-3" *ngIf="!loader">
-    <div class="row">
-      <div class="col-md-2">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container-fluid p-3" *ngIf="!loader">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="sticky-top">
         <div class="list-group mb-2" id="list-tab" role="tablist">
-          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'General'" (click)="selectItem('General')" routerLink="General" >Informativos y piezas</button>
-          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Format'" (click)="selectItem('Format')"routerLink="Format" >Formato</button>
-          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Genero'" (click)="selectItem('Genero')"routerLink="Genero" >Genero</button>
-          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Location'" (click)="selectItem('Location')" routerLink="Location" >Localización</button>
-          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 3</button>
-          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 4</button>
-          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 5</button>
-          <button class="list-group-item list-group-item-action" routerLink="Location" >Dashboard 6</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'General'" (click)="selectItem('General')"
+            routerLink="General">Informativos y piezas</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Format'" (click)="selectItem('Format')"
+            routerLink="Format">Formato</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Genero'" (click)="selectItem('Genero')"
+            routerLink="Genero">Genero</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Location'" (click)="selectItem('Location')"
+            routerLink="Location">Localización</button>
         </div>
         <div class="border rounded p-2">
-            <h5 class="text-info">Filtros</h5>
-            <div class="form-group">
-                <label>Semestre:</label>
-                <select class="form-control" [(ngModel)]="query.semestre" (change)="performQuery()">
+          <h5 class="text-info">Filtros</h5>
+          <div class="form-group">
+            <label>Semestre:</label>
+            <select class="form-control" [(ngModel)]="query.semestre" (change)="performQuery()">
                   <option></option>
                   <option *ngFor="let option of (semestre | async)" value="{{option.$key}}">{{option.$value}}</option>
                 </select>
-              </div>
           </div>
+        </div>
       </div>
+    </div>
 
-      <div class="col-md-10">
-       <router-outlet></router-outlet>
+    <div class="col-md-10">
+      <router-outlet></router-outlet>
     </div>
   </div>

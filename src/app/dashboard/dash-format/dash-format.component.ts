@@ -5,8 +5,6 @@ import { Data } from '../../shared/datamodel';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 
-import { UIChart } from 'primeng/primeng';
-
 
 @Component({
   selector: 'app-dash-format',
@@ -58,6 +56,7 @@ export class DashFormatComponent implements OnInit {
         this.formatData.push({ format: format.$value, total: num, dur: duracion, med: media });
       }
       )
+      this.loader = false;
     })
 
     this.formatDataCadenaTotal=[];
@@ -91,10 +90,11 @@ export class DashFormatComponent implements OnInit {
         })
 
       });
+      this.loader = false;
     })
 
 
-    this.loader = false;
+    
   }
 
 }
