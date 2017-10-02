@@ -15,6 +15,7 @@ import { DashGeneralComponent } from './dash-general/dash-general.component';
 import { DashLocationComponent } from './dash-location/dash-location.component';
 import { DashFormatComponent } from './dash-format/dash-format.component';
 import { DashGeneroComponent } from './dash-genero/dash-genero.component';
+import { DashDataComponent } from './dash-data/dash-data.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { DashGeneroComponent } from './dash-genero/dash-genero.component';
     DashboardRoutingModule, 
     ButtonModule,DataTableModule, SharedModule, TabViewModule
   ],
-  declarations: [DashboardComponent, DashGeneralComponent, DashLocationComponent, DashFormatComponent, DashGeneroComponent],
+  declarations: [DashboardComponent, DashGeneralComponent, DashLocationComponent, DashFormatComponent, DashGeneroComponent, DashDataComponent],
   providers:[DashboardService]
 })
 export class DashboardModule { }

@@ -58,42 +58,75 @@ export class DashboardService {
           ficha['catTem-l'] = this.combos.catTem[ficha.catTem];
           if(ficha.lugares){
             ficha.lugares.forEach(lugar =>{
+              lugar['pieza'] = ficha.$key;
               if(lugar.pais){lugar['pais-l']=this.combos.pais[lugar.pais];}
               if(lugar.comunidad){lugar['comunidad-l']=this.combos.comunidad[lugar.comunidad];}
             })
           }
+          else{
+            ficha['lugares']=[];
+          }
+          if(ficha.localidades){
+            ficha.localidades.forEach(lugar =>{
+              lugar['pieza'] = ficha.$key;
+            })
+          }
+          else{
+            ficha['localidades']=[];
+          }
           if(ficha.dques){
             ficha.dques.forEach(dque =>{
+              dque['pieza'] = ficha.$key;
               if(dque.categoria){dque['categoria-l']=this.combos.dqcategoria[dque.categoria];}
             })
           }
+          else{
+            ficha['dques']=[];
+          }
           if(ficha.quienes){
             ficha.quienes.forEach(quien =>{
+              quien['pieza'] = ficha.$key;
               if(quien.categoria){quien['categoria-l']=this.combos.categoria[quien.categoria];}
             })
           }
+          else{
+            ficha['quienes']=[];
+          }
           if(ficha.dquienes){
             ficha.dquienes.forEach(dquien =>{
+              dquien['pieza'] = ficha.$key;
               if(dquien.categoria){dquien['categoria-l']=this.combos.categoria[dquien.categoria];}
             })
+          }
+          else{
+            ficha['dquienes']=[];
           }
           if(ficha.origen){
             ficha['origen-l']=[];
             ficha.origen.forEach(valor =>{
-              ficha['origen-l'].push({key:valor, value:this.combos.origen[valor]});
+              ficha['origen-l'].push({key:valor, value:this.combos.origen[valor], pieza: ficha.$key});
             })
+          }
+          else{
+            ficha['origen']=[];
           }
           if(ficha.rotulos){
             ficha['rotulos-l']=[];
             ficha.rotulos.forEach(valor =>{
-              ficha['rotulos-l'].push({key:valor, value:this.combos.rotulos[valor]})
+              ficha['rotulos-l'].push({key:valor, value:this.combos.rotulos[valor], pieza: ficha.$key})
             })
+          }
+          else{
+            ficha['rotulos']=[];
           }
           if(ficha.retorica){
             ficha['retorica-l']=[];
             ficha.retorica.forEach(valor =>{
-              ficha['retorica-l'].push({key:valor, value:this.combos.retorica[valor]})
+              ficha['retorica-l'].push({key:valor, value:this.combos.retorica[valor], pieza: ficha.$key})
             })
+          }
+          else{
+            ficha['retorica']=[];
           }
           ficha['duracion'] = (ficha.ehour-ficha.bhour)*3600 + (ficha.emin - ficha.bmin)*60 + (ficha.esec-ficha.bsec);
         })
