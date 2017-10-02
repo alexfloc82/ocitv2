@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedItem = 'General';
+    this.selectedItem = 'Data';
     this.dashService.emitNormTarea();
     this.dashService.emitNormFicha();   
   }

@@ -6,15 +6,17 @@ import {DashGeneralComponent} from './dash-general/dash-general.component';
 import {DashLocationComponent} from './dash-location/dash-location.component';
 import {DashFormatComponent} from './dash-format/dash-format.component';
 import {DashGeneroComponent} from './dash-genero/dash-genero.component';
+import {DashDataComponent} from './dash-data/dash-data.component';
 
 const routes: Routes = [
   { path: '',    component: DashboardComponent,
   children: [
-    {path: '',    component: DashGeneralComponent},
+    {path: '',    component: DashDataComponent},
     {path: 'General',    component: DashGeneralComponent},
     {path: 'Format',    component: DashFormatComponent},
     {path: 'Genero',    component: DashGeneroComponent},
     {path: 'Location',    component: DashLocationComponent},
+    {path: 'Data',    component: DashDataComponent},
   ] }
 ];
 
