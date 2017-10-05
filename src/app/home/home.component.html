@@ -15,19 +15,19 @@
 </div>
 
 <div class="container p-3" *ngIf="(authService.user | async)">
-  <div class="row p-1" >
-    <div class="col-lg-3 mt-3" >
+  <div class="row p-1">
+    <div class="col-lg-3 mt-3">
       <div class="card">
         <span (click)="gotoMenu('Tarea')" class="btn btn-primary">
           <h1>Informativos</h1><span class="fa fa-file-text-o fa-5x fa-fw" aria-hidden="true"></span></span>
       </div>
     </div>
     <div class="col-lg-3 mt-3">
-        <div class="card">
-          <span (click)="gotoMenu('Dashboard')" class="btn btn-primary">
+      <div class="card">
+        <span (click)="gotoMenu('Dashboard')" class="btn btn-primary">
             <h1>Análisis</h1><span class="fa fa-bar-chart fa-5x" aria-hidden="true"></span></span>
-        </div>
       </div>
+    </div>
     <div class="col-lg-3 mt-3" *ngIf="(authService.userProfile|async)?.role == '90'">
       <div class="card">
         <span (click)="gotoMenu('Desplegable')" class="btn btn-secondary">
@@ -38,6 +38,20 @@
       <div class="card">
         <span (click)="gotoMenu('User')" class="btn btn-secondary">
           <h1>Usuarios</h1><span class="fa fa-user fa-5x" aria-hidden="true"></span></span>
+      </div>
+    </div>
+  </div>
+  <div class="row p-1">
+    <div class="col-lg-12 mt-3">
+      <div class="card">
+        <div class="card-header">
+          Departamento de Periodismo II
+        </div>
+        <div class="card-body">
+          <p>El Observatorio de los Informativos de Tv realiza un análisis de contenido de los informativos de televisión a
+            través de una herramienta de análisis en línea.</p>
+          <a href="../../assets/protocolo.pdf" class="btn btn-primary" role="button">Protocolo</a>
+        </div>
       </div>
     </div>
   </div>

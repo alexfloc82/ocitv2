@@ -27,6 +27,7 @@ export class DashboardService {
   }
 
   emitNormTarea(){
+    if(!this.combos){return null;}
     this.db.list('/tareas')
     .subscribe(tareas => {
         let fileteredTarea = tareas.filter(a=> (this.query.semestre =="" || this.query.semestre == a.semestre));//prepara el filtro con la query
@@ -41,6 +42,7 @@ export class DashboardService {
   }
 
   emitNormFicha(){
+    if(!this.combos){return null;}
     this.db.list('/fichas')
     .subscribe(fichas => {
         fichas.forEach((ficha, index, fichas)=>{
