@@ -5,8 +5,6 @@ import { Data } from '../../shared/datamodel';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 
-import { UIChart } from 'primeng/primeng';
-
 @Component({
   selector: 'app-dash-genero',
   templateUrl: './dash-genero.component.html',
