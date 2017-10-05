@@ -84,11 +84,20 @@ export class TareaFichaComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.db.list('/mencionados').subscribe(personas => 
+      {
+        this.personas = [];
+        personas.forEach(persona =>
+          this.personas.push(persona.$value))
+          this.personas.sort();       
+      });
+
     this.db.list('/fichas').subscribe(fichas => {
-      this.personas = [];
+      //this.personas = [];
       this.temas = [];
       fichas.forEach(ficha => {
-        if (ficha.quienes) {
+        /*if (ficha.quienes) {
           ficha.quienes.forEach(element => {
             if (element.persona && this.personas.indexOf(element.persona) < 0) {
               this.personas.push(element.persona)
@@ -97,12 +106,13 @@ export class TareaFichaComponent implements OnInit {
         }
 
         if (ficha.dquienes) {
-          ficha.dquienes.forEach(element => {
+          ficha.dquienes.forEach(element => { 
             if (element.persona && this.personas.indexOf(element.persona) < 0) {
               this.personas.push(element.persona)
             }
           })
         }
+        */
 
         if (ficha.dques) {
           ficha.dques.forEach(element => {
@@ -112,7 +122,7 @@ export class TareaFichaComponent implements OnInit {
           })
         }
       })
-      this.personas.sort();
+      //this.personas.sort();
       this.temas.sort();
     });
 

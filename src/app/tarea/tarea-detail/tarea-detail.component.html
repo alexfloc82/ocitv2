@@ -4,7 +4,7 @@
 <div class="container-fluid p-3" *ngIf="!loader">
   <div class="row content">
     <div class="col-sm-11">
-      <button class="btn btn-outline-success m-2" (click)="onSubmit()" [disabled]="!form.id_tarea || (authService.userProfile|async)?.role < 40"><span class="fa fa-save" aria-hidden="true" ></span> Guardar Tarea</button>
+      <button class="btn btn-outline-success m-2" (click)="onSubmit()" [disabled]="!form.id_tarea || (authService.userProfile|async)?.role < 40"><span class="fa fa-save" aria-hidden="true" ></span> Guardar Informativo</button>
       <button class="btn btn-outline-secondary m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Regresar</button>
       <button class="btn btn-outline-danger m-2 float-right" (click)="delete()" *ngIf="!form.analizado && form.$key && (authService.userProfile|async)?.role > 40"><span class="fa fa-trash" aria-hidden="true"></span> Eliminar</button>
     </div>
