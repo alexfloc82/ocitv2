@@ -20,7 +20,7 @@
         <button class="list-group-item list-group-item-action" (click)="goTo('obs')" href="#obs">Observaciones</button>
       </div>
     </div>
-    <p-overlayPanel #op></p-overlayPanel> 
+    <p-overlayPanel #op></p-overlayPanel>
     <div class="col-9">
       <!--General-->
       <div id="gen" class="mb-2 border rounded p-3">
@@ -28,6 +28,7 @@
         <div class="form-group form-inline">
           <label class="col-sm-2">Terminado:</label>
           <input type="checkbox" [(ngModel)]="form.terminado" [disabled]="tarea.analizado">
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'terminado',op);"><span class="fa fa-info"></span></button>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Titular:</label>
@@ -41,7 +42,7 @@
           <select class="form-control minute" [(ngModel)]="form.bmin" [disabled]="form.terminado"><option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option></select>
           <label>:</label>
           <select class="form-control minute" [(ngModel)]="form.bsec" [disabled]="form.terminado"><option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option></select>
-          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'title',op);"><span class="fa fa-info"></span></button>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'inicio',op);"><span class="fa fa-info"></span></button>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Fin:</label>
@@ -61,6 +62,7 @@
               <option></option>
               <option *ngFor="let option of (format | async)" value="{{option.$key}}">{{option.$value}}</option>
                             </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'format',op);"><span class="fa fa-info"></span></button>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Genero:</label>
@@ -68,6 +70,7 @@
               <option></option>
               <option *ngFor="let option of (genero | async)" value="{{option.$key}}">{{option.$value}}</option>
                             </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'genero',op);"><span class="fa fa-info"></span></button>
         </div>
       </div>
       <!--localizacion-->
@@ -79,6 +82,7 @@
               <option></option>
               <option *ngFor="let option of (ambito | async)" value="{{option.$key}}">{{option.$value}}</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'local',op);"><span class="fa fa-info"></span></button>
         </div>
         <!--<div class="form-group form-inline">
           <label class="col-sm-4"> Valoración:</label>
@@ -165,7 +169,9 @@
         <div class="form-group">
           <label><input type="checkbox" [(ngModel)]="form.fuente" [disabled]="form.terminado"> Tiene Fuentes</label>
         </div>
-        <h5 class="text-info">Declaraciones</h5>
+        <h5 class="text-info">Declaraciones <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'declaraciones',op);"><span class="fa fa-info"></span></span>
+        </h5>
+
         <div class="form-group form-inline">
           <label class="col-sm-3">"Totales" de Hombres:</label>
           <input type="number" class="form-control" [(ngModel)]="form.declhombre" placeholder="Numero" [disabled]="form.terminado">
@@ -177,9 +183,12 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Directa</th>
-              <th>Generica</th>
-              <th>Confidencial</th>
+              <th>Directa <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'directa',op);"><span class="fa fa-info"></span></span>
+              </th>
+              <th>Generica <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'generica',op);"><span class="fa fa-info"></span></span>
+              </th>
+              <th>Confidencial <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'confidencial',op);"><span class="fa fa-info"></span></span>
+              </th>
               <th>Total</th>
             </tr>
           </thead>
@@ -195,13 +204,15 @@
       </div>
       <!--Quien habla-->
       <div id="quien" class="mb-2 border rounded p-3">
-        <h3 class="text-info">Quien habla</h3>
+        <h3 class="text-info">¿Quién habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'quien',op);"><span class="fa fa-info"></span></span>
+        </h3>
         <table class="table">
           <thead>
             <tr>
               <th>Agente Informativo</th>
               <th>Numero de veces</th>
               <th>Personaje</th>
+              <th>Numero de veces</th>
               <th></th>
             </tr>
           </thead>
@@ -214,6 +225,7 @@
               </td>
               <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
               <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
+              <td><select class="form-control" [(ngModel)]="quien.valor2" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
               <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
             </tr>
@@ -223,7 +235,8 @@
       </div>
       <!--De Quien habla-->
       <div id="dequien" class="mb-2 border rounded p-3">
-        <h3 class="text-info">De quien habla</h3>
+        <h3 class="text-info">¿De quién habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'dquien',op);"><span class="fa fa-info"></span></span>
+        </h3>
         <table class="table">
           <thead>
             <tr>
@@ -251,22 +264,15 @@
       </div>
       <!--De Que se Habla-->
       <div id="deque" class="mb-2 border rounded p-3">
-        <h3 class="text-info">De que se Habla</h3>
-        <div class="form-group form-inline">
-          <label class="col-sm-4">Categoria Tematica:</label>
-          <div>
-            <select [(ngModel)]="form.catTem" class="form-control" [disabled]="form.terminado">
-                <option></option>
-                <option *ngFor="let option of (catTem | async)" value="{{option.$key}}">{{option.$value}}</option>
-                 </select>
-          </div>
-        </div>
+        <h3 class="text-info">¿De que se Habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'quien',op);"><span class="fa fa-info"></span></span>
+        </h3>
         <table class="table">
           <thead>
             <tr>
               <th>¿De que se habla?</th>
               <th>Valoración</th>
               <th>Etiqueta</th>
+              <th>Valoración</th>
               <th></th>
             </tr>
           </thead>
@@ -277,10 +283,11 @@
                     <option></option>
                     <option *ngFor="let option of (dqcategoria | async)" value="{{option.$key}}">{{option.$value}}</option>
                                         </select></td>
-              <td>
-                <select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+              <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
               </td>
               <td><input type="text" class="form-control" [ngbTypeahead]="tsearch" [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
+              <td><select class="rating form-control" [(ngModel)]="dque.valor2" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+              </td>
               <td>
                 <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
                                             <span class="fa fa-trash"></span>
@@ -301,6 +308,7 @@
                 <option></option>
                 <option *ngFor="let option of (valedit | async)" value="{{option.$key}}">{{option.$value}}</option>
                  </select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'valedit',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
@@ -309,6 +317,7 @@
             <select multiple [(ngModel)]="form.origen" class="form-control" [disabled]="form.terminado">
                 <option *ngFor="let option of (origen | async)" value="{{option.$key}}">{{option.$value}}</option>
                                 </select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'origen',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
@@ -317,6 +326,7 @@
             <select multiple [(ngModel)]="form.rotulos" class="form-control" [disabled]="form.terminado">
                 <option *ngFor="let option of (rotulos | async)" value="{{option.$key}}">{{option.$value}}</option>
                                 </select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'rotulos',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
@@ -326,6 +336,7 @@
                 <option></option>
                 <option *ngFor="let option of (informador | async)" value="{{option.$key}}">{{option.$value}}</option>
                                 </select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'informador',op);"><span class="fa fa-info"></span></button>
             <label><input type="checkbox" [(ngModel)]="form.infoAparece" [disabled]="form.terminado"> ¿Aparece en la imagen?</label>
           </div>
         </div>
@@ -335,18 +346,21 @@
             <select multiple [(ngModel)]="form.retorica" class="form-control" [disabled]="form.terminado">
                 <option *ngFor="let option of (retorica | async)" value="{{option.$key}}">{{option.$value}}</option>
                                 </select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'retorica',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-4">Equilibrio:</label>
           <div>
             <select [(ngModel)]="form.equilibrio" class="form-control" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'equi',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-4">Contextualización:</label>
           <div>
             <select [(ngModel)]="form.context" class="form-control" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'context',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
@@ -356,12 +370,13 @@
                 <option></option>
                 <option *ngFor="let option of (relcad | async)" value="{{option.$key}}">{{option.$value}}</option>
                                 </select>
+            <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'relcad',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
       </div>
       <!--Observaciones-->
       <div id="obs" class="mb-2 border rounded p-3">
-        <h3 class="text-info">Observaciones</h3>
+        <h3 class="text-info">Observaciones <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'obs',op);"><span class="fa fa-info"></span></button></h3>
         <div class="form-group">
           <div>
             <textarea rows="10" style="width:100%" [(ngModel)]="form.observaciones" [disabled]="form.terminado"></textarea>
@@ -370,4 +385,3 @@
       </div>
     </div>
   </div>
-  
