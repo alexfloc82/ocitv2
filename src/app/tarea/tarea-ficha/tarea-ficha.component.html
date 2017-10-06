@@ -5,8 +5,10 @@
   <div class="row content">
     <div class="col-3">
       <div class="list-group sticky-top" id="list-tab" role="tablist">
-        <button class="btn btn-success m-2" *ngIf="(authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == analista || (authService.user|async)?.uid == revisor" (click)="onSubmit()" [disabled]="!form.title" ><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
-        <button class="btn btn-secondary m-2" *ngIf="(authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == analista || (authService.user|async)?.uid == revisor" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Regresar</button>
+        <button class="btn btn-success m-2" *ngIf="(authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == analista || (authService.user|async)?.uid == revisor"
+          (click)="onSubmit()" [disabled]="!form.title"><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
+        <button class="btn btn-secondary m-2" *ngIf="(authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == analista || (authService.user|async)?.uid == revisor"
+          (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Regresar</button>
         <button class="btn btn-danger m-2 float-right" (click)="delete()" *ngIf="!form.terminado && form.$key"><span class="fa fa-trash" aria-hidden="true"></span> Eliminar</button>
         <button class="list-group-item list-group-item-action" (click)="goTo('gen')" href="#gen">General</button>
         <button class="list-group-item list-group-item-action" (click)="goTo('loc')" href="#loc">Localización</button>
@@ -18,6 +20,7 @@
         <button class="list-group-item list-group-item-action" (click)="goTo('obs')" href="#obs">Observaciones</button>
       </div>
     </div>
+    <p-overlayPanel #op></p-overlayPanel> 
     <div class="col-9">
       <!--General-->
       <div id="gen" class="mb-2 border rounded p-3">
@@ -29,6 +32,7 @@
         <div class="form-group form-inline">
           <label class="col-sm-2">Titular:</label>
           <input type="text" class="form-control" placeholder="Breve titular indicativo" [(ngModel)]="form.title" [disabled]="form.terminado">
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'title',op);"><span class="fa fa-info"></span></button>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Inicio:</label>
@@ -37,6 +41,7 @@
           <select class="form-control minute" [(ngModel)]="form.bmin" [disabled]="form.terminado"><option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option></select>
           <label>:</label>
           <select class="form-control minute" [(ngModel)]="form.bsec" [disabled]="form.terminado"><option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option></select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'title',op);"><span class="fa fa-info"></span></button>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Fin:</label>
@@ -208,7 +213,7 @@
                   </select>
               </td>
               <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
-              <td><input type="text" class="form-control" [ngbTypeahead]="psearch"  [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
+              <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
               <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
             </tr>
@@ -236,9 +241,8 @@
                                     </select>
               </td>
               <td><select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
-              <td><input type="text" class="form-control" [ngbTypeahead]="psearch"  [(ngModel)]="dquien.persona" [disabled]="form.terminado"></td>
-              <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('dquien',i)"
-                  *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
+              <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="dquien.persona" [disabled]="form.terminado"></td>
+              <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('dquien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
             </tr>
           </tbody>
@@ -276,7 +280,7 @@
               <td>
                 <select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
               </td>
-              <td><input type="text" class="form-control" [ngbTypeahead]="tsearch"  [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
+              <td><input type="text" class="form-control" [ngbTypeahead]="tsearch" [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
               <td>
                 <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
                                             <span class="fa fa-trash"></span>
@@ -366,3 +370,4 @@
       </div>
     </div>
   </div>
+  

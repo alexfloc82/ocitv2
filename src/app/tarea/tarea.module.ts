@@ -9,9 +9,11 @@ import { TareaComponent } from './tarea.component';
 import { TareaDetailComponent } from './tarea-detail/tarea-detail.component';
 import { TareaFichaComponent } from './tarea-ficha/tarea-ficha.component';
 
+import {OverlayPanelModule} from 'primeng/primeng';
+
 @NgModule({
   imports: [
-    CommonModule, FormsModule,NgbModule,
+    CommonModule, FormsModule,NgbModule,OverlayPanelModule,
     TareaRoutingModule
   ],
   declarations: [TareaComponent, TareaDetailComponent, TareaFichaComponent]

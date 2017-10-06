@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operator/map';
+import { NgStyle } from '@angular/common';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 import { distinctUntilChanged } from 'rxjs/operator/distinctUntilChanged';
 
@@ -10,6 +11,8 @@ import { Location } from '@angular/common';
 import { AuthService } from '../../core/auth/auth.service';
 import { MessageService } from '../../core/message/message.service';
 import { UtilsService } from '../../core/utils/utils.service';
+
+import {OverlayPanel} from 'primeng/primeng';
 
 import { User, Tarea, Ficha, Item } from '../../shared/datamodel';
 
@@ -54,6 +57,9 @@ export class TareaFichaComponent implements OnInit {
   personas: string[];
   temas: string[];
 
+  //Tooltip
+  tooltip: {};
+
   constructor(
     public authService: AuthService,
     private db: AngularFireDatabase,
@@ -63,6 +69,7 @@ export class TareaFichaComponent implements OnInit {
     public utils: UtilsService,
     public messageService: MessageService) {
     this.loader = true;
+    this.db.object('/tooltip').subscribe(tooltip => this.tooltip = tooltip);
     this.combos = this.db.object('/values');
     this.format = this.db.list('/values/format');
     this.genero = this.db.list('/values/genero');
@@ -243,6 +250,14 @@ export class TareaFichaComponent implements OnInit {
     window.location.hash = "";
     window.location.hash = location;
     window.scrollBy(0,2);
+  }
+
+  //tooltip
+  getInfo(event,tooltip:string,overlaypanel: OverlayPanel){
+    overlaypanel.container.style.width = "30%";
+    overlaypanel.container.innerHTML = '<div class="ui-overlaypanel-content">'+this.tooltip[tooltip]+'</div>';
+    overlaypanel.toggle(event, event.target);
+
   }
 
   //Personas typeahead

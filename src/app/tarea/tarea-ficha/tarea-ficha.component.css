@@ -1,3 +1,7 @@
 .form-inline label {
-    justify-content: left; 
+   justify-content: left; 
+}
+
+#op{
+    width:50%;
 }
