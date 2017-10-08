@@ -1,0 +1,26 @@
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container-fluid p-3" *ngIf="!loader">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group" id="list-tab" role="tablist">
+        <button class="list-group-item list-group-item-action" [class.active]="selectedItem == tooltip" *ngFor="let tooltip of tooltips"
+          (click)="selectItem(tooltip)">{{tooltip.$key}}</button>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="tab-content">
+        <button class="btn btn-outline-success m-2" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
+        <button class="btn btn-outline-secondary m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Cancelar</button>
+        <button class="btn btn-outline-info m-2 pull-right" (click)="goTo('Desplegable')"><span class="fa fa-arrow-left" aria-hidden="true" ></span> Ir a Desplegables</button>
+        <textarea [(ngModel)]="selectedItem.$value" rows="10" style="width:100%"></textarea>
+        <div class="border p-2 rounded">
+          <h5 class="text-info">Previsualización</h5>
+          <div [innerHTML]="selectedItem.$value"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

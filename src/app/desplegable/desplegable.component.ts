@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap,Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 
@@ -25,6 +25,7 @@ export class DesplegableComponent implements OnInit {
   constructor(
     private db: AngularFireDatabase,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     public utils: UtilsService,
     public authService: AuthService,
@@ -73,6 +74,10 @@ export class DesplegableComponent implements OnInit {
 
   addItem(){
     this.sItemArray.push({"key":"","value":""});
+  }
+
+  goTo(url:string){
+    this.router.navigate([url]);
   }
 
 }

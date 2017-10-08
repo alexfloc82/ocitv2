@@ -13,6 +13,7 @@
       <div class="tab-content">
         <button class="btn btn-outline-success m-2" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
         <button class="btn btn-outline-secondary m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Cancelar</button>
+        <button class="btn btn-outline-info m-2 pull-right" (click)="goTo('Desplegable/tooltip')"><span class="fa fa-arrow-right" aria-hidden="true" ></span> Ir a Tooltip</button>
         <div class="row" *ngFor="let item of sItemArray; let i=index">
           <div class="col-2"><label>Value: </label> <input type="text" [(ngModel)]="item['key']" class="form-control"></div>
           <div class="col-8"><label>Description: </label> <input type="text" [(ngModel)]="item['value']" class="form-control"></div>
