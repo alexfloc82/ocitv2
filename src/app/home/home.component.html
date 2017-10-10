@@ -18,7 +18,7 @@
   <div class="row p-1">
     <div class="col-lg-3 mt-3">
       <div class="card">
-        <span (click)="gotoMenu('Tarea')" class="btn btn-primary">
+        <span (click)="gotoMenu('Tarea')" class="btn btn-success">
           <h1>Informativos</h1><span class="fa fa-file-text-o fa-5x fa-fw" aria-hidden="true"></span></span>
       </div>
     </div>
@@ -30,13 +30,13 @@
     </div>
     <div class="col-lg-3 mt-3" *ngIf="(authService.userProfile|async)?.role == '90'">
       <div class="card">
-        <span (click)="gotoMenu('Desplegable/etiquetas')" class="btn btn-secondary">
+        <span (click)="gotoMenu('Desplegable/etiquetas')" class="btn btn-info">
           <h1>Etiquetas</h1><span class="fa fa-tags fa-5x" aria-hidden="true"></span></span>
       </div>
     </div>
     <div class="col-lg-3 mt-3" *ngIf="(authService.userProfile|async)?.role == '90'">
       <div class="card">
-        <span (click)="gotoMenu('User')" class="btn btn-secondary">
+        <span (click)="gotoMenu('User')" class="btn btn-info">
           <h1>Usuarios</h1><span class="fa fa-user fa-5x" aria-hidden="true"></span></span>
       </div>
     </div>
