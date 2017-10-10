@@ -202,7 +202,7 @@ export class TareaFichaComponent implements OnInit {
     }
   }
 
-  addElem(elem: string) {
+  addElem(elem: string, type?:string) {
     switch (elem) {
       case 'lugar':
         this.form.lugares.push(new Item());
@@ -211,13 +211,13 @@ export class TareaFichaComponent implements OnInit {
         this.form.localidades.push(new Item());
         break;
       case 'quien':
-        this.form.quienes.push(new Item());
+        this.form.quienes.push(new Item(type));
         break;
       case 'dquien':
         this.form.dquienes.push(new Item());
         break;
       case 'dque':
-        this.form.dques.push(new Item());
+        this.form.dques.push(new Item(type));
         break;
       default:
         break;

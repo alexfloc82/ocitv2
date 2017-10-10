@@ -152,7 +152,11 @@ export class Item {
 	categoria: string;
 	etiqueta: string;
 	valor:number;
-	constructor() {}
+	type:string;
+	constructor(type?:string) {
+		if(type)
+		{this.type = type;}
+	}
 }
 
 export class Data{

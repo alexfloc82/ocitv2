@@ -211,27 +211,45 @@
             <tr>
               <th>Agente Informativo</th>
               <th>Numero de veces</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let quien of form.quienes, let i=index">
+              <tr *ngIf="quien.type==='Agente'">
+                <td><select class="form-control" [(ngModel)]="quien.categoria" [disabled]="form.terminado">
+                  <option></option>
+                  <option *ngFor="let option of (categoria | async)" value="{{option.$key}}">{{option.$value}}</option>
+                  </select>
+                </td>
+                <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
+                <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <div *ngIf="!form.terminado"><button type="button" class="btn btn-outline-info mb-2" (click)="addElem('quien','Agente')">Añadir Agente Informativo</button></div>
+        <table class="table">
+          <thead>
+            <tr>
               <th>Personaje</th>
               <th>Numero de veces</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let quien of form.quienes, let i=index">
-              <td><select class="form-control" [(ngModel)]="quien.categoria" [disabled]="form.terminado">
-                  <option></option>
-                  <option *ngFor="let option of (categoria | async)" value="{{option.$key}}">{{option.$value}}</option>
-                  </select>
-              </td>
-              <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
-              <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
-              <td><select class="form-control" [(ngModel)]="quien.valor2" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
-              <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
-              </td>
-            </tr>
+            <ng-container *ngFor="let quien of form.quienes, let i=index">
+              <tr *ngIf="quien.type==='Personaje'">
+                <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
+                <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
+                <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
-        <div *ngIf="!form.terminado"><button type="button" class="btn btn-outline-info" (click)="addElem('quien')">Añadir</button></div>
+        <div *ngIf="!form.terminado"><button type="button" class="btn btn-outline-info" (click)="addElem('quien','Personaje')">Añadir Personaje</button></div>
       </div>
       <!--De Quien habla-->
       <div id="dequien" class="mb-2 border rounded p-3">
@@ -241,8 +259,8 @@
           <thead>
             <tr>
               <th>Agente Informativo</th>
-              <th>Valoración</th>
               <th>Mencionado</th>
+              <th>Valoración</th>
               <th></th>
             </tr>
           </thead>
@@ -253,8 +271,8 @@
                                         <option *ngFor="let option of (categoria | async)" value="{{option.$key}}">{{option.$value}}</option>
                                     </select>
               </td>
-              <td><select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
               <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="dquien.persona" [disabled]="form.terminado"></td>
+              <td><select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
               <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('dquien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
             </tr>
@@ -264,39 +282,60 @@
       </div>
       <!--De Que se Habla-->
       <div id="deque" class="mb-2 border rounded p-3">
-        <h3 class="text-info">¿De que se Habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'dque',op);"><span class="fa fa-info"></span></span>
+        <h3 class="text-info">¿De qué se habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'dque',op);"><span class="fa fa-info"></span></span>
         </h3>
         <table class="table">
           <thead>
             <tr>
               <th>¿De que se habla?</th>
               <th>Valoración</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor=" let dque of form.dques, let i=index">
+              <tr *ngIf="dque.type==='Cat'">
+                <td>
+                  <select class="form-control" [(ngModel)]="dque.categoria" [disabled]="form.terminado">
+                    <option></option>
+                    <option *ngFor="let option of (dqcategoria | async)" value="{{option.$key}}">{{option.$value}}</option>
+                                        </select></td>
+                <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
+                                            <span class="fa fa-trash"></span>
+                                        </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <div *ngIf="!form.terminado"><button type="button" class="btn btn-outline-info mb-2" (click)="addElem('dque','Cat')">Añadir Categoría</button></div>
+        <table class="table">
+          <thead>
+            <tr>
               <th>Etiqueta</th>
               <th>Valoración</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor=" let dque of form.dques, let i=index">
-              <td>
-                <select class="form-control" [(ngModel)]="dque.categoria" [disabled]="form.terminado">
-                    <option></option>
-                    <option *ngFor="let option of (dqcategoria | async)" value="{{option.$key}}">{{option.$value}}</option>
-                                        </select></td>
-              <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
-              </td>
-              <td><input type="text" class="form-control" [ngbTypeahead]="tsearch" [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
-              <td><select class="rating form-control" [(ngModel)]="dque.valor2" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
-              </td>
-              <td>
-                <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
-                                            <span class="fa fa-trash"></span>
-                                        </button>
-              </td>
-            </tr>
+            <ng-container *ngFor=" let dque of form.dques, let i=index">
+              <tr *ngIf="dque.type==='Etiqueta'">
+                <td><input type="text" class="form-control" [ngbTypeahead]="tsearch" [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
+                <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
+                                              <span class="fa fa-trash"></span>
+                                          </button>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
-        <div *ngIf="!form.terminado"><button type="button" class="btn btn-outline-info" (click)="addElem('dque')">Añadir</button></div>
+        <div *ngIf="!form.terminado"><button type="button" class="btn btn-outline-info" (click)="addElem('dque','Etiqueta')">Añadir Etiqueta</button></div>
       </div>
       <!--Tratamiento-->
       <div id="trat" class="mb-2 border rounded p-3">
