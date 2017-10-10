@@ -17,9 +17,9 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable }
 })
 export class DespCloudComponent implements OnInit {
   loader = false;
-  personajes: string[];
-  temas: string[];
-  lugares: string[];
+  personajes: any[];
+  temas: any[];
+  lugares: any[];
   selectedItem: any;
 
 
@@ -34,10 +34,9 @@ export class DespCloudComponent implements OnInit {
     public messageService: MessageService) {
 
     this.loader = true;
-
-    this.db.list('/mencionados').subscribe(personajes => this.personajes = personajes.sort());
-    this.db.list('/lugares').subscribe(lugares => this.lugares = lugares.sort());
-    this.db.list('/temas').subscribe(temas => this.temas = temas.sort());
+    this.db.list('/mencionados').subscribe(personajes => this.personajes = personajes.sort(this.compare));
+    this.db.list('/lugares').subscribe(lugares => this.lugares = lugares.sort(this.compare));
+    this.db.list('/temas').subscribe(temas => this.temas = temas.sort(this.compare));
 
   }
 
@@ -51,18 +50,56 @@ export class DespCloudComponent implements OnInit {
   };
 
   onSubmit(){
+    switch (this.selectedItem) {
+      case 'Personajes':
+        let pers = [];
+        this.personajes.forEach(item => pers.push(item['$value']));
+        this.db.object('/mencionados').set(pers)
+        .then(a => {
+          this.db.list('/mencionados').subscribe(personajes => this.personajes = personajes.sort(this.compare));
+          this.messageService.sendMessage('Los personajes han sido guardados', 'success');})
+        .catch(err => this.messageService.sendMessage(err.message, 'error'));
+        break;
+        case "Localidades":
+        let lugars = [];
+        this.lugares.forEach(item => lugars.push(item['$value']));
+        this.db.object('/lugares').set(lugars)
+        .then(a => {this.db.list('/lugares').subscribe(lugares => this.lugares = lugares.sort(this.compare));
+        this.messageService.sendMessage('Las localidades han sido guardadas', 'success');})
+        .catch(err => this.messageService.sendMessage(err.message, 'error'));
+        break;
+        case "Temas":
+        let temas = [];
+        this.temas.forEach(item => temas.push(item['$value']));
+        this.db.object('/temas').set(temas)
+        .then(a => {this.db.list('/temas').subscribe(temas => this.temas = temas.sort(this.compare));
+        this.messageService.sendMessage('Los temas han sido guardados', 'success');})
+        .catch(err => this.messageService.sendMessage(err.message, 'error'));
+        break;
+      default:
+        break;
+    }
   }
 
   goBack(){
-    this.location.back();
+    this.router.navigate(['Desplegable/etiquetas']);
   }
 
   deleteItem(i, object:string[]){
     object.splice(i,1);
   }
 
-  addItem(object:string[]){
-    object.push("");
+  addItem(object:any[]){
+    object.unshift({$value:""});
+  }
+
+  compare(a: any,b: any){
+    if(a.$value.toLowerCase() > b.$value.toLowerCase())
+    {
+      return 1;
+    }
+    return -1;
+    
   }
 
 }

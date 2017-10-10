@@ -147,7 +147,7 @@
             <tbody>
               <tr *ngFor="let local of form.localidades, let i=index ">
                 <td>
-                  <input type="text " class="form-control text " [(ngModel)]="local.localidad" my-localisation [(disabled)]="form.terminado ">
+                  <input type="text " class="form-control text " [ngbTypeahead]="lsearch" [(ngModel)]="local.localidad" my-localisation [(disabled)]="form.terminado ">
                 </td>
                 <td>
                   <select class="form-control " [(ngModel)]="local.valor " [(disabled)]="form.terminado "><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>

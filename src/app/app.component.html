@@ -14,10 +14,10 @@
         <a routerLink="Tarea" class="nav-link" routerLinkActive="active">Informativos</a>
       </li>
       <li class="nav-item">
-        <a routerLink="Dashboard" class="nav-link" routerLinkActive="active">Análisis</a>
+        <a routerLink="Dashboard" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Análisis</a>
       </li>
       <li class="nav-item">
-          <a routerLink="Desplegable" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Etiquetas</a>
+          <a routerLink="Desplegable/etiquetas" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Etiquetas</a>
         </li>
       <li class="nav-item">
         <a routerLink="User" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Usuarios</a>

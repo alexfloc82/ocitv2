@@ -12,7 +12,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { MessageService } from '../../core/message/message.service';
 import { UtilsService } from '../../core/utils/utils.service';
 
-import {OverlayPanel} from 'primeng/primeng';
+import { OverlayPanel } from 'primeng/primeng';
 
 import { User, Tarea, Ficha, Item } from '../../shared/datamodel';
 
@@ -29,7 +29,7 @@ export class TareaFichaComponent implements OnInit {
   form: Ficha; //form data
   tarea: FirebaseObjectObservable<any>;
   analista: string;
-  revisor:string;
+  revisor: string;
 
   //desplegables
   combos: FirebaseObjectObservable<any>;
@@ -56,6 +56,7 @@ export class TareaFichaComponent implements OnInit {
   //Etiquetas
   personas: string[];
   temas: string[];
+  lugares: string[];
 
   //Tooltip
   tooltip: {};
@@ -92,51 +93,31 @@ export class TareaFichaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.db.list('/mencionados').subscribe(personas => 
-      {
-        this.personas = [];
-        personas.forEach(persona =>
-          this.personas.push(persona.$value))
-          this.personas.sort();       
-      });
+    this.db.list('/mencionados').subscribe(personas => {
+      this.personas = [];
+      personas.forEach(persona =>
+        this.personas.push(persona.$value))
+      this.personas.sort();
+    });
 
-    this.db.list('/fichas').subscribe(fichas => {
-      //this.personas = [];
+    this.db.list('/lugares').subscribe(lugares => {
+      this.lugares = [];
+      lugares.forEach(lugar =>
+        this.lugares.push(lugar.$value))
+      this.lugares.sort();
+    });
+
+    this.db.list('/temas').subscribe(temas => {
       this.temas = [];
-      fichas.forEach(ficha => {
-        /*if (ficha.quienes) {
-          ficha.quienes.forEach(element => {
-            if (element.persona && this.personas.indexOf(element.persona) < 0) {
-              this.personas.push(element.persona)
-            }
-          })
-        }
-
-        if (ficha.dquienes) {
-          ficha.dquienes.forEach(element => { 
-            if (element.persona && this.personas.indexOf(element.persona) < 0) {
-              this.personas.push(element.persona)
-            }
-          })
-        }
-        */
-
-        if (ficha.dques) {
-          ficha.dques.forEach(element => {
-            if (element.etiqueta && this.temas.indexOf(element.etiqueta) < 0) {
-              this.temas.push(element.etiqueta)
-            }
-          })
-        }
-      })
-      //this.personas.sort();
+      temas.forEach(tema =>
+        this.temas.push(tema.$value))
       this.temas.sort();
     });
 
     this.route.paramMap.forEach(
       param => {
         this.tarea = this.db.object('/tareas/' + param.get('id'));
-        this.tarea.subscribe(tarea =>{
+        this.tarea.subscribe(tarea => {
           this.analista = tarea.analista;
           this.revisor = tarea.revisor;
         })
@@ -202,7 +183,7 @@ export class TareaFichaComponent implements OnInit {
     }
   }
 
-  addElem(elem: string, type?:string) {
+  addElem(elem: string, type?: string) {
     switch (elem) {
       case 'lugar':
         this.form.lugares.push(new Item());
@@ -249,13 +230,13 @@ export class TareaFichaComponent implements OnInit {
   goTo(location: string): void {
     window.location.hash = "";
     window.location.hash = location;
-    window.scrollBy(0,2);
+    window.scrollBy(0, 2);
   }
 
   //tooltip
-  getInfo(event,tooltip:string,overlaypanel: OverlayPanel){
+  getInfo(event, tooltip: string, overlaypanel: OverlayPanel) {
     overlaypanel.container.style.width = "30%";
-    overlaypanel.container.innerHTML = '<div class="ui-overlaypanel-content">'+this.tooltip[tooltip]+'</div>';
+    overlaypanel.container.innerHTML = '<div class="ui-overlaypanel-content">' + this.tooltip[tooltip] + '</div>';
     overlaypanel.toggle(event, event.target);
 
   }
@@ -269,5 +250,10 @@ export class TareaFichaComponent implements OnInit {
   tsearch = (text$: Observable<string>) =>
     map.call(debounceTime.call(text$, 200),
       term => term === '' ? [] : this.temas.filter(tema => tema.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+
+  //Localidades typeahead
+  lsearch = (text$: Observable<string>) =>
+    map.call(debounceTime.call(text$, 200),
+      term => term === '' ? [] : this.lugares.filter(lugar => lugar.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
 }
