@@ -1,0 +1,27 @@
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container-fluid p-3" *ngIf="!loader">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group" id="list-tab" role="tablist">
+        <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Personajes'" (click)="selectItem('Personajes')">Personajes</button>
+        <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Localidades'" (click)="selectItem('Localidades')">Localidades</button>
+        <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'Temas'" (click)="selectItem('Temas')">Temas</button>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="tab-content">
+        <button class="btn btn-outline-success m-2" (click)="onSubmit()"><span class="fa fa-save" aria-hidden="true" ></span> Guardar</button>
+        <button class="btn btn-outline-secondary m-2" (click)="goBack()"><span class="fa fa-undo" aria-hidden="true"></span> Cancelar</button>
+        <ng-container *ngIf="selectedItem == 'Personajes'">
+          <div class="form-group form-inline" *ngFor="let item of personajes; let i=index">
+            <input type="text" [(ngModel)]="item.$value" class="form-control" style="width:60%">
+            <button class="btn btn-outline-danger m-2" (click)="deleteItem(i, personajes)"><span class="fa fa-trash" aria-hidden="true"></span></button>
+          </div>
+          <button class="btn btn-outline-success m-2" (click)="addItem(personajes)"><span class="fa fa-plus" aria-hidden="true"></span> Añadir</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

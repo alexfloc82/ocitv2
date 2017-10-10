@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a routerLink="etiquetas" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Desplegables</a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="tooltip" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Tooltip</a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="cloud" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Nubes</a>
+  </li>
+</ul>
+<router-outlet></router-outlet>
