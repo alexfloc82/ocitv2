@@ -6,20 +6,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { AuthService } from './auth/auth.service';
-import { QuestionControlService }    from './question/question-control.service';
 import {MessageService} from './message/message.service';
 import {MessageService as MsgService} from 'primeng/components/common/messageservice';
 import { UtilsService } from './utils/utils.service';
 
-import { DynamicFormQuestionComponent } from '../core/question/dynamic-form-question.component';
-
 @NgModule({
-  declarations: [DynamicFormQuestionComponent
+  declarations: [
   ],
-  exports:[DynamicFormQuestionComponent],
+  exports:[],
   imports: [
    NgbModule.forRoot(), HttpModule, FormsModule, CommonModule, ReactiveFormsModule
   ],
-  providers:[AuthService, AngularFireDatabase, QuestionControlService, MessageService, UtilsService, MsgService]
+  providers:[AuthService, AngularFireDatabase, MessageService, UtilsService, MsgService]
 })
 export class CoreModule { }
