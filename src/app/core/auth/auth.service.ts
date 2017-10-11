@@ -34,7 +34,10 @@ export class AuthService {
         let newUser={};
         let user = { email: email, uid: value.uid, name: name, lastname: lastname, role: '30' };
         newUser[value.uid]=user;
-        this.users.update(newUser).then(a => this.router.navigate(['/Home']))
+        this.users.update(newUser).then(a => {
+          this.getProfile();
+          this.router.navigate(['/Home'])
+        })
       })
       .catch(err => this.messageService.sendMessage(err.message, 'error'))
   }
