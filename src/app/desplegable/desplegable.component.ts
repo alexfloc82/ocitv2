@@ -7,7 +7,7 @@ import { UtilsService } from '../core/utils/utils.service';
 import { MessageService } from '../core/message/message.service';
 import { AuthService } from '../core/auth/auth.service';
 
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase} from 'angularfire2/database';
 
 @Component({
   selector: 'app-desplegable',

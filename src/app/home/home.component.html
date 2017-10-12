@@ -50,7 +50,9 @@
         <div class="card-body">
           <p>El Observatorio de los Informativos de Tv realiza un análisis de contenido de los informativos de televisión a
             través de una herramienta de análisis en línea.</p>
-          <a href="../../assets/protocolo.pdf" class="btn btn-primary" role="button">Protocolo</a>
+          <ng-container *ngFor="let document of documents">
+            <a [href]="document.url" target="_blank" class="btn btn-primary" role="button">{{document.title}}</a>
+          </ng-container>
         </div>
       </div>
     </div>

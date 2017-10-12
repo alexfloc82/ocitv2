@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/auth/auth.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+
+import * as firebase from 'firebase/app';
+import "firebase/storage";
 
 @Component({
   selector: 'app-home',
@@ -8,10 +12,25 @@ import { AuthService } from '../core/auth/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  documents: any[];
+  url: string;
   email: string;
   password: string;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router, private db: AngularFireDatabase) {
+    db.list('/documentos').subscribe(documentos => {
+      this.documents = [];
+      documentos.forEach(document => {
+        firebase.storage().ref(document.url).getDownloadURL().then(url => {
+          document.url = url;
+          this.documents.push(document);
+        }
+        );
+
+      })
+    })
+
+  }
 
   ngOnInit() {
   }
@@ -29,7 +48,7 @@ export class HomeComponent implements OnInit {
     this.email = this.password = '';
   }
 
-  resetPassword(){
+  resetPassword() {
     this.router.navigate(['user/Forgot']);
   }
 
