@@ -8,5 +8,8 @@
   <li class="nav-item">
     <a routerLink="cloud" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Nubes</a>
   </li>
+  <li class="nav-item">
+      <a routerLink="file" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Ficheros</a>
+    </li>
 </ul>
 <router-outlet></router-outlet>

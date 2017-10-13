@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
           this.documents.push(document);
         }
         );
-
       })
     })
 

@@ -170,3 +170,12 @@ export class Data{
 			hoverBackgroundColor: backgroundColors});
 	}
 }
+
+export class Documento{
+	title:string;
+	url:string;
+	downloadUrl:string;
+	file: any;
+
+	constructor() { }
+}

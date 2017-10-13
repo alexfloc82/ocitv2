@@ -1,4 +1,42 @@
-<p>
-  desp-file works!
-  <a [href]="url" class="btn btn-primary" role="button">Protocolo</a>
-</p>
+<div class="container text-center pt-5" *ngIf="loader">
+  <i class="fa fa-spinner fa-4x fa-spin fa-fw" aria-hidden="true"></i>
+</div>
+<div class="container-fluid" *ngIf="!loader">
+  <div class="row p-2">
+    <div class="col-3 p-2 border rounded">
+      <div class="form">
+        <div class="form-group">
+          <label class="col-sm-2">Titulo:</label>
+          <input type="text" [(ngModel)]="form.title" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="file" class="form-control-file" (change)="setFile($event)">
+        </div>
+        <button class="btn btn-outline-success m-2" (click)="saveItem()" [disabled]="!form.file || !form.title"><span class="fa fa-save" aria-hidden="true"></span> Guardar</button>
+      </div>
+    </div>
+    <div class="col-8 ml-2 p-2 border rounded">
+      <table>
+        <thead>
+          <tr>
+            <th>Documentos</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let document of documents">
+            <td>{{document.title}}</td><td>{{document.url}}</td><td>
+              <a class="btn btn-outline-info m-2" [href]="document.downloadUrl" target="_blank"><span class="fa fa-eye" aria-hidden="true"></span> Ver</a>
+              <button class="btn btn-outline-danger m-2" (click)="deleteItem(document)"><span class="fa fa-trash" aria-hidden="true"></span> Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="progress" *ngIf="percentage != 'none'">
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="percentage" [style.width]="percentage"
+          aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        </div>
+      </div>
+    </div>
+  </div>
