@@ -22,6 +22,14 @@
       <li class="nav-item">
         <a routerLink="User" class="nav-link" routerLinkActive="active" *ngIf="(authService.userProfile|async)?.role == '90'">Usuarios</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+          Cuenta
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" routerLink="user/Reset/-">Cambiar contraseña</a>
+        </div>
+      </li>
     </ul>
     <div class="form-inline my-2 my-lg-0">
       <div class="mr-sm-2">{{ (authService.user | async)?.email }}</div>
