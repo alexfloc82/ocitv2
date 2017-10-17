@@ -50,29 +50,29 @@
       </div>
       <div class="form-group form-inline">
         <label class="col-3">Hora comienzo:</label>
-        <select class="form-control" [(ngModel)]="form.bh" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
+        <select class="form-control" [(ngModel)]="form.bh" [disabled]="form.comprobado">
                       <option *ngFor="let h of hour;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option>
                   </select>
         <label>:</label>
-        <select class="form-control" [(ngModel)]="form.bm" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
+        <select class="form-control" [(ngModel)]="form.bm" [disabled]="form.comprobado">
                       <option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option>
                   </select>
         <label>:</label>
-        <select class="form-control" [(ngModel)]="form.bs" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
+        <select class="form-control" [(ngModel)]="form.bs" [disabled]="form.comprobado">
                       <option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option>
                   </select>
       </div>
       <div class="form-group form-inline">
         <label class="col-3">Hora de fin:</label>
-        <select class="form-control" [(ngModel)]="form.eh" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
+        <select class="form-control" [(ngModel)]="form.eh" [disabled]="form.comprobado">
                       <option *ngFor="let h of hour;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option>
                   </select>
         <label>:</label>
-        <select class="form-control" [(ngModel)]="form.em" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
+        <select class="form-control" [(ngModel)]="form.em" [disabled]="form.comprobado">
                       <option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option>
                   </select>
         <label>:</label>
-        <select class="form-control" [(ngModel)]="form.es" [disabled]="form.comprobado || (authService.userProfile|async)?.role < 40">
+        <select class="form-control" [(ngModel)]="form.es" [disabled]="form.comprobado">
                       <option *ngFor="let min of minute;let i=index" value="{{i}}">{{i | number:'2.0-0'}}</option>
                   </select>
       </div>
