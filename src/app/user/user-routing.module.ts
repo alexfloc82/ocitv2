@@ -13,7 +13,6 @@ const routes: Routes = [
   { path: ':id',    component: UserDetailComponent },
   { path: 'user/Signin',    component: UserSigninComponent },
   { path: 'user/Forgot',    component: UserForgotComponent },
-  { path: 'user/Reset/:code',    component: UserResetComponent },
   { path: 'user/Reset',    component: UserResetComponent }
 
 ];
