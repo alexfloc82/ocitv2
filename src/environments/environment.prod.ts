@@ -5,7 +5,7 @@ export const environment = {
     authDomain: "ocitv-complutense.firebaseapp.com",
     databaseURL: "https://ocitv-complutense.firebaseio.com",
     projectId: "ocitv-complutense",
-    storageBucket: "",
+    storageBucket: "ocitv-complutense.appspot.com",
     messagingSenderId: "319794440492"
   }
 };
