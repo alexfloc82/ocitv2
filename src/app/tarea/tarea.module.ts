@@ -10,10 +10,11 @@ import { TareaDetailComponent } from './tarea-detail/tarea-detail.component';
 import { TareaFichaComponent } from './tarea-ficha/tarea-ficha.component';
 
 import {OverlayPanelModule} from 'primeng/primeng';
+import {SpinnerModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule,NgbModule,OverlayPanelModule,
+    CommonModule, FormsModule,NgbModule,OverlayPanelModule,SpinnerModule,
     TareaRoutingModule
   ],
   declarations: [TareaComponent, TareaDetailComponent, TareaFichaComponent]
