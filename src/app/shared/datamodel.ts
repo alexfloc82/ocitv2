@@ -42,6 +42,7 @@ export class User {
 export class Tarea {
 
 	analista: string;
+	profesor: string;
 	analizado: boolean;
 	bh: number;
 	bm: number;
