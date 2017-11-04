@@ -80,7 +80,12 @@
         <h3 class="text-info">Localización</h3>
         <div class="form-group form-inline">
           <label class="col-sm-4">Conforme Revisor:</label>
-          <input type="checkbox" [(ngModel)]="form.conf_loc" [disabled]="tarea.analizado">
+          <select class="form-control" [(ngModel)]="form.conf_loc_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_loc" [disabled]="tarea.analizado" *ngIf="form.conf_loc_s=='N'">
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-4">Ambito:</label>
@@ -175,7 +180,12 @@
         <h3 class="text-info">Fuentes</h3>
         <div class="form-group form-inline">
           <label class="col-sm-4">Conforme Revisor:</label>
-          <input type="checkbox" [(ngModel)]="form.conf_fuen" [disabled]="tarea.analizado">
+          <select class="form-control"[(ngModel)]="form.conf_fuen_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_fuen" [disabled]="tarea.analizado" *ngIf="form.conf_fuen_s==='N'">
         </div>
         <div class="form-group">
           <label><input type="checkbox" [(ngModel)]="form.fuente" [disabled]="form.terminado"> Tiene Fuentes</label>
@@ -219,7 +229,12 @@
         </h3>
         <div class="form-group form-inline">
           <label class="col-sm-4">Conforme Revisor:</label>
-          <input type="checkbox" [(ngModel)]="form.conf_quien" [disabled]="tarea.analizado">
+          <select class="form-control"[(ngModel)]="form.conf_quien_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_quien" [disabled]="tarea.analizado" *ngIf="form.conf_quien_s==='N'">
         </div>
         <table class="table">
           <thead>
@@ -272,7 +287,12 @@
         </h3>
         <div class="form-group form-inline">
           <label class="col-sm-4">Conforme Revisor:</label>
-          <input type="checkbox" [(ngModel)]="form.conf_dquien" [disabled]="tarea.analizado">
+          <select class="form-control"[(ngModel)]="form.conf_dquien_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_dquien" [disabled]="tarea.analizado" *ngIf="form.conf_dquien_s==='N'">
         </div>
         <table class="table">
           <thead>
@@ -305,7 +325,12 @@
         </h3>
         <div class="form-group form-inline">
           <label class="col-sm-4">Conforme Revisor:</label>
-          <input type="checkbox" [(ngModel)]="form.conf_dque" [disabled]="tarea.analizado">
+          <select class="form-control"[(ngModel)]="form.conf_dque_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_dque" [disabled]="tarea.analizado" *ngIf="form.conf_dque_s==='N'">
         </div>
         <table class="table">
           <thead>
@@ -365,7 +390,12 @@
         <h3 class="text-info">Tratamiento</h3>
         <div class="form-group form-inline">
           <label class="col-sm-4">Conforme Revisor:</label>
-          <input type="checkbox" [(ngModel)]="form.conf_trat" [disabled]="tarea.analizado">
+          <select class="form-control"[(ngModel)]="form.conf_trat_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_trat" [disabled]="tarea.analizado" *ngIf="form.conf_trat_s==='N'">
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-4">Valoración editorial:</label>
