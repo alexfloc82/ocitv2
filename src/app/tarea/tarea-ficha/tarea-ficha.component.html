@@ -85,6 +85,7 @@
             <option value="S">Sí</option>
             <option value="N">No</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
           <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_loc" [disabled]="tarea.analizado" *ngIf="form.conf_loc_s=='N'">
         </div>
         <div class="form-group form-inline">
@@ -185,6 +186,7 @@
             <option value="S">Sí</option>
             <option value="N">No</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
           <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_fuen" [disabled]="tarea.analizado" *ngIf="form.conf_fuen_s==='N'">
         </div>
         <div class="form-group">
@@ -234,6 +236,7 @@
             <option value="S">Sí</option>
             <option value="N">No</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
           <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_quien" [disabled]="tarea.analizado" *ngIf="form.conf_quien_s==='N'">
         </div>
         <table class="table">
@@ -292,6 +295,7 @@
             <option value="S">Sí</option>
             <option value="N">No</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
           <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_dquien" [disabled]="tarea.analizado" *ngIf="form.conf_dquien_s==='N'">
         </div>
         <table class="table">
@@ -330,6 +334,7 @@
             <option value="S">Sí</option>
             <option value="N">No</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
           <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_dque" [disabled]="tarea.analizado" *ngIf="form.conf_dque_s==='N'">
         </div>
         <table class="table">
@@ -395,6 +400,7 @@
             <option value="S">Sí</option>
             <option value="N">No</option>
           </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
           <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_trat" [disabled]="tarea.analizado" *ngIf="form.conf_trat_s==='N'">
         </div>
         <div class="form-group form-inline">

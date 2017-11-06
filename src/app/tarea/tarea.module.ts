@@ -8,12 +8,13 @@ import { TareaRoutingModule } from './tarea-routing.module';
 import { TareaComponent } from './tarea.component';
 import { TareaDetailComponent } from './tarea-detail/tarea-detail.component';
 import { TareaFichaComponent } from './tarea-ficha/tarea-ficha.component';
+import { DataTableModule} from 'primeng/primeng';
 
 import {OverlayPanelModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule,NgbModule,OverlayPanelModule,
+    CommonModule, FormsModule,NgbModule,OverlayPanelModule,DataTableModule,
     TareaRoutingModule
   ],
   declarations: [TareaComponent, TareaDetailComponent, TareaFichaComponent]

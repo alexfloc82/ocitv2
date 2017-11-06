@@ -18,6 +18,7 @@ export class TareaComponent implements OnInit {
   displayTareas:any[];
   cadenas:FirebaseListObservable<any[]>;
   semestre:FirebaseListObservable<any[]>;
+  ediciones:FirebaseListObservable<any[]>;
   combos:FirebaseObjectObservable<any>;
   query: any;
 
@@ -28,8 +29,9 @@ export class TareaComponent implements OnInit {
     private route: ActivatedRoute) { 
       this.cadenas = this.db.list('/values/cadena');
       this.semestre = this.db.list('/values/semestre');
+      this.ediciones = this.db.list('/values/edicion');
       this.combos = this.db.object('/values');
-      this.query = {cadena:"", id_tarea:"", year:"", semestre:""};
+      this.query = {cadena:"", id_tarea:"", year:"", semestre:"", edicion:""};
       this.db.list('/tareas',
       {query:{orderByChild:'date'}}).subscribe(a => {
       this.tareas = a.reverse();
@@ -49,6 +51,7 @@ export class TareaComponent implements OnInit {
   onFilterSort(){
     this.displayTareas = this.tareas.filter(tarea => 
       (tarea.cadena == this.query.cadena || this.query.cadena == "") &&
+      (tarea.edicion == this.query.edicion || this.query.edicion == "") &&
       (tarea.dateNgb.year == this.query.year || this.query.year == "") &&
       (tarea.semestre == this.query.semestre || this.query.semestre == "") &&
       (tarea.id_tarea.toLowerCase().indexOf(this.query.id_tarea.toLowerCase()) > -1 || this.query.id_tarea == ""))
