@@ -13,9 +13,9 @@
         <button class="list-group-item list-group-item-action" (click)="goTo('gen')" href="#gen">General</button>
         <button class="list-group-item list-group-item-action" (click)="goTo('loc')" href="#loc">Localización</button>
         <button class="list-group-item list-group-item-action" (click)="goTo('fuen')" href="#fuen">Fuentes</button>
-        <button class="list-group-item list-group-item-action" (click)="goTo('quien')" href="#quien">Quien habla</button>
-        <button class="list-group-item list-group-item-action" (click)="goTo('dequien')" href="#dequien">De quien habla</button>
-        <button class="list-group-item list-group-item-action" (click)="goTo('deque')" href="#deque">De que se habla</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('quien')" href="#quien">Quién habla</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('dequien')" href="#dequien">De quién habla</button>
+        <button class="list-group-item list-group-item-action" (click)="goTo('deque')" href="#deque">De qué se habla</button>
         <button class="list-group-item list-group-item-action" (click)="goTo('trat')" href="#trat">Tratamiento</button>
         <button class="list-group-item list-group-item-action" (click)="goTo('obs')" href="#obs">Observaciones</button>
       </div>
@@ -26,9 +26,11 @@
       <div id="gen" class="mb-2 border rounded p-3">
         <h3 class="text-info">General</h3>
         <div class="form-group form-inline">
-          <label class="col-sm-2">Terminado:</label>
+          <label class="col-sm-2">Analizado:</label>
           <input type="checkbox" [(ngModel)]="form.terminado" [disabled]="tarea.analizado">
           <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'terminado',op);"><span class="fa fa-info"></span></button>
+          <label class="col-sm-2">Revisado:</label>
+          <input type="checkbox" [(ngModel)]="form.revisado" [disabled]="tarea.analizado">
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Titular:</label>
@@ -77,6 +79,16 @@
       <div id="loc" class="mb-2 border rounded p-3">
         <h3 class="text-info">Localización</h3>
         <div class="form-group form-inline">
+          <label class="col-sm-4">Conforme Revisor:</label>
+          <select class="form-control" [(ngModel)]="form.conf_loc_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_loc" [disabled]="tarea.analizado" *ngIf="form.conf_loc_s=='N'">
+        </div>
+        <div class="form-group form-inline">
           <label class="col-sm-4">Ambito:</label>
           <select id="ambito" class="form-control" [(ngModel)]="form.ambito" [(disabled)]="form.terminado">
               <option></option>
@@ -100,6 +112,7 @@
                 <option *ngFor="let option of (zona | async)" value="{{option.$key}}">{{option.$value}}</option>
             </select>
           </div>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'zonaAmbInt',op);"><span class="fa fa-info"></span></button>
         </div>
         <div *ngIf='form.ambito=="I"||form.ambito=="N"||form.ambito=="G"'>
           <table class="table ">
@@ -126,7 +139,7 @@
                                         </select>
                 </td>
                 <td>
-                  <select class="form-control" [(ngModel)]="local.valor" [(disabled)]="form.terminado "><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+                  <select class="form-control" [(ngModel)]="local.valor" [(disabled)]="form.terminado "><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select>
                 </td>
                 <td>
                   <button type="button" class="btn btn-outline-danger " (click)="deleteElem('lugar',i)" *ngIf="!form.terminado "><span class="fa fa-trash "></span></button>
@@ -150,7 +163,7 @@
                   <input type="text " class="form-control text " [ngbTypeahead]="lsearch" [(ngModel)]="local.localidad" my-localisation [(disabled)]="form.terminado ">
                 </td>
                 <td>
-                  <select class="form-control " [(ngModel)]="local.valor " [(disabled)]="form.terminado "><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+                  <select class="form-control " [(ngModel)]="local.valor " [(disabled)]="form.terminado "><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select>
                 </td>
                 <td>
                   <button type="button " class="btn btn-outline-danger" (click)="deleteElem('localidad',i)" *ngIf="!form.terminado "><span class="fa fa-trash "></span></button>
@@ -166,6 +179,16 @@
       <!--Fuentes-->
       <div id="fuen" class="mb-2 border rounded p-3">
         <h3 class="text-info">Fuentes</h3>
+        <div class="form-group form-inline">
+          <label class="col-sm-4">Conforme Revisor:</label>
+          <select class="form-control"[(ngModel)]="form.conf_fuen_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_fuen" [disabled]="tarea.analizado" *ngIf="form.conf_fuen_s==='N'">
+        </div>
         <div class="form-group">
           <label><input type="checkbox" [(ngModel)]="form.fuente" [disabled]="form.terminado"> Tiene Fuentes</label>
         </div>
@@ -209,6 +232,16 @@
       <div id="quien" class="mb-2 border rounded p-3">
         <h3 class="text-info">¿Quién habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'quien',op);"><span class="fa fa-info"></span></span>
         </h3>
+        <div class="form-group form-inline">
+          <label class="col-sm-4">Conforme Revisor:</label>
+          <select class="form-control"[(ngModel)]="form.conf_quien_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_quien" [disabled]="tarea.analizado" *ngIf="form.conf_quien_s==='N'">
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -225,7 +258,7 @@
                   <option *ngFor="let option of (categoria | async)" value="{{option.$key}}">{{option.$value}}</option>
                   </select>
                 </td>
-                <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
+                <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select></td>
                 <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
                 </td>
               </tr>
@@ -245,7 +278,7 @@
             <ng-container *ngFor="let quien of form.quienes, let i=index">
               <tr *ngIf="quien.type==='Personaje'">
                 <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="quien.persona" [disabled]="form.terminado"></td>
-                <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
+                <td><select class="form-control" [(ngModel)]="quien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select></td>
                 <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('quien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
                 </td>
               </tr>
@@ -258,6 +291,16 @@
       <div id="dequien" class="mb-2 border rounded p-3">
         <h3 class="text-info">¿De quién habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'dquien',op);"><span class="fa fa-info"></span></span>
         </h3>
+        <div class="form-group form-inline">
+          <label class="col-sm-4">Conforme Revisor:</label>
+          <select class="form-control"[(ngModel)]="form.conf_dquien_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_dquien" [disabled]="tarea.analizado" *ngIf="form.conf_dquien_s==='N'">
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -275,7 +318,7 @@
                                     </select>
               </td>
               <td><input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="dquien.persona" [disabled]="form.terminado"></td>
-              <td><select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select></td>
+              <td><select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select></td>
               <td><button type="button" class="btn btn-outline-danger" (click)="deleteElem('dquien',i)" *ngIf="!form.terminado"><span class="fa fa-trash"></span></button>
               </td>
             </tr>
@@ -287,6 +330,16 @@
       <div id="deque" class="mb-2 border rounded p-3">
         <h3 class="text-info">¿De qué se habla? <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'dque',op);"><span class="fa fa-info"></span></span>
         </h3>
+        <div class="form-group form-inline">
+          <label class="col-sm-4">Conforme Revisor:</label>
+          <select class="form-control"[(ngModel)]="form.conf_dque_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_dque" [disabled]="tarea.analizado" *ngIf="form.conf_dque_s==='N'">
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -303,7 +356,7 @@
                     <option></option>
                     <option *ngFor="let option of (dqcategoria | async)" value="{{option.$key}}">{{option.$value}}</option>
                                         </select></td>
-                <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+                <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select>
                 </td>
                 <td>
                   <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
@@ -327,7 +380,7 @@
             <ng-container *ngFor=" let dque of form.dques, let i=index">
               <tr *ngIf="dque.type==='Etiqueta'">
                 <td><input type="text" class="form-control" [ngbTypeahead]="tsearch" [(ngModel)]="dque.etiqueta" [disabled]="form.terminado"></td>
-                <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+                <td><select class="rating form-control" [(ngModel)]="dque.valor" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select>
                 </td>
                 <td>
                   <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dque',i)" *ngIf="!form.terminado">
@@ -343,6 +396,16 @@
       <!--Tratamiento-->
       <div id="trat" class="mb-2 border rounded p-3">
         <h3 class="text-info">Tratamiento</h3>
+        <div class="form-group form-inline">
+          <label class="col-sm-4">Conforme Revisor:</label>
+          <select class="form-control"[(ngModel)]="form.conf_trat_s" [disabled]="tarea.analizado">
+            <option value=""></option>
+            <option value="S">Sí</option>
+            <option value="N">No</option>
+          </select>
+          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'revisor',op);"><span class="fa fa-info"></span></button>
+          <input type="text" class="form-control ml-2" style="width: 50%" placeholder="Indicar modificaciones aquí"  [(ngModel)]="form.conf_trat" [disabled]="tarea.analizado" *ngIf="form.conf_trat_s==='N'">
+        </div>
         <div class="form-group form-inline">
           <label class="col-sm-4">Valoración editorial:</label>
           <div>
@@ -394,14 +457,14 @@
         <div class="form-group form-inline">
           <label class="col-sm-4">Equilibrio:</label>
           <div>
-            <select [(ngModel)]="form.equilibrio" class="form-control" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+            <select [(ngModel)]="form.equilibrio" class="form-control" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select>
             <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'equi',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-4">Contextualización:</label>
           <div>
-            <select [(ngModel)]="form.context" class="form-control" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i}}">{{i}}</option></select>
+            <select [(ngModel)]="form.context" class="form-control" [disabled]="form.terminado"><option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option></select>
             <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'context',op);"><span class="fa fa-info"></span></button>
           </div>
         </div>

@@ -35,7 +35,7 @@ export class TareaFichaComponent implements OnInit {
   combos: FirebaseObjectObservable<any>;
   minute: number[] = new Array(60);
   hour: number[] = new Array(24);
-  rating: number[] = new Array(6);
+  rating: number[] = new Array(5);
   format: FirebaseListObservable<any[]>;
   genero: FirebaseListObservable<any[]>;
   zona: FirebaseListObservable<any[]>;

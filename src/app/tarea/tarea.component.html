@@ -33,19 +33,28 @@
               <option *ngFor="let option of (semestre | async)" value="{{option.$key}}">{{option.$value}}</option>
             </select>
           </div>
+          <div class="form-group">
+            <label>Edición:</label>
+            <select class="form-control" [(ngModel)]="query.edicion">
+              <option></option>
+              <option *ngFor="let option of (ediciones | async)" value="{{option.$key}}">{{option.$value}}</option>
+            </select>
+          </div>
       <button class="btn btn-outline-info" (click)="onFilterSort()">Buscar</button>
     </div>
     <!-- Tabla de tareas -->
-    <div class="col-sm-8 border rounded p-2 m-2">
+    <div class="col-sm-8  rounded p-2 m-2">
         <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')" [disabled]="(authService.userProfile|async)?.role < 40"><span class="fa fa-plus" aria-hidden="true"></span> Nuevo Informativo</button>
-      <table class="table">
+     <!--  <table class="table">
         <thead>
           <th>#</th>
           <th>Semestre</th>
           <th>Cadena</th>
           <th>Fecha</th>
+          <th>Edición</th>
           <th style="text-align:center;">Analizado</th>
           <th style="text-align:center;">Revisado</th>
+          <th style="text-align:center;">Verificado</th>
         </thead>
         <tbody>
           <tr *ngFor="let tarea of displayTareas, let i=index" >
@@ -53,11 +62,41 @@
             <td *ngIf="i<200">{{(combos|async)?.semestre[tarea.semestre]}}</td>
             <td *ngIf="i<200">{{(combos|async)?.cadena[tarea.cadena]}}</td>
             <td *ngIf="i<200">{{tarea.date | date:'dd/MM/yyyy'}}</td>
+            <td *ngIf="i<200">{{(combos|async)?.edicion[tarea.edicion]}}</td>
             <td *ngIf="i<200" style="text-align:center;"><input type="checkbox" [checked]="tarea.analizado"  disabled/></td>
             <td *ngIf="i<200"style="text-align:center;"><input type="checkbox" [checked]="tarea.revisado"  disabled/></td>
+            <td *ngIf="i<200"style="text-align:center;"><input type="checkbox" [checked]="tarea.comprobado"  disabled/></td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <p-dataTable [value]="displayTareas" [rows]="50" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[25,50,100]">
+        <p-column field="id_tarea" header="#" [sortable]="true">
+          <ng-template let-tarea="rowData" pTemplate="body">
+            <button class="btn-link" (click)="gotoDetail(tarea.$key)">{{tarea.id_tarea}}</button>
+          </ng-template>
+        </p-column>
+        <p-column field="semestre" header="Semestre" [sortable]="true">
+          <ng-template let-tarea="rowData" pTemplate="body"> {{(combos|async)?.semestre[tarea.semestre]}} </ng-template>
+        </p-column>
+        <p-column field="cadena" header="Cadena" [sortable]="true">
+          <ng-template let-tarea="rowData" pTemplate="body"> {{(combos|async)?.cadena[tarea.cadena]}} </ng-template>
+        </p-column>
+        <p-column field="date" header="Fecha" [sortable]="true">
+          <ng-template let-tarea="rowData" pTemplate="body"> {{tarea.date | date:'dd/MM/yyyy'}} </ng-template>
+        </p-column>
+        <p-column field="edicion" header="Edición" [sortable]="true">
+          <ng-template let-tarea="rowData" pTemplate="body"> {{(combos|async)?.edicion[tarea.edicion]}} </ng-template>
+        </p-column>
+        <p-column field="analizado" header="Analizado" [sortable]="true">
+            <ng-template let-tarea="rowData" pTemplate="body"> <div style="text-align:center;"><input type="checkbox" [checked]="tarea.analizado"  disabled/> </div></ng-template>
+        </p-column>
+        <p-column field="revisado" header="Revisado" [sortable]="true">
+            <ng-template let-tarea="rowData" pTemplate="body"> <div style="text-align:center;"><input type="checkbox" [checked]="tarea.revisado"  disabled/> </div></ng-template>
+        </p-column>
+        <p-column field="comprobado" header="Verificado" [sortable]="true">
+            <ng-template let-tarea="rowData" pTemplate="body"> <div style="text-align:center;"><input type="checkbox" [checked]="tarea.comprobado"  disabled/> </div></ng-template>
+        </p-column>
+    </p-dataTable>
     </div>
   </div>
 </div>

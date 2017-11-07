@@ -39,6 +39,7 @@ export class TareaDetailComponent implements OnInit {
   users: User[]; // list of elegible users
   selectedAnalista: User;
   selectedRevisor: User;
+  selectedProfesor: User;
 
   constructor(
     public authService: AuthService,
@@ -81,6 +82,7 @@ export class TareaDetailComponent implements OnInit {
               this.form = a;
               this.startDate={year: this.form.dateNgb.year, month: this.form.dateNgb.month}
               if(a.analista){this.db.object('/users/' + a.analista).subscribe(b => this.selectedAnalista = b);}
+              if(a.profesor){this.db.object('/users/' + a.profesor).subscribe(b => this.selectedProfesor = b);}
               if(a.revisor){this.db.object('/users/' + a.revisor).subscribe(b => this.selectedRevisor = b);}
               this.loader = false;
             }
@@ -166,6 +168,10 @@ export class TareaDetailComponent implements OnInit {
 
   selectAnalista(selectedItem: any) {
     this.form.analista = selectedItem.item.$key;
+  }
+
+  selectProfesor(selectedItem: any) {
+    this.form.profesor = selectedItem.item.$key;
   }
 
   selectRevisor(selectedItem: any) {
