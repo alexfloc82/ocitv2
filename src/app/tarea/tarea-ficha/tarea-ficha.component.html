@@ -197,11 +197,11 @@
 
         <div class="form-group form-inline">
           <label class="col-sm-3">"Totales" de Hombres:</label>
-          <input type="number" class="form-control" [(ngModel)]="form.declhombre" placeholder="Numero" [disabled]="form.terminado">
+          <p-spinner  [(ngModel)]="form.declhombre" [min]="0" placeholder="Numero" [disabled]="form.terminado"></p-spinner>
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-3">"Totales" de Mujeres:</label>
-          <input type="number" class="form-control" [(ngModel)]="form.declmujeres" placeholder="Numero" [disabled]="form.terminado">
+          <p-spinner  [(ngModel)]="form.declmujeres" [min]="0" placeholder="Numero" [disabled]="form.terminado"></p-spinner>
         </div>
         <table class="table">
           <thead>
@@ -217,9 +217,12 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="number" class="form-control" [(ngModel)]="form.fDir" placeholder="Num fuentes" [disabled]="form.terminado"></td>
-              <td><input type="number" class="form-control" [(ngModel)]="form.fGenerica" placeholder="Num fuentes" [disabled]="form.terminado"></td>
-              <td><input type="number" class="form-control" [(ngModel)]="form.fConfidencial" placeholder="Num fuentes" [disabled]="form.terminado"></td>
+              <td>
+                  <p-spinner  [(ngModel)]="form.fDir" [min]="0" placeholder="Num fuentes" [disabled]="form.terminado"></p-spinner></td>
+              <td>
+                  <p-spinner  [(ngModel)]="form.fGenerica" [min]="0" placeholder="Num fuentes" [disabled]="form.terminado"></p-spinner></td>
+              <td>
+                  <p-spinner  [(ngModel)]="form.fConfidencial" [min]="0" placeholder="Num fuentes" [disabled]="form.terminado"></p-spinner></td>
               <td>{{form.fDir+form.fGenerica+form.fConfidencial}}</td>
             </tr>
           </tbody>
