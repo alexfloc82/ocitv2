@@ -22,6 +22,9 @@ export class AppComponent implements OnDestroy {
       this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; });
     }
 
+  ngOnInit(){
+    this.authService.logout();
+  }
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }

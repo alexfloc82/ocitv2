@@ -165,7 +165,11 @@ export class TareaFichaComponent implements OnInit {
     //Update object in database
     if (this.ficha) {
       this.ficha.update(this.form)
-        .then(a => this.messageService.sendMessage('La ficha ha sido guardada', 'success'))
+        .then(a => 
+          {
+            this.saveLabelForm();
+            this.messageService.sendMessage('La ficha ha sido guardada', 'success')
+          })
         .catch(
         err => this.messageService.sendMessage(err.message, 'error')
         );
@@ -174,6 +178,7 @@ export class TareaFichaComponent implements OnInit {
     else {
       this.db.list('/fichas').push(this.form)
         .then(a => {
+          this.saveLabelForm();
           this.messageService.sendMessage('La ficha ha sido guardada', 'success');
           this.router.navigate(['Tarea', this.tarea.$ref.key, a.key]);
         })
@@ -240,6 +245,28 @@ export class TareaFichaComponent implements OnInit {
     overlaypanel.toggle(event, event.target);
 
   }
+
+  //guardar nube
+  saveLabelForm(){
+    this.form.quienes.forEach(quien => this.saveLabel(quien.persona, "mencionados"));
+    this.form.dquienes.forEach(quien => this.saveLabel(quien.persona, "mencionados"));
+    this.form.dques.forEach(a => this.saveLabel(a.etiqueta, "temas"));
+    this.form.localidades.forEach(a => this.saveLabel(a.localidad, "lugares"));
+  }
+
+  saveLabel(label: string, nube: string){
+    let obj= this.db.object('/'+nube);
+    obj.subscribe(object => {
+      if(object.constructor != Array)
+      {
+        object = [];
+      }
+      if(object.indexOf(label)<0){
+        object.push(label);
+        obj.set(object);
+      }
+    });
+  };
 
   //Personas typeahead
   psearch = (text$: Observable<string>) =>

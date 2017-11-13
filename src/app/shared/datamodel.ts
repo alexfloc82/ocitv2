@@ -148,6 +148,7 @@ export class Ficha {
 
 export class Item {
 	pais:string;
+	persona:string;
 	comunidad:string;
 	localidad:string;
 	categoria: string;
