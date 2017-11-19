@@ -104,8 +104,8 @@
       <button class="btn btn-outline-success m-2" *ngIf="!form.analizado && ((authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == form.analista)" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Pieza</button>
       <table class="table">
         <thead>
-          <th>Titulo</th>
-          <th>Genero</th>
+          <th>Título</th>
+          <th>Género</th>
           <th>Formato</th>
           <th>Inicio</th>
           <th>Fin</th>

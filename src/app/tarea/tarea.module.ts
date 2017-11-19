@@ -12,10 +12,11 @@ import { DataTableModule} from 'primeng/primeng';
 
 import {OverlayPanelModule} from 'primeng/primeng';
 import {SpinnerModule} from 'primeng/primeng';
+import {DropdownModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule,NgbModule,OverlayPanelModule,SpinnerModule,
+    CommonModule, FormsModule,NgbModule,OverlayPanelModule,SpinnerModule,DropdownModule,
     DataTableModule,
     TareaRoutingModule
   ],

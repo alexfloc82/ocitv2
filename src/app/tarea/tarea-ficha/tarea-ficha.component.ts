@@ -255,17 +255,20 @@ export class TareaFichaComponent implements OnInit {
   }
 
   saveLabel(label: string, nube: string){
-    let obj= this.db.object('/'+nube);
-    obj.subscribe(object => {
-      if(object.constructor != Array)
-      {
-        object = [];
-      }
-      if(object.indexOf(label)<0){
-        object.push(label);
-        obj.set(object);
-      }
-    });
+    if(label){
+      let obj= this.db.object('/'+nube);
+      obj.subscribe(object => {
+        if(object.constructor != Array)
+        {
+          object = [];
+        }
+        if(object.indexOf(label)<0){
+          object.push(label);
+          obj.set(object);
+        }
+      });
+    }
+
   };
 
   //Personas typeahead
