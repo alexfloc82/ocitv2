@@ -43,6 +43,8 @@ export class TareaFichaComponent implements OnInit {
   ambito: FirebaseListObservable<any[]>;
   comunidad: FirebaseListObservable<any[]>;
   categoria: FirebaseListObservable<any[]>;
+  categorias : any[];
+  dqcategorias : any[];
   dqcategoria: FirebaseListObservable<any[]>;
   catTem: FirebaseListObservable<any[]>;
   edicion: FirebaseListObservable<any[]>;
@@ -79,7 +81,15 @@ export class TareaFichaComponent implements OnInit {
     this.ambito = this.db.list('/values/ambito');
     this.comunidad = this.db.list('/values/comunidad');
     this.categoria = this.db.list('/values/categoria');
+    this.db.list('/values/categoria').subscribe(a => {
+      this.categorias =[];
+      a.forEach(cat => this.categorias.push({label:cat.$value, value:{id:cat.$key,name:cat.$value}}))
+    });
     this.dqcategoria = this.db.list('/values/dqcategoria');
+    this.db.list('/values/dqcategoria').subscribe(a => {
+      this.dqcategorias =[];
+      a.forEach(cat => this.dqcategorias.push({label:cat.$value, value:{id:cat.$key,name:cat.$value}}))
+    });
     this.catTem = this.db.list('/values/catTem');
     this.edicion = this.db.list('/values/edicion');
     this.informador = this.db.list('/values/informador');
