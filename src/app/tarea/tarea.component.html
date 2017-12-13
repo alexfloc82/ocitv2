@@ -4,7 +4,7 @@
 <div class="container-fluid p-3" *ngIf="!loader">
   <div class="row content">
     <!-- Search control-->
-    <div class="col-sm-3 border rounded p-2 m-2">
+    <div class="col-2 border rounded p-2">
       <div class="form-group">
         <label>ID Informativo:</label>
         <input class="form-control" [(ngModel)]="query.id_tarea">
@@ -43,7 +43,7 @@
       <button class="btn btn-outline-info" (click)="onFilterSort()">Buscar</button>
     </div>
     <!-- Tabla de tareas -->
-    <div class="col-sm-8  rounded p-2 m-2">
+    <div class="col-10 rounded p-2">
         <button class="btn btn-outline-success m-2" (click)="gotoDetail('-')" [disabled]="(authService.userProfile|async)?.role < 40"><span class="fa fa-plus" aria-hidden="true"></span> Nuevo Informativo</button>
      <!--  <table class="table">
         <thead>

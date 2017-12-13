@@ -43,6 +43,8 @@ export class TareaFichaComponent implements OnInit {
   ambito: FirebaseListObservable<any[]>;
   comunidad: FirebaseListObservable<any[]>;
   categoria: FirebaseListObservable<any[]>;
+  categorias : any[];
+  dqcategorias : any[];
   dqcategoria: FirebaseListObservable<any[]>;
   catTem: FirebaseListObservable<any[]>;
   edicion: FirebaseListObservable<any[]>;
@@ -79,7 +81,15 @@ export class TareaFichaComponent implements OnInit {
     this.ambito = this.db.list('/values/ambito');
     this.comunidad = this.db.list('/values/comunidad');
     this.categoria = this.db.list('/values/categoria');
+    this.db.list('/values/categoria').subscribe(a => {
+      this.categorias =[];
+      a.forEach(cat => this.categorias.push({label:cat.$value, value:{id:cat.$key,name:cat.$value}}))
+    });
     this.dqcategoria = this.db.list('/values/dqcategoria');
+    this.db.list('/values/dqcategoria').subscribe(a => {
+      this.dqcategorias =[];
+      a.forEach(cat => this.dqcategorias.push({label:cat.$value, value:{id:cat.$key,name:cat.$value}}))
+    });
     this.catTem = this.db.list('/values/catTem');
     this.edicion = this.db.list('/values/edicion');
     this.informador = this.db.list('/values/informador');
@@ -165,7 +175,11 @@ export class TareaFichaComponent implements OnInit {
     //Update object in database
     if (this.ficha) {
       this.ficha.update(this.form)
-        .then(a => this.messageService.sendMessage('La ficha ha sido guardada', 'success'))
+        .then(a => 
+          {
+            this.saveLabelForm();
+            this.messageService.sendMessage('La ficha ha sido guardada', 'success')
+          })
         .catch(
         err => this.messageService.sendMessage(err.message, 'error')
         );
@@ -174,6 +188,7 @@ export class TareaFichaComponent implements OnInit {
     else {
       this.db.list('/fichas').push(this.form)
         .then(a => {
+          this.saveLabelForm();
           this.messageService.sendMessage('La ficha ha sido guardada', 'success');
           this.router.navigate(['Tarea', this.tarea.$ref.key, a.key]);
         })
@@ -240,6 +255,31 @@ export class TareaFichaComponent implements OnInit {
     overlaypanel.toggle(event, event.target);
 
   }
+
+  //guardar nube
+  saveLabelForm(){
+    this.form.quienes.forEach(quien => this.saveLabel(quien.persona, "mencionados"));
+    this.form.dquienes.forEach(quien => this.saveLabel(quien.persona, "mencionados"));
+    this.form.dques.forEach(a => this.saveLabel(a.etiqueta, "temas"));
+    this.form.localidades.forEach(a => this.saveLabel(a.localidad, "lugares"));
+  }
+
+  saveLabel(label: string, nube: string){
+    if(label){
+      let obj= this.db.object('/'+nube);
+      obj.subscribe(object => {
+        if(object.constructor != Array)
+        {
+          object = [];
+        }
+        if(object.indexOf(label)<0){
+          object.push(label);
+          obj.set(object);
+        }
+      });
+    }
+
+  };
 
   //Personas typeahead
   psearch = (text$: Observable<string>) =>
