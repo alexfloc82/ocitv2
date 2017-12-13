@@ -149,7 +149,7 @@
           <table class="table ">
             <thead>
               <tr>
-                <th>Pais</th>
+                <th>País</th>
                 <th *ngIf='form.ambito=="N"'>Comunidad</th>
                 <th>Valoración</th>
                 <th></th>
@@ -433,7 +433,7 @@
       </div>
       <!--De Que se Habla-->
       <div id="deque" class="mb-2 border rounded p-3">
-        <h3 class="text-info">¿De qué se habla?
+        <h3 class="text-info">Categoría Temática
           <span class="btn btn-outline-info ml-2" (click)="getInfo($event,'dque',op);">
             <span class="fa fa-info"></span>
           </span>
@@ -583,7 +583,7 @@
           </div>
         </div>
         <div class="form-group form-inline">
-          <label class="col-sm-4">Retorica de la Imagen:</label>
+          <label class="col-sm-4">Retórica de la Imagen:</label>
           <div>
             <select multiple [(ngModel)]="form.retorica" class="form-control" [disabled]="form.terminado">
               <option *ngFor="let option of (retorica | async)" value="{{option.$key}}">{{option.$value}}</option>
