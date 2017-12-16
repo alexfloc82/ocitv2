@@ -137,10 +137,8 @@ export class TareaDetailComponent implements OnInit {
   }
 
   compareFichas(a: Ficha, b: Ficha) {
-    if (a.bhour > b.bhour) { return 1 }
-    if (a.bmin > b.bmin) { return 1 }
-    if (a.bsec > b.bsec) { return 1 }
-    return -1;
+    if (Number(a.bhour)*3600 + Number(a.bmin)*60 + Number(a.bsec)  > Number(b.bhour)*3600 + Number(b.bmin)*60 + Number(b.bsec)) { return 1 }
+    else{return -1};
   }
 
   delete() {

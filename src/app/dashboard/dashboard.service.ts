@@ -61,6 +61,7 @@ export class DashboardService {
           if(ficha.lugares){
             ficha.lugares.forEach(lugar =>{
               lugar['pieza'] = ficha.$key;
+              lugar['title'] = ficha.title;
               if(lugar.pais){lugar['pais-l']=this.combos.pais[lugar.pais];}
               if(lugar.comunidad){lugar['comunidad-l']=this.combos.comunidad[lugar.comunidad];}
             })
@@ -71,6 +72,7 @@ export class DashboardService {
           if(ficha.localidades){
             ficha.localidades.forEach(lugar =>{
               lugar['pieza'] = ficha.$key;
+              lugar['title'] = ficha.title;
             })
           }
           else{
@@ -79,6 +81,7 @@ export class DashboardService {
           if(ficha.dques){
             ficha.dques.forEach(dque =>{
               dque['pieza'] = ficha.$key;
+              dque['title'] = ficha.title;
               if(dque.categoria){dque['categoria-l']=this.combos.dqcategoria[dque.categoria];}
             })
           }
@@ -88,6 +91,7 @@ export class DashboardService {
           if(ficha.quienes){
             ficha.quienes.forEach(quien =>{
               quien['pieza'] = ficha.$key;
+              quien['title'] = ficha.title;
               if(quien.categoria){quien['categoria-l']=this.combos.categoria[quien.categoria];}
             })
           }
@@ -97,6 +101,7 @@ export class DashboardService {
           if(ficha.dquienes){
             ficha.dquienes.forEach(dquien =>{
               dquien['pieza'] = ficha.$key;
+              dquien['title'] = ficha.title;
               if(dquien.categoria){dquien['categoria-l']=this.combos.categoria[dquien.categoria];}
             })
           }
@@ -106,7 +111,7 @@ export class DashboardService {
           if(ficha.origen){
             ficha['origen-l']=[];
             ficha.origen.forEach(valor =>{
-              ficha['origen-l'].push({key:valor, value:this.combos.origen[valor], pieza: ficha.$key});
+              ficha['origen-l'].push({key:valor, title:ficha.title, value:this.combos.origen[valor], pieza: ficha.$key});
             })
           }
           else{
@@ -115,7 +120,7 @@ export class DashboardService {
           if(ficha.rotulos){
             ficha['rotulos-l']=[];
             ficha.rotulos.forEach(valor =>{
-              ficha['rotulos-l'].push({key:valor, value:this.combos.rotulos[valor], pieza: ficha.$key})
+              ficha['rotulos-l'].push({key:valor, title:ficha.title, value:this.combos.rotulos[valor], pieza: ficha.$key})
             })
           }
           else{
@@ -124,7 +129,7 @@ export class DashboardService {
           if(ficha.retorica){
             ficha['retorica-l']=[];
             ficha.retorica.forEach(valor =>{
-              ficha['retorica-l'].push({key:valor, value:this.combos.retorica[valor], pieza: ficha.$key})
+              ficha['retorica-l'].push({key:valor, title:ficha.title, value:this.combos.retorica[valor], pieza: ficha.$key})
             })
           }
           else{
