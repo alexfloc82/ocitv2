@@ -7,7 +7,7 @@ import {TabViewModule,ButtonModule, DataTableModule,SharedModule} from 'primeng/
 
 //import { DxChartModule, DxPieChartModule } from 'devextreme-angular';
 
-import {DashboardService} from './dashboard.service';
+//import {DashboardService} from './dashboard.service';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -21,11 +21,11 @@ import { DashDataComponent } from './dash-data/dash-data.component';
 
 @NgModule({
   imports: [
-    CommonModule, ChartModule, FormsModule, //DxChartModule,DxPieChartModule,
+    CommonModule, ChartModule, FormsModule,
     DashboardRoutingModule, 
     ButtonModule,DataTableModule, SharedModule, TabViewModule
   ],
   declarations: [DashboardComponent],
-  providers:[DashboardService]
+  providers:[]
 })
 export class DashboardModule { }
