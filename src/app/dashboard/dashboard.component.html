@@ -25,12 +25,15 @@
           <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'dques'" (click)="selectItem('dques')">De ques</button>
           <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'fuentes'" (click)="selectItem('fuentes')">Fuentes</button>
           <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'tratamiento'" (click)="selectItem('tratamiento')">Tratamiento</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'retorica'" (click)="selectItem('retorica')">Retorica</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'origen'" (click)="selectItem('origen')">Origen</button>
+          <button class="list-group-item list-group-item-action" [class.active]="selectedItem == 'rotulo'" (click)="selectItem('rotulo')">Rótulo</button>
         </div>
       </div>
     </div>
 
     <div class="col-md-10">
-        <p-dataTable #dt [value]="informativos" exportFilename="informativos" resizableColumns="true" *ngIf="selectedItem == 'informativos'">
+        <p-dataTable #dt [value]="informativos" exportFilename="informativos" resizableColumns="true" *ngIf="selectedItem == 'informativos'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()" style="float:left"></button>
@@ -44,7 +47,7 @@
             <p-column field="semestre-l" header="Semestre"></p-column>
             <p-column field="edicion-l" header="Edicion"></p-column>
         </p-dataTable>
-        <p-dataTable #dt1 [value]="piezas" exportFilename="piezas" resizableColumns="true" *ngIf="selectedItem == 'piezas'">
+        <p-dataTable #dt1 [value]="piezas" exportFilename="piezas" resizableColumns="true" *ngIf="selectedItem == 'piezas'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -63,7 +66,7 @@
             <p-column field="zona-l" header="Zona"></p-column>
             <p-column field="espConjunto" header="Conjunto España"></p-column>
         </p-dataTable>
-        <p-dataTable #dt2 [value]="lugares" exportFilename="lugares" resizableColumns="true" *ngIf="selectedItem == 'lugares'">
+        <p-dataTable #dt2 [value]="lugares" exportFilename="lugares" resizableColumns="true" *ngIf="selectedItem == 'lugares'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt2.exportCSV()" style="float:left"></button>
@@ -78,7 +81,7 @@
             <p-column field="comunidad-l" header="Comunidad"></p-column>
             <p-column field="valor" header="Valoracion"></p-column>
         </p-dataTable>
-        <p-dataTable #dt3 [value]="locals" exportFilename="localidades" resizableColumns="true" *ngIf="selectedItem == 'localidades'">
+        <p-dataTable #dt3 [value]="locals" exportFilename="localidades" resizableColumns="true" *ngIf="selectedItem == 'localidades'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt3.exportCSV()" style="float:left"></button>
@@ -90,7 +93,7 @@
             <p-column field="localidad" header="Localidad"></p-column>
             <p-column field="valor" header="Valoracion"></p-column>
         </p-dataTable>
-        <p-dataTable #dt4 [value]="quienes" exportFilename="Quienes" resizableColumns="true" *ngIf="selectedItem == 'quienes'">
+        <p-dataTable #dt4 [value]="quienes" exportFilename="Quienes" resizableColumns="true" *ngIf="selectedItem == 'quienes'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt4.exportCSV()" style="float:left"></button>
@@ -99,11 +102,10 @@
             <p-column field="id_tarea" header="Titulo informativo"></p-column>
             <p-column field="pieza" header="Clave Pieza"></p-column>
             <p-column field="title" header="Titulo"></p-column>
-            <p-column field="categoria-l" header="Agente Informativo"></p-column>
+            <p-column field="categoria-l" header="Agente Informativo - persona"></p-column>
             <p-column field="valor" header="Valoracion"></p-column>
-            <p-column field="persona" header="Persona"></p-column>
         </p-dataTable>
-        <p-dataTable #dt5 [value]="dquienes" exportFilename="DeQuienes" resizableColumns="true" *ngIf="selectedItem == 'dequienes'">
+        <p-dataTable #dt5 [value]="dquienes" exportFilename="DeQuienes" resizableColumns="true" *ngIf="selectedItem == 'dequienes'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt5.exportCSV()" style="float:left"></button>
@@ -113,10 +115,10 @@
             <p-column field="pieza" header="Clave Pieza"></p-column>
             <p-column field="title" header="Titulo"></p-column>
             <p-column field="categoria-l" header="Agente Informativo"></p-column>
-            <p-column field="valor" header="Valoracion"></p-column>
             <p-column field="persona" header="Persona"></p-column>
+            <p-column field="valor" header="Valoracion"></p-column>
         </p-dataTable>
-        <p-dataTable #dt6 [value]="dques" exportFilename="DeQues" resizableColumns="true" *ngIf="selectedItem == 'dques'">
+        <p-dataTable #dt6 [value]="dques" exportFilename="DeQues" resizableColumns="true" *ngIf="selectedItem == 'dques'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt6.exportCSV()" style="float:left"></button>
@@ -125,12 +127,10 @@
             <p-column field="id_tarea" header="Titulo informativo"></p-column>
             <p-column field="pieza" header="Clave Pieza"></p-column>
             <p-column field="title" header="Titulo"></p-column>
-            <p-column field="tematica" header="Tematica"></p-column>
-            <p-column field="categoria-l" header="Categoria"></p-column>
+            <p-column field="categoria-l" header="Categoria - Etiqueta"></p-column>
             <p-column field="valor" header="Valoracion"></p-column>
-            <p-column field="persona" header="Tema"></p-column>
         </p-dataTable>
-        <p-dataTable #dt7 [value]="piezas" exportFilename="Fuentes" resizableColumns="true" *ngIf="selectedItem == 'fuentes'">
+        <p-dataTable #dt7 [value]="piezas" exportFilename="Fuentes" resizableColumns="true" *ngIf="selectedItem == 'fuentes'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt7.exportCSV()" style="float:left"></button>
@@ -146,7 +146,7 @@
             <p-column field="fDir" header="Fuentes Directas"></p-column>
             <p-column field="fGenerica" header="Fuentes Genericas"></p-column>
         </p-dataTable>
-        <p-dataTable #dt8 [value]="piezas" exportFilename="Tratamiento" resizableColumns="true" *ngIf="selectedItem == 'tratamiento'">
+        <p-dataTable #dt8 [value]="piezas" exportFilename="Tratamiento" resizableColumns="true" *ngIf="selectedItem == 'tratamiento'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt8.exportCSV()" style="float:left"></button>
@@ -162,6 +162,39 @@
             <p-column field="context" header="Contextualización"></p-column>
             <p-column field="fDir" header="Fuentes Directas"></p-column>
             <p-column field="relcad-l" header="Relación con Cadena"></p-column>
+        </p-dataTable>
+        <p-dataTable #dt9 [value]="retoricas" exportFilename="Retorica" resizableColumns="true" *ngIf="selectedItem == 'retorica'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt9.exportCSV()" style="float:left"></button>
+                </div>
+            </p-header>
+            <p-column field="key" header="Titulo informativo"></p-column>
+            <p-column field="pieza" header="Clave Pieza"></p-column>
+            <p-column field="title" header="Titulo"></p-column>
+            <p-column field="value" header="Retorica"></p-column>
+        </p-dataTable>
+        <p-dataTable #dt10 [value]="rotulos" exportFilename="Rótulo" resizableColumns="true" *ngIf="selectedItem == 'rotulo'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt10.exportCSV()" style="float:left"></button>
+                </div>
+            </p-header>
+            <p-column field="key" header="Titulo informativo"></p-column>
+            <p-column field="pieza" header="Clave Pieza"></p-column>
+            <p-column field="title" header="Titulo"></p-column>
+            <p-column field="value" header="Rotulo"></p-column>
+        </p-dataTable>
+        <p-dataTable #dt11 [value]="origenes" exportFilename="Origen" resizableColumns="true" *ngIf="selectedItem == 'origen'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt11.exportCSV()" style="float:left"></button>
+                </div>
+            </p-header>
+            <p-column field="key" header="Titulo informativo"></p-column>
+            <p-column field="pieza" header="Clave Pieza"></p-column>
+            <p-column field="title" header="Titulo"></p-column>
+            <p-column field="value" header="Origen"></p-column>
         </p-dataTable>
     </div>
   </div>
