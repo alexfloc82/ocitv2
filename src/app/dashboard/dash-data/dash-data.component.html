@@ -39,7 +39,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - Lugares">
-    <p-dataTable #dt1 [value]="lugares" exportFilename="lugares" resizableColumns="true">
+    <p-dataTable #dt2 [value]="lugares" exportFilename="lugares" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -55,7 +55,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - Localidades">
-    <p-dataTable #dt1 [value]="locals" exportFilename="localidades" resizableColumns="true">
+    <p-dataTable #dt3 [value]="locals" exportFilename="localidades" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -68,7 +68,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - Quien Habla">
-    <p-dataTable #dt1 [value]="quienes" exportFilename="Quienes" resizableColumns="true">
+    <p-dataTable #dt4 [value]="quienes" exportFilename="Quienes" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -82,7 +82,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - De Quien Habla">
-    <p-dataTable #dt1 [value]="dquienes" exportFilename="DeQuienes" resizableColumns="true">
+    <p-dataTable #dt5 [value]="dquienes" exportFilename="DeQuienes" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -96,7 +96,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - De Que Habla  ">
-    <p-dataTable #dt1 [value]="dques" exportFilename="DeQues" resizableColumns="true">
+    <p-dataTable #dt6 [value]="dques" exportFilename="DeQues" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -111,7 +111,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - Fuentes  ">
-    <p-dataTable #dt1 [value]="piezas" exportFilename="Fuentes" resizableColumns="true">
+    <p-dataTable #dt7 [value]="piezas" exportFilename="Fuentes" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
@@ -128,7 +128,7 @@
     </p-dataTable>
 </p-tabPanel>
 <p-tabPanel header="Datos - Tratamiento  ">
-    <p-dataTable #dt1 [value]="piezas" exportFilename="Tratamiento" resizableColumns="true">
+    <p-dataTable #dt8 [value]="piezas" exportFilename="Tratamiento" resizableColumns="true">
         <p-header>
             <div class="ui-helper-clearfix">
                 <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="float:left"></button>
