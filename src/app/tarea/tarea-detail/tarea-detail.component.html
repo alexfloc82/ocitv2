@@ -105,22 +105,20 @@
       <table class="table">
         <thead>
           <th>Título</th>
-          <th>Género</th>
-          <th>Formato</th>
-          <th>Valoración Editorial</th>
           <th>Inicio</th>
           <th>Fin</th>
+          <th>Género</th>
+          <th>Formato</th>
           <th style="text-align:center;">Analizado</th>
           <th style="text-align:center;">Revisado</th>
         </thead>
         <tbody>
           <tr *ngFor="let ficha of fichas">
             <td><button class="btn-link text-left" (click)="gotoDetail(ficha.$key)">{{ficha.title}}</button></td>
-            <td>{{(combos|async)?.genero[ficha.genero]}}</td>
-            <td>{{(combos|async)?.format[ficha.format]}}</td>
-            <td>{{(combos|async)?.valedit[ficha.valedit]}}</td>
             <td>{{ficha.bhour | number:'2.0-0'}}:{{ficha.bmin | number:'2.0-0'}}:{{ficha.bsec | number:'2.0-0'}}</td>
             <td>{{ficha.ehour | number:'2.0-0'}}:{{ficha.emin | number:'2.0-0'}}:{{ficha.esec | number:'2.0-0'}}</td>
+            <td>{{(combos|async)?.format[ficha.format]}}</td>
+            <td>{{(combos|async)?.genero[ficha.genero]}}</td>
             <td style="text-align:center;"><input type="checkbox" [checked]="ficha.terminado" disabled/></td>
             <td style="text-align:center;"><input type="checkbox" [checked]="ficha.revisado" disabled/></td>
           </tr>

@@ -38,7 +38,7 @@
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Titular:</label>
-          <input type="text" class="form-control" placeholder="Breve titular indicativo" [(ngModel)]="form.title" [disabled]="form.terminado">
+          <input type="text" class="form-control" style="width:70%" placeholder="Breve titular indicativo" [(ngModel)]="form.title" [disabled]="form.terminado">
           <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'title',op);">
             <span class="fa fa-info"></span>
           </button>
@@ -89,7 +89,7 @@
           </button>
         </div>
         <div class="form-group form-inline">
-          <label class="col-sm-2">Genero:</label>
+          <label class="col-sm-2">Género:</label>
           <select class="form-control" [(ngModel)]="form.genero" [disabled]="form.terminado">
             <option></option>
             <option *ngFor="let option of (genero | async)" value="{{option.$key}}">{{option.$value}}</option>
@@ -134,7 +134,7 @@
           <input type="checkbox" [(ngModel)]="form.espConjunto" [(disabled)]="form.terminado">
         </div>
         <div *ngIf='form.ambito=="I"||form.ambito=="G"' class="form-group form-inline ">
-          <label class="col-sm-4 ">Zona Ambito Internacional:</label>
+          <label class="col-sm-4 ">Zona Ámbito Internacional:</label>
           <div>
             <select class="form-control " [(ngModel)]="form.zona " [(disabled)]="form.terminado ">
               <option></option>
@@ -454,7 +454,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>¿De que se habla?</th>
+              <th>¿De qué se habla?</th>
               <th>Valoración</th>
               <th></th>
             </tr>
