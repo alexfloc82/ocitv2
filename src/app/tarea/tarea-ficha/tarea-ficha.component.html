@@ -5,7 +5,7 @@
   <div class="row content">
     <div class="col-3">
       <div class="list-group sticky-top" id="list-tab" role="tablist">
-        <button class="btn btn-success m-2" *ngIf="(authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == analista || (authService.user|async)?.uid == revisor"
+        <button class="btn btn-success m-2" *ngIf="!(tarea|async)?.comprobado && ((authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == analista || (authService.user|async)?.uid == revisor)"
           (click)="onSubmit()" [disabled]="!form.title">
           <span class="fa fa-save" aria-hidden="true"></span> Guardar</button>
         <button class="btn btn-secondary m-2" (click)="goBack()">
@@ -27,18 +27,30 @@
       <!--General-->
       <div id="gen" class="mb-2 border rounded p-3">
         <h3 class="text-info">General</h3>
+        <div id="gen" class="mb-2 border rounded p-3 bg-light">
         <div class="form-group form-inline">
-          <label class="col-sm-2">Analizado:</label>
-          <input type="checkbox" [(ngModel)]="form.terminado" [disabled]="tarea.analizado">
-          <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'terminado',op);">
+          <input type="checkbox" [(ngModel)]="form.verifProf" [disabled]="(tarea|async).comprobado || (authService.userProfile|async)?.role < 40">
+          <label class="col-sm-4">: Verificado Profesor</label>
+        </div>
+        <div class="form-group form-inline">
+            <textarea rows="4" style="width:100%" [(ngModel)]="form.observacionesProf" [disabled]="(authService.userProfile|async)?.role < 40"></textarea>
+          </div>
+        </div>
+        <div class="form-group form-inline">
+          <input type="checkbox" [(ngModel)]="form.revisado1" [disabled]="(tarea|async)?.comprobado || form.terminado">
+          <label class="col-sm-3">: Revisión Alumno 1</label>
+          <input type="checkbox" [(ngModel)]="form.revisado2" [disabled]="(tarea|async)?.comprobado || form.terminado">
+          <label class="col-sm-3">: Revisión Alumno 2</label>
+          <input type="checkbox" [(ngModel)]="form.terminado" [disabled]="(tarea|async)?.comprobado  || !(form.revisado1 && form.revisado2)">
+          <label class="col-sm-3">: Finalizado</label>
+          <button class="btn btn-outline-info m-2" (click)="getInfo($event,'terminado',op);">
             <span class="fa fa-info"></span>
           </button>
-          <label class="col-sm-2">Revisado:</label>
-          <input type="checkbox" [(ngModel)]="form.revisado" [disabled]="tarea.analizado">
         </div>
         <div class="form-group form-inline">
           <label class="col-sm-2">Titular:</label>
-          <input type="text" class="form-control" style="width:70%" placeholder="Breve titular indicativo" [(ngModel)]="form.title" [disabled]="form.terminado">
+          <input type="text" class="form-control" style="width:70%" placeholder="Breve titular indicativo" [(ngModel)]="form.title"
+            [disabled]="form.terminado">
           <button class="btn btn-outline-info ml-2" (click)="getInfo($event,'title',op);">
             <span class="fa fa-info"></span>
           </button>

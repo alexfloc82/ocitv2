@@ -87,12 +87,12 @@
         <p-column field="edicion" header="Edición" [sortable]="true">
           <ng-template let-tarea="rowData" pTemplate="body"> {{(combos|async)?.edicion[tarea.edicion]}} </ng-template>
         </p-column>
-        <p-column field="analizado" header="Analizado" [sortable]="true">
+       <!-- <p-column field="analizado" header="Analizado" [sortable]="true">
             <ng-template let-tarea="rowData" pTemplate="body"> <div style="text-align:center;"><input type="checkbox" [checked]="tarea.analizado"  disabled/> </div></ng-template>
         </p-column>
         <p-column field="revisado" header="Revisado" [sortable]="true">
             <ng-template let-tarea="rowData" pTemplate="body"> <div style="text-align:center;"><input type="checkbox" [checked]="tarea.revisado"  disabled/> </div></ng-template>
-        </p-column>
+        </p-column>-->
         <p-column field="comprobado" header="Verificado" [sortable]="true">
             <ng-template let-tarea="rowData" pTemplate="body"> <div style="text-align:center;"><input type="checkbox" [checked]="tarea.comprobado"  disabled/> </div></ng-template>
         </p-column>
