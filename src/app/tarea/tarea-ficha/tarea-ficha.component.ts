@@ -210,7 +210,7 @@ export class TareaFichaComponent implements OnInit {
         this.form.quienes.push(new Item(type));
         break;
       case 'dquien':
-        this.form.dquienes.push(new Item());
+        this.form.dquienes.push(new Item(type));
         break;
       case 'dque':
         this.form.dques.push(new Item(type));

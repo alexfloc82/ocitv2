@@ -171,6 +171,12 @@
         <label class="col-sm-4">¿España en su conjunto?</label>
         <input type="checkbox" [(ngModel)]="form.espConjunto" [(disabled)]="form.terminado">
       </div>
+      <div *ngIf='form.ambito=="N"' class="form-group form-inline">
+        <label class="col-sm-4">Valoración España</label>
+        <select class="form-control" [(ngModel)]="form.valorEsp" [(disabled)]="form.terminado ">
+          <option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option>
+        </select>
+      </div>
       <div *ngIf='form.ambito=="I"||form.ambito=="G"' class="form-group form-inline ">
         <label class="col-sm-4 ">Zona Ámbito Internacional:</label>
         <div>
@@ -187,7 +193,7 @@
         <table class="table ">
           <thead>
             <tr>
-              <th>País</th>
+              <th *ngIf='form.ambito=="I"||form.ambito=="G"'>País</th>
               <th *ngIf='form.ambito=="N"'>Comunidad</th>
               <th>Valoración</th>
               <th></th>
@@ -435,13 +441,14 @@
         <thead>
           <tr>
             <th>Agente Informativo</th>
-            <th>Personaje mencionado</th>
+            <!--<th>Personaje mencionado</th>-->
             <th>Valoración</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dquien of form.dquienes, let i=index">
+          <ng-container *ngFor="let dquien of form.dquienes, let i=index">
+              <tr *ngIf="dquien.type==='Agente'">
             <td>
               <p-dropdown [options]="categorias" [(ngModel)]="dquien.categoria" [style]="{'width':'500px'}" filter="true"></p-dropdown>
               <!--<select class="form-control" [(ngModel)]="dquien.categoria" [disabled]="form.terminado">
@@ -449,9 +456,9 @@
                                         <option *ngFor="let option of (categoria | async)" value="{{option.$key}}">{{option.$value}}</option>
                                     </select>-->
             </td>
-            <td>
+            <!--<td>
               <input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="dquien.persona" [disabled]="form.terminado">
-            </td>
+            </td>-->
             <td>
               <select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado">
                 <option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option>
@@ -463,10 +470,42 @@
               </button>
             </td>
           </tr>
+          </ng-container>
         </tbody>
       </table>
       <div *ngIf="!form.terminado">
-        <button type="button" class="btn btn-outline-info" (click)="addElem('dquien')">Añadir</button>
+        <button type="button" class="btn btn-outline-info mb-2" (click)="addElem('dquien', 'Agente')">Añadir</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Personaje mencionado</th>
+            <th>Valoración</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let dquien of form.dquienes, let i=index">
+            <tr *ngIf="dquien.type==='Personaje'">
+              <td>
+                <input type="text" class="form-control" [ngbTypeahead]="psearch" [(ngModel)]="dquien.persona" [disabled]="form.terminado">
+              </td>
+              <td>
+                <select class="form-control" [(ngModel)]="dquien.valor" [disabled]="form.terminado">
+                  <option *ngFor="let h of rating;let i=index" value="{{i+1}}">{{i+1}}</option>
+                </select>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteElem('dquien',i)" *ngIf="!form.terminado">
+                  <span class="fa fa-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div *ngIf="!form.terminado">
+        <button type="button" class="btn btn-outline-info" (click)="addElem('dquien','Personaje')">Añadir Personaje</button>
       </div>
     </div>
     <!--De Que se Habla-->

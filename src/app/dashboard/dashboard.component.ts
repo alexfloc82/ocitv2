@@ -204,8 +204,14 @@ export class DashboardComponent implements OnInit {
             ficha.dquienes.forEach(dquien => {
               dquien['pieza'] = ficha.$key;
               dquien['title'] = ficha.title;
-              if (dquien.categoria) { dquien['categoria-l'] = dquien.categoria.name; }
-              dquien['persona'] = dquien.persona;
+              switch (dquien['type']) {
+                case 'Agente':
+                  if (dquien.categoria) { dquien['categoria-l'] = dquien.categoria.name; }
+                  break;
+                case 'Personaje':
+                  dquien['categoria-l'] = dquien.persona;
+                  break;
+              }
             })
           }
           else {

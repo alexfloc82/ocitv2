@@ -65,6 +65,7 @@
             <p-column field="ambito-l" header="Ambito"></p-column>
             <p-column field="zona-l" header="Zona"></p-column>
             <p-column field="espConjunto" header="Conjunto España"></p-column>
+            <p-column field="valorEsp" header="Valoración España"></p-column>
         </p-dataTable>
         <p-dataTable #dt2 [value]="lugares" exportFilename="lugares" resizableColumns="true" *ngIf="selectedItem == 'lugares'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
             <p-header>
@@ -102,6 +103,7 @@
             <p-column field="id_tarea" header="Titulo informativo"></p-column>
             <p-column field="pieza" header="Clave Pieza"></p-column>
             <p-column field="title" header="Titulo"></p-column>
+            <p-column field="type" header="Tipo"></p-column>
             <p-column field="categoria-l" header="Agente Informativo - persona"></p-column>
             <p-column field="valor" header="Valoracion"></p-column>
         </p-dataTable>
@@ -114,8 +116,8 @@
             <p-column field="id_tarea" header="Titulo informativo"></p-column>
             <p-column field="pieza" header="Clave Pieza"></p-column>
             <p-column field="title" header="Titulo"></p-column>
-            <p-column field="categoria-l" header="Agente Informativo"></p-column>
-            <p-column field="persona" header="Persona"></p-column>
+            <p-column field="type" header="Tipo"></p-column>
+            <p-column field="categoria-l" header="Agente Informativo -persona"></p-column>
             <p-column field="valor" header="Valoracion"></p-column>
         </p-dataTable>
         <p-dataTable #dt6 [value]="dques" exportFilename="DeQues" resizableColumns="true" *ngIf="selectedItem == 'dques'" [rows]="20" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[20,50,100]">
