@@ -101,7 +101,7 @@
   <div class="row content" *ngIf="form.$key">
     <!-- Tabla de fichas -->
     <div class="col-sm-11 p-3">
-      <button class="btn btn-outline-success m-2" *ngIf="!form.analizado && ((authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == form.analista || (authService.user|async)?.uid == form.revisor)" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Pieza</button>
+      <button class="btn btn-outline-success m-2" *ngIf="!form.comprobado && ((authService.userProfile|async)?.role > 40 || (authService.user|async)?.uid == form.analista || (authService.user|async)?.uid == form.revisor)" (click)="gotoDetail('-')"><span class="fa fa-plus" aria-hidden="true"></span> Nueva Pieza</button>
       <table class="table">
         <thead>
           <th>Título</th>
