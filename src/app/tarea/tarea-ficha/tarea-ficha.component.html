@@ -201,7 +201,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let local of form.lugares, let i=index">
-              <td>
+              <td *ngIf='form.ambito=="I"||form.ambito=="G"'>
                 <select class="form-control " [(ngModel)]="local.pais " [(disabled)]="form.terminado ">
                   <option></option>
                   <option *ngFor="let option of (pais | async)" value="{{option.$key}}">{{option.$value}}</option>
